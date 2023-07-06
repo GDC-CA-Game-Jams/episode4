@@ -669,6 +669,7 @@ GameObject:
   - component: {fileID: 1909615129}
   - component: {fileID: 1909615128}
   - component: {fileID: 1909615127}
+  - component: {fileID: 1909615130}
   m_Layer: 5
   m_Name: Play Game Button
   m_TagString: Untagged
@@ -740,7 +741,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1909615128}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1909615130}
+        m_TargetAssemblyTypeName: LoadSceneOnClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Game
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1909615128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -779,3 +792,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1909615125}
   m_CullTransparentMesh: 1
+--- !u!114 &1909615130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909615125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193625d7cd89d014690f89b58db14456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
