@@ -1,15 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Services;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EventManager : MonoBehaviour
-{
-    public static EventManager Instance { get; private set; }
-    
-    public UnityEvent OnHit;
-
-    public UnityEvent OnMiss;
+public class EventManager : IService
+{    
+    public UnityEvent OnHit = new();
+    public UnityEvent OnMiss = new();
 
 
     public void HitListener()
@@ -22,15 +21,7 @@ public class EventManager : MonoBehaviour
         Debug.Log("Miss!");
     }
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-            Destroy(this);
-        else
-            Instance = this;
-    }
-
-    private void Start()
+    public void Init()
     {
         OnHit.AddListener(HitListener);
         OnMiss.AddListener(MissListener);

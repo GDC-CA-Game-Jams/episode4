@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+
+using Services;
+
 using UnityEngine;
 
 public class NoteObject : MonoBehaviour
@@ -14,7 +17,7 @@ public class NoteObject : MonoBehaviour
         {
             if(canBePressed)
             {
-                EventManager.Instance.OnHit?.Invoke();
+                ServiceLocator.Instance.Get<EventManager>().OnHit?.Invoke();
                 Destroy(gameObject);
             }
         }
@@ -29,7 +32,7 @@ public class NoteObject : MonoBehaviour
 
         if(other.CompareTag("Destroyer"))
         {
-            EventManager.Instance.OnMiss?.Invoke();
+            ServiceLocator.Instance.Get<EventManager>().OnMiss?.Invoke();
             Destroy(gameObject);
         }
     }
