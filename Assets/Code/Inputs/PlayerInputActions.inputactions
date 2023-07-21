@@ -6,27 +6,36 @@
             "id": "c1b57382-3e34-4f90-ac8b-666381d3f8e6",
             "actions": [
                 {
-                    "name": "DiscoMotion",
-                    "type": "Value",
-                    "id": "92c8c207-4bb9-48c6-b877-089d0f6c9589",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "PlayerMotion",
-                    "type": "Value",
-                    "id": "357021a0-b611-4163-9681-e483401aa1a5",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Jump",
+                    "name": "DiscoUp",
                     "type": "Button",
-                    "id": "d073673b-8f71-4950-a8fa-56008e8d234b",
+                    "id": "d5eb3d43-bd79-453a-9a10-01d4d3a0e796",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DiscoDown",
+                    "type": "Button",
+                    "id": "76552227-16c8-4ad1-bc1e-af531a042452",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DiscoLeft",
+                    "type": "Button",
+                    "id": "6093d89f-d684-4f5f-af1d-e098859f5809",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DiscoRight",
+                    "type": "Button",
+                    "id": "d8cc2ca5-f826-4690-9508-2e9df27a1620",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -35,123 +44,90 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
-                    "id": "b3957d28-9ffb-4cf6-a8ad-24dc2d7dd914",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DiscoMotion",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "1d6168fb-7bba-4af0-9cd9-ab0054901a1d",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Primary",
-                    "action": "DiscoMotion",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "7d55edf5-61c4-4964-96ae-1af532fa5491",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Primary",
-                    "action": "DiscoMotion",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "e316152e-90d3-42bd-a896-2b6185352406",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Primary",
-                    "action": "DiscoMotion",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "adf8e768-62df-433b-8189-20c476a71cbb",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Primary",
-                    "action": "DiscoMotion",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "2D Vector",
-                    "id": "a19b5561-c96d-4679-b83d-5c5ffa85d503",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PlayerMotion",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "a6eea461-e1c3-4e83-90b9-7ce03bdde28c",
+                    "name": "",
+                    "id": "38019275-a7c6-41d6-b7f2-1abd66af5466",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Primary",
-                    "action": "PlayerMotion",
+                    "groups": "",
+                    "action": "DiscoUp",
                     "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "caa1a007-6c17-46f0-8258-92e9cb38ac4d",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Primary",
-                    "action": "PlayerMotion",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "43426d55-3204-4819-8c9d-76aacbe022dd",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Primary",
-                    "action": "PlayerMotion",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "2a8da684-a5b8-4dd2-aed8-2d54ac348d04",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Primary",
-                    "action": "PlayerMotion",
-                    "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "891f4a55-8f1a-4dca-b977-fac986875ecf",
-                    "path": "<Keyboard>/space",
+                    "id": "8f5e961d-5425-47dd-807a-bc5b6c2a2fc9",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Primary",
-                    "action": "Jump",
+                    "groups": "",
+                    "action": "DiscoUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1dae0125-4ee3-4c4d-a8ef-b266d72c8a4f",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DiscoDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f671529-18ee-4c46-8060-ec651f255702",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DiscoDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1e0f73c-0245-4fde-8c59-14928f6c804b",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DiscoLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a6dbeef6-03b1-42ad-9d6a-6a2faa0990aa",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DiscoLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "547b03ea-c818-4008-879b-b5eba8b0a457",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DiscoRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c780397-1ab2-4491-92fc-54083f408313",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DiscoRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

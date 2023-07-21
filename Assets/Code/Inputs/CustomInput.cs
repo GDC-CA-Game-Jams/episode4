@@ -28,27 +28,36 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
             ""id"": ""c1b57382-3e34-4f90-ac8b-666381d3f8e6"",
             ""actions"": [
                 {
-                    ""name"": ""DiscoMotion"",
-                    ""type"": ""Value"",
-                    ""id"": ""92c8c207-4bb9-48c6-b877-089d0f6c9589"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""PlayerMotion"",
-                    ""type"": ""Value"",
-                    ""id"": ""357021a0-b611-4163-9681-e483401aa1a5"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Jump"",
+                    ""name"": ""DiscoUp"",
                     ""type"": ""Button"",
-                    ""id"": ""d073673b-8f71-4950-a8fa-56008e8d234b"",
+                    ""id"": ""d5eb3d43-bd79-453a-9a10-01d4d3a0e796"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiscoDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""76552227-16c8-4ad1-bc1e-af531a042452"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiscoLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""6093d89f-d684-4f5f-af1d-e098859f5809"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiscoRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8cc2ca5-f826-4690-9508-2e9df27a1620"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -57,123 +66,90 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""b3957d28-9ffb-4cf6-a8ad-24dc2d7dd914"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DiscoMotion"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""1d6168fb-7bba-4af0-9cd9-ab0054901a1d"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Primary"",
-                    ""action"": ""DiscoMotion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""7d55edf5-61c4-4964-96ae-1af532fa5491"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Primary"",
-                    ""action"": ""DiscoMotion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""e316152e-90d3-42bd-a896-2b6185352406"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Primary"",
-                    ""action"": ""DiscoMotion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""adf8e768-62df-433b-8189-20c476a71cbb"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Primary"",
-                    ""action"": ""DiscoMotion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""a19b5561-c96d-4679-b83d-5c5ffa85d503"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PlayerMotion"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""a6eea461-e1c3-4e83-90b9-7ce03bdde28c"",
+                    ""name"": """",
+                    ""id"": ""38019275-a7c6-41d6-b7f2-1abd66af5466"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Primary"",
-                    ""action"": ""PlayerMotion"",
+                    ""groups"": """",
+                    ""action"": ""DiscoUp"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""caa1a007-6c17-46f0-8258-92e9cb38ac4d"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Primary"",
-                    ""action"": ""PlayerMotion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""43426d55-3204-4819-8c9d-76aacbe022dd"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Primary"",
-                    ""action"": ""PlayerMotion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""2a8da684-a5b8-4dd2-aed8-2d54ac348d04"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Primary"",
-                    ""action"": ""PlayerMotion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""891f4a55-8f1a-4dca-b977-fac986875ecf"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""8f5e961d-5425-47dd-807a-bc5b6c2a2fc9"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Primary"",
-                    ""action"": ""Jump"",
+                    ""groups"": """",
+                    ""action"": ""DiscoUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1dae0125-4ee3-4c4d-a8ef-b266d72c8a4f"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiscoDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f671529-18ee-4c46-8060-ec651f255702"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiscoDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1e0f73c-0245-4fde-8c59-14928f6c804b"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiscoLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a6dbeef6-03b1-42ad-9d6a-6a2faa0990aa"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiscoLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""547b03ea-c818-4008-879b-b5eba8b0a457"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiscoRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c780397-1ab2-4491-92fc-54083f408313"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiscoRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -190,9 +166,10 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_DiscoMotion = m_Player.FindAction("DiscoMotion", throwIfNotFound: true);
-        m_Player_PlayerMotion = m_Player.FindAction("PlayerMotion", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_DiscoUp = m_Player.FindAction("DiscoUp", throwIfNotFound: true);
+        m_Player_DiscoDown = m_Player.FindAction("DiscoDown", throwIfNotFound: true);
+        m_Player_DiscoLeft = m_Player.FindAction("DiscoLeft", throwIfNotFound: true);
+        m_Player_DiscoRight = m_Player.FindAction("DiscoRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -254,16 +231,18 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_DiscoMotion;
-    private readonly InputAction m_Player_PlayerMotion;
-    private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_DiscoUp;
+    private readonly InputAction m_Player_DiscoDown;
+    private readonly InputAction m_Player_DiscoLeft;
+    private readonly InputAction m_Player_DiscoRight;
     public struct PlayerActions
     {
         private @CustomInput m_Wrapper;
         public PlayerActions(@CustomInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @DiscoMotion => m_Wrapper.m_Player_DiscoMotion;
-        public InputAction @PlayerMotion => m_Wrapper.m_Player_PlayerMotion;
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @DiscoUp => m_Wrapper.m_Player_DiscoUp;
+        public InputAction @DiscoDown => m_Wrapper.m_Player_DiscoDown;
+        public InputAction @DiscoLeft => m_Wrapper.m_Player_DiscoLeft;
+        public InputAction @DiscoRight => m_Wrapper.m_Player_DiscoRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -273,28 +252,34 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @DiscoMotion.started += instance.OnDiscoMotion;
-            @DiscoMotion.performed += instance.OnDiscoMotion;
-            @DiscoMotion.canceled += instance.OnDiscoMotion;
-            @PlayerMotion.started += instance.OnPlayerMotion;
-            @PlayerMotion.performed += instance.OnPlayerMotion;
-            @PlayerMotion.canceled += instance.OnPlayerMotion;
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
+            @DiscoUp.started += instance.OnDiscoUp;
+            @DiscoUp.performed += instance.OnDiscoUp;
+            @DiscoUp.canceled += instance.OnDiscoUp;
+            @DiscoDown.started += instance.OnDiscoDown;
+            @DiscoDown.performed += instance.OnDiscoDown;
+            @DiscoDown.canceled += instance.OnDiscoDown;
+            @DiscoLeft.started += instance.OnDiscoLeft;
+            @DiscoLeft.performed += instance.OnDiscoLeft;
+            @DiscoLeft.canceled += instance.OnDiscoLeft;
+            @DiscoRight.started += instance.OnDiscoRight;
+            @DiscoRight.performed += instance.OnDiscoRight;
+            @DiscoRight.canceled += instance.OnDiscoRight;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @DiscoMotion.started -= instance.OnDiscoMotion;
-            @DiscoMotion.performed -= instance.OnDiscoMotion;
-            @DiscoMotion.canceled -= instance.OnDiscoMotion;
-            @PlayerMotion.started -= instance.OnPlayerMotion;
-            @PlayerMotion.performed -= instance.OnPlayerMotion;
-            @PlayerMotion.canceled -= instance.OnPlayerMotion;
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
+            @DiscoUp.started -= instance.OnDiscoUp;
+            @DiscoUp.performed -= instance.OnDiscoUp;
+            @DiscoUp.canceled -= instance.OnDiscoUp;
+            @DiscoDown.started -= instance.OnDiscoDown;
+            @DiscoDown.performed -= instance.OnDiscoDown;
+            @DiscoDown.canceled -= instance.OnDiscoDown;
+            @DiscoLeft.started -= instance.OnDiscoLeft;
+            @DiscoLeft.performed -= instance.OnDiscoLeft;
+            @DiscoLeft.canceled -= instance.OnDiscoLeft;
+            @DiscoRight.started -= instance.OnDiscoRight;
+            @DiscoRight.performed -= instance.OnDiscoRight;
+            @DiscoRight.canceled -= instance.OnDiscoRight;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -323,8 +308,9 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
     }
     public interface IPlayerActions
     {
-        void OnDiscoMotion(InputAction.CallbackContext context);
-        void OnPlayerMotion(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
+        void OnDiscoUp(InputAction.CallbackContext context);
+        void OnDiscoDown(InputAction.CallbackContext context);
+        void OnDiscoLeft(InputAction.CallbackContext context);
+        void OnDiscoRight(InputAction.CallbackContext context);
     }
 }
