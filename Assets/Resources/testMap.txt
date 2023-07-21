@@ -1,0 +1,16 @@
+up 0
+down 4
+up 4
+right 4
+left 4
+up 6
+down 6
+right 7
+up 10
+down 12
+left 15
+right 15
+up 20
+left 20
+up 30
+down 40
