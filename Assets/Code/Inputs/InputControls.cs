@@ -5,10 +5,13 @@ using UnityEngine.InputSystem;
 
 public class InputControls : MonoBehaviour
 {
+    //enum used to hold cardinal direction of inputButton this is attached to.
+    enum Direction { Up, Down, Left, Right };
+    [SerializeField] Direction arrowDirection;
+
     private CustomInput input = null;
-    private Vector2 discoMotion = Vector2.zero;
-    private Vector2 playerMotion = Vector2.zero;
-    private bool isJumpInputting = false;
+    //isPressed stores whether the input button is currently held down or not in a publicly grabbable way
+    private bool isPressed = false;
 
     private void Awake()
     {
@@ -18,32 +21,67 @@ public class InputControls : MonoBehaviour
     private void OnEnable()
     {
         input.Enable();
-        input.Player.DiscoMotion.performed += DiscoMotion_performed;
-        input.Player.DiscoMotion.canceled += DiscoMotion_canceled;
-        input.Player.PlayerMotion.performed += PlayerMotion_performed;
-        input.Player.PlayerMotion.canceled += PlayerMotion_canceled;
-        input.Player.Jump.performed += Jump_performed;
-        input.Player.Jump.canceled += Jump_cancelled;
+        //switch case adds only the input handling for the appropriate direction.
+        switch (arrowDirection)
+        {
+            case Direction.Up:
+                input.Player.DiscoUp.performed += DiscoInput_performed;
+                input.Player.DiscoUp.canceled += DiscoInput_canceled;
+                break;
+            case Direction.Down:
+                input.Player.DiscoDown.performed += DiscoInput_performed;
+                input.Player.DiscoDown.canceled += DiscoInput_canceled;
+                break;
+            case Direction.Left:
+                input.Player.DiscoLeft.performed += DiscoInput_performed;
+                input.Player.DiscoLeft.canceled += DiscoInput_canceled;
+                break;
+            case Direction.Right:
+                input.Player.DiscoRight.performed += DiscoInput_performed;
+                input.Player.DiscoRight.canceled += DiscoInput_canceled;
+                break;
+        }
     }
 
     private void OnDisable()
     {
         input.Disable();
-        input.Player.DiscoMotion.performed -= DiscoMotion_performed;
-        input.Player.DiscoMotion.canceled -= DiscoMotion_canceled;
-        input.Player.PlayerMotion.performed -= PlayerMotion_performed;
-        input.Player.PlayerMotion.canceled -= PlayerMotion_performed;
-        input.Player.Jump.performed -= Jump_performed;
-        input.Player.Jump.canceled -= Jump_performed;
+        switch (arrowDirection)
+        {
+            case Direction.Up:
+                input.Player.DiscoUp.performed -= DiscoInput_performed;
+                input.Player.DiscoUp.canceled -= DiscoInput_canceled;
+                break;
+            case Direction.Down:
+                input.Player.DiscoDown.performed -= DiscoInput_performed;
+                input.Player.DiscoDown.canceled -= DiscoInput_canceled;
+                break;
+            case Direction.Left:
+                input.Player.DiscoLeft.performed -= DiscoInput_performed;
+                input.Player.DiscoLeft.canceled -= DiscoInput_canceled;
+                break;
+            case Direction.Right:
+                input.Player.DiscoRight.performed -= DiscoInput_performed;
+                input.Player.DiscoRight.canceled -= DiscoInput_canceled;
+                break;
+        }
     }
 
-    private void PlayerMotion_performed(InputAction.CallbackContext obj) { playerMotion = obj.ReadValue<Vector2>(); }
-    private void PlayerMotion_canceled(InputAction.CallbackContext obj) { playerMotion = Vector2.zero; }
-    private void DiscoMotion_canceled(InputAction.CallbackContext obj) { discoMotion = Vector2.zero; }
-    private void DiscoMotion_performed(InputAction.CallbackContext obj) { discoMotion = obj.ReadValue<Vector2>(); }
-    private void Jump_performed(InputAction.CallbackContext obj) { isJumpInputting = true; }
-    private void Jump_cancelled(InputAction.CallbackContext obj) { isJumpInputting = false; }
-    public Vector2 GetDiscoMotion() { return discoMotion; }
-    public Vector2 GetPlayerMotion() { return playerMotion; }
-    public bool GetInputJump() { return isJumpInputting; }
+    private void DiscoInput_performed(InputAction.CallbackContext obj)
+    {
+        isPressed = true;
+    }
+    private void DiscoInput_canceled(InputAction.CallbackContext obj)
+    {
+        isPressed = false;
+    }
+
+    /// <summary>
+    /// Returns a boolean indicating whether the input of a button is currently being actuated
+    /// </summary>
+    /// <returns></returns>
+    public bool GetPressStatus()
+    {
+        return isPressed;
+    }
 }

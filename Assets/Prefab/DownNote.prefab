@@ -87,8 +87,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60f6d46620b11ea489b3c8efdf3f7562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  vectorMovement: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
 --- !u!50 &2427876956944664582
 Rigidbody2D:
