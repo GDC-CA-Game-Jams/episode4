@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,30 +7,19 @@ using UnityEngine;
 
 public class NoteObject : MonoBehaviour
 {
-    private bool canBeActivated; //indicates whether the note is in the "zone" of a button
-    private bool falseStart = false; //used to catch if the player had the button held down before the note entered "the zone"
-    private InputControls targetControls = null; //used to snatch a controls reference once the note enters the "zone" of a button
+    public bool canBePressed;
 
-    public Rigidbody2D rb; //afaik currently unused, not sure what it will be used for -BMH
-    /// </summary>
+    public Rigidbody2D rb;
 
     private void Update()
     {
-        if(canBeActivated) //if note is in active "zone" of a button
+        if(Input.GetKeyDown(KeyCode.S))
         {
-            if (targetControls.GetPressStatus()) //if key button is pressed
+            if(canBePressed)
             {
-                if (!falseStart) //provided the button wasn't held prior to "zone" entry
-                {
-                    ServiceLocator.Instance.Get<EventManager>().OnHit?.Invoke();
-                    Destroy(gameObject);
-                }
+                ServiceLocator.Instance.Get<EventManager>().OnHit?.Invoke();
+                Destroy(gameObject);
             }
-            else if (falseStart) //resets falseStart to false if the player disengages the active button
-            {
-                falseStart = false;
-            }
-
         }
     }
 
@@ -39,14 +27,7 @@ public class NoteObject : MonoBehaviour
     {
         if(other.CompareTag("Activator"))
         {
-            targetControls = other.GetComponent<InputControls>(); //grabs a control reference once to be able to check button status
-            canBeActivated = true;
-
-            //below statement means if you were already pressing when the note entered the zone you won't auto score
-            if (targetControls.GetPressStatus())
-            {
-                falseStart = true;
-            }
+            canBePressed = true;
         }
 
         if(other.CompareTag("Destroyer"))
@@ -60,7 +41,7 @@ public class NoteObject : MonoBehaviour
     {
         if(other.CompareTag("Activator"))
         {
-            canBeActivated = false;
+            canBePressed = false;
         }
     }
 }
