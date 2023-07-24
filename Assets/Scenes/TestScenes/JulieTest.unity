@@ -465,6 +465,7 @@ MonoBehaviour:
     _trigger:
       m_PersistentCalls:
         m_Calls: []
+  m_MyAudioSource: {fileID: 2052052680}
 --- !u!82 &2052052680
 AudioSource:
   m_ObjectHideFlags: 0
