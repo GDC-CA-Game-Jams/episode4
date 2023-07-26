@@ -1229,6 +1229,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BeatSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 6021296259428775915, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
+      propertyPath: readMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021296259428775915, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
+      propertyPath: fileLocation
+      value: testMap
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021296259428775915, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
+      propertyPath: levelFileName
+      value: testMap
+      objectReference: {fileID: 0}
     - target: {fileID: 8248456229583047343, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
       propertyPath: m_Pivot.x
       value: 0
