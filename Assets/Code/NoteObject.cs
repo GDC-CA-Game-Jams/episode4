@@ -9,12 +9,15 @@ using UnityEngine;
 public class NoteObject : MonoBehaviour
 {
     [Header("Difficulty Variables")]
-    public float pointValue = 10f; //how many points is this worth at max
-    public float missValue = -10f; //how much does this cost as a miss
+    [Tooltip("Point worth of note on a hit (modified by grade on hit)")]
+    public float pointValue = 10f;
+    [Tooltip("specifies how much a miss costs the player in terms of glamour")]
+    public float missValue = -10f;
+    [Tooltip("specifies grading threshhold in meters from center of button to center of note")]
     public float gradingThreshhold = 10f; //grading threshhold between perfect, excellent, good, poor
 
     [Header("Reference Variables")]
-    public Rigidbody2D rb; //afaik currently unused, not sure what it will be used for -BMH
+    public Rigidbody2D rb;
 
     //private variables
     private bool canBeActivated; //indicates whether the note is in the "zone" of a button

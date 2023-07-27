@@ -20,7 +20,10 @@ public class BeatSpawner : MonoBehaviour
 
     [Header("Scene Object References")]
     public GameObject notePrefab; //contains a reference to the note prefab to be rotated & used in spawns
-    public Transform SpawnPointUp, SpawnPointDown, SpawnPointLeft, SpawnPointRight; //contains spawnpoints for arrows
+    [Tooltip("Order for slotting is counterclockwise from down: Down-0, Right-1, Up-2, Left-3")]
+    public Transform[] SpawnPoints = new Transform[4]; 
+    
+    //public Transform SpawnPointUp, SpawnPointDown, SpawnPointLeft, SpawnPointRight; //contains spawnpoints for arrows
 
     //private variables
     private float clock = 0f;
@@ -75,7 +78,6 @@ public class BeatSpawner : MonoBehaviour
     /// </summary>
     private void ReadSpawn()
     {
-
         //going to add beatspawner enum to beatreader's dict later to make this matching easy
         //for now this is just going to be a wee bit ugly and full of magic values for beat directions
 
@@ -127,10 +129,10 @@ public class BeatSpawner : MonoBehaviour
         }
 
         //spawns an arrow in the selected directions
-        if (bArrowSpawn[0]) { SpawnNote(NoteStyle.Up); }
-        if (bArrowSpawn[1]) { SpawnNote(NoteStyle.Down); }
-        if (bArrowSpawn[2]) { SpawnNote(NoteStyle.Left); }
-        if (bArrowSpawn[3]) { SpawnNote(NoteStyle.Right); }
+        if (bArrowSpawn[0]) { SpawnNote(NoteStyle.Down); }
+        if (bArrowSpawn[1]) { SpawnNote(NoteStyle.Right); }
+        if (bArrowSpawn[2]) { SpawnNote(NoteStyle.Up); }
+        if (bArrowSpawn[3]) { SpawnNote(NoteStyle.Left); }
     }
 
 /// <summary>
@@ -142,29 +144,11 @@ public class BeatSpawner : MonoBehaviour
         var noteObject = Instantiate(notePrefab);
         var noteObjectScript = noteObject.GetComponent<NoteObject>();
 
-        noteObject.transform.SetParent(gameObject.transform, false);
+        int noteDirection = (int)noteStyle;
 
-        switch (noteStyle)
-        {
-            case NoteStyle.Down: //down
-                noteObject.transform.position = SpawnPointDown.position;
-                break;
-            case NoteStyle.Right: //right
-                noteObject.transform.position = SpawnPointRight.position;
-                noteObject.transform.Rotate(new Vector3(0, 0, 90));
-                break;
-            case NoteStyle.Up: //up
-                noteObject.transform.position = SpawnPointUp.position;
-                noteObject.transform.Rotate(new Vector3(0, 0, 180));
-                break;
-            case NoteStyle.Left: //left
-                noteObject.transform.position = SpawnPointLeft.position;
-                noteObject.transform.Rotate(new Vector3(0, 0, 270));
-                break;
-            default:
-                Debug.Log("Error - BeatSpawner.SpawnNote(): unhandled note style - " + noteStyle.ToString());
-                break;
-        }
+        noteObject.transform.SetParent(gameObject.transform, false);
+        noteObject.transform.position = SpawnPoints[noteDirection].position;
+        noteObject.transform.Rotate(new Vector3(0, 0, 90 * noteDirection));
 
         if (orientation == Orientation.Horizontal)
         {
@@ -194,8 +178,8 @@ public enum ReadMode
 
 public enum NoteStyle
 {
-    Up,
-    Down,
+    Down, 
+    Right, 
+    Up, 
     Left,
-    Right,
 }
