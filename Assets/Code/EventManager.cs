@@ -12,19 +12,19 @@ public class EventManager : IService
 
     public UnityEvent OnDeath = new();
 
-    private float discoMeterHitIncreaseAmount = 10;
-    private float discoMeterMissDecreaseAmount = -10;
+    //private float discoMeterHitIncreaseAmount = 10;
+    //private float discoMeterMissDecreaseAmount = -10;
 
     public void HitListener()
     {
-        Debug.Log("Hit!");
-        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(discoMeterHitIncreaseAmount);
+        //Debug.Log("Hit!");
+        //ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(discoMeterHitIncreaseAmount);
     }
 
     public void MissListener()
     {
-        Debug.Log("Miss!");
-        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(discoMeterMissDecreaseAmount);
+        //Debug.Log("Miss!");
+        //ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(discoMeterMissDecreaseAmount);
     }
 
     private void DeathListener()

@@ -18,6 +18,8 @@ public static class Bootstrapper
         ServiceLocator.Instance.Register(new EventManager());
         ServiceLocator.Instance.Get<EventManager>().Init();
 
+        ServiceLocator.Instance.Register(new BeatReader());
+
         //ServiceLocator.Instance.Register(new AudioManager());
         //ServiceLocator.Instance.Register(new GameManager());
         // Get
