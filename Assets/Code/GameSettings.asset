@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8009133ed066b7644852649d60c1a688, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  beatTempo: 120
-  beatFrequency: 3
+  beatTempo: 180
+  beatFrequency: 1
   beatMultiplier: 1
