@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Services;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class DiscoMeterBehaviour : MonoBehaviour
 {
     [SerializeField] private Slider slider;
-    [SerializeField] private Slider deathSlider;
     
     [SerializeField] private float initialValue;
     [SerializeField] private float maxValue;
@@ -19,7 +18,7 @@ public class DiscoMeterBehaviour : MonoBehaviour
     {
         // Init the disco meter service. Setting as a service so other scripts can access more easily
         ServiceLocator.Instance.Register(new DiscoMeterService());
-        ServiceLocator.Instance.Get<DiscoMeterService>().Init(this, slider, deathSlider, initialValue, maxValue, killValue);
+        ServiceLocator.Instance.Get<DiscoMeterService>().Init(slider, initialValue, maxValue, killValue);
     }
 
     // Update is called once per frame

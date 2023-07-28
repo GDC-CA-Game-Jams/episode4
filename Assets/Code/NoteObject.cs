@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -27,9 +26,9 @@ public class NoteObject : MonoBehaviour
 
     private void Update()
     {
-        if(canBeActivated) //if note is in active "zone" of a button
+        if(Input.GetKeyDown(KeyCode.S))
         {
-            if (targetControls.GetPressStatus()) //if key button is pressed
+            if(canBePressed)
             {
                 if (!falseStart) //provided the button wasn't held prior to "zone" entry
                 {
@@ -38,11 +37,6 @@ public class NoteObject : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
-            else if (falseStart) //resets falseStart to false if the player disengages the active button
-            {
-                falseStart = false;
-            }
-
         }
     }
 
@@ -108,7 +102,7 @@ public class NoteObject : MonoBehaviour
     {
         if(other.CompareTag("Activator"))
         {
-            canBeActivated = false;
+            canBePressed = false;
         }
     }
 }
