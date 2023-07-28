@@ -9,7 +9,7 @@ public class AudioController : MonoBehaviour
     [SerializeField] private float _bpm;
 
     // The "beat"- controls when events will be fired (ie every beat, every half beat, every quarter beat etc)
-    [SerializeField] private Interval _interval;
+    [SerializeField] private Interval[] _intervals;
 
     [SerializeField] AudioSource m_MyAudioSource;
 
@@ -20,8 +20,11 @@ public class AudioController : MonoBehaviour
         //you can change the interval, so it could be time elapsed in beats, half beats, quarter beats etc.
         //for example, assuming 1 interval = 1 beat, if timeElapsedinIntervals = 5, then we are 5 beats into the song
         //if if timeElapsedinIntervals = 5.0006, then we are 5 beats into the song (it rounds down)
-        float timeElapsedinIntervals = ((m_MyAudioSource.timeSamples) / m_MyAudioSource.clip.frequency * _interval.GetIntervalLength(_bpm));
-        _interval.CheckForNewInterval(timeElapsedinIntervals);
+        foreach (Interval interval in _intervals)
+        {
+            float timeElapsedinIntervals = ((m_MyAudioSource.timeSamples) / (m_MyAudioSource.clip.frequency * interval.GetIntervalLength(_bpm)));
+            interval.CheckForNewInterval(timeElapsedinIntervals);
+        }
     }
 
 
@@ -63,6 +66,7 @@ public class Interval
             _lastInterval = Mathf.FloorToInt(interval);
             _trigger.Invoke(); //Fire the event
             Debug.Log("Beat");
+            //instead of debug.log do an update in the screen- change text to 0,1,2
         }
     }
 }
