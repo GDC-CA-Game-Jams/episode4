@@ -1,9 +1,10 @@
 using Services;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class BeatSpawner : MonoBehaviour
 {
@@ -28,7 +29,14 @@ public class BeatSpawner : MonoBehaviour
     //private variables
     private float clock = 0f;
     private int beatCount = -1; //tracks current beat of game
-    private Dictionary<string, List<int>> levelNoteMap; //contains the 
+    private Dictionary<string, List<int>> levelNoteMap; //contains the
+    
+    [Header("Obstacle Configuration")]
+    private SortedDictionary<int, int[]> obstacleBeats = new SortedDictionary<int, int[]>();
+    [SerializeField] private Sprite[] obstacleSprites;
+    [SerializeField] private GameObject obstacle;
+    [SerializeField] private float obstacleCoverScale = 1;
+    [SerializeField] private float[] obstacleSpriteScales;
 
     private void Awake()
     {
@@ -49,6 +57,8 @@ public class BeatSpawner : MonoBehaviour
                 Debug.Log("Random Mode Engaged - Invalid File Location");
             }
         }
+        
+        LoadObstacles();
 
     }
 
@@ -101,6 +111,50 @@ public class BeatSpawner : MonoBehaviour
             SpawnNote(NoteStyle.Right);
             levelNoteMap["right"].Remove(beatCount);
         }
+        if (obstacleBeats.Count != 0 && obstacleBeats.ContainsKey(beatCount))
+        {
+            RunObstacle(obstacleBeats[beatCount][0], obstacleBeats[beatCount][1]);
+        }
+    }
+
+    private void LoadObstacles()
+    {
+        LoadObstacle("os", ObstacleType.Small);
+        LoadObstacle("om", ObstacleType.Medium);
+        LoadObstacle("ol", ObstacleType.Large);
+        LoadObstacle("ox", ObstacleType.XL);
+    }
+
+    private void LoadObstacle(string key, ObstacleType t)
+    {
+        for (int i = 0; i < levelNoteMap[key].Count - 1; ++i)
+        {
+            obstacleBeats.TryAdd(levelNoteMap[key][i], new []{(int)t, levelNoteMap[key][i + 1]});
+            obstacleBeats.TryAdd(levelNoteMap[key][i + 1], new []{0, 0});
+        }
+    }
+    
+    /// <summary>
+    /// Spawns or despawns an obstacle
+    /// </summary>
+    private void RunObstacle(int t, int end)
+    {
+        Debug.Log("Running obstacle, start: " + beatCount + " end: " + end);
+        if (obstacle.activeSelf)
+        {
+            Debug.Log("Despawning obstacle!");
+            obstacle.SetActive(false);
+            return;
+        }
+
+        Debug.Log("Spawning Obstacle!");
+        obstacle.transform.position = SpawnPoints[4].position;
+        Transform sprite = obstacle.transform.GetChild(0);
+        sprite.GetComponent<Image>().sprite = obstacleSprites[t];
+        sprite.localScale = Vector3.one * obstacleSpriteScales[t];
+        Transform cover = obstacle.transform.GetChild(1);
+        cover.localScale = new Vector3((end - beatCount) * obstacleCoverScale, cover.localScale.y);
+        obstacle.SetActive(true);
     }
 
     /// <summary>
@@ -182,4 +236,12 @@ public enum NoteStyle
     Right, 
     Up, 
     Left,
+}
+
+public enum ObstacleType
+{
+    Small,
+    Medium,
+    Large,
+    XL
 }
