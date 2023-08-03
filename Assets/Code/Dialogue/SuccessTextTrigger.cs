@@ -8,6 +8,6 @@ public class SuccessTextTrigger : MonoBehaviour
 
     public void TriggerSuccessText()
     {
-        FindObjectOfType<SuccessTextManager>().StartSuccessTextExternal(successText);
+        SuccessTextManager.onSuccessTextTrigger.Invoke(successText);
     }
 }

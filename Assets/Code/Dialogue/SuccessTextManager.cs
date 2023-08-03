@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Reflection;
 using System.Data;
+using System.Reflection;
+using UnityEngine.Events;
 
 public class SuccessTextManager : MonoBehaviour
 {
     public Dialogue successText;
 
     public Transform targetLocation;
+    public RectTransform textParent;
 
     public Animator animator;
 
     public TMP_Text textMesh;
+
+    public static UnityEvent<Dialogue> onSuccessTextTrigger;
+
     Mesh mesh;
     Vector3[] vertices;
     Color[] colors;
@@ -23,65 +28,110 @@ public class SuccessTextManager : MonoBehaviour
 
     Gradient rainbow;
 
+    //is the text currently animating on screen?
+    private bool isVisible;
+
+    private void Awake()
+    {
+        onSuccessTextTrigger = new UnityEvent<Dialogue>();
+        onSuccessTextTrigger.AddListener(StartSuccessTextExternal);
+    }
     void Start()
     {
+        Color _orange = new Color(255, 165, 0);
+        Color _purple = new Color32(143, 0, 254, 1);
         //textMesh = GetComponent<TMP_Text>();
         cam = Camera.main;
         rainbow = new Gradient();
+        isVisible = false;
+
+        var colors = new GradientColorKey[6];
+        colors[0] = new GradientColorKey(Color.red, 0.3f);
+        colors[1] = new GradientColorKey(_orange, 0.550f);
+        colors[2] = new GradientColorKey(Color.yellow, 0.551f);
+        colors[3] = new GradientColorKey(Color.green, 0.552f);
+        colors[4] = new GradientColorKey(Color.blue, 0.8f);
+        colors[5] = new GradientColorKey(_purple, 1.0f);
+
+        var alphas = new GradientAlphaKey[2];
+        alphas[0] = new GradientAlphaKey(1.0f, 1.0f);
+        alphas[1] = new GradientAlphaKey(1.0f, 1.0f);
+
+        rainbow.SetKeys(colors, alphas);
     }
 
     //for activating success text directly through SuccessTextManager
     public void StartSuccessText()
     {
         animator.Play("SuccessFade", -1, 0f);
-        Random.InitState(System.DateTime.Now.Millisecond);
-        string phrase = successText[Random.Range(0, successText.sentences.Length)];
+        isVisible = true;
+
+        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
+        string phrase = successText[UnityEngine.Random.Range(0, successText.sentences.Length)];
         textMesh.text = phrase;
+        StopAllCoroutines();
+        StartCoroutine(WaitToEndDialogue());
     }
 
     //for activating success text through a gameobject with the SuccessTextTrigger script
     public void StartSuccessTextExternal(Dialogue phrases)
     {
-        Random.InitState(System.DateTime.Now.Millisecond);
-        string phrase = phrases[Random.Range(0, phrases.sentences.Length)];
+        animator.Play("SuccessFade", -1, 0f);
+        isVisible = true;
+
+        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
+        string phrase = phrases[UnityEngine.Random.Range(0, phrases.sentences.Length)];
         textMesh.text = phrase;
+        StopAllCoroutines();
+        StartCoroutine(WaitToEndDialogue());
     }
 
-    
+    IEnumerator WaitToEndDialogue()
+    {
+        yield return new WaitForSeconds(3f);
+        isVisible = false;
+    }
+
+
     void Update()
     {
-        textMesh.ForceMeshUpdate();
-        mesh = textMesh.mesh;
-        vertices = mesh.vertices;
-        colors = mesh.colors;
-
-        for (int i = 0; i < textMesh.textInfo.characterCount; i++)
+        //if text is currently animating and visible, create wobble/rainbow effects
+        if(isVisible)
         {
-            TMP_CharacterInfo c = textMesh.textInfo.characterInfo[i];
+            textMesh.ForceMeshUpdate();
+            mesh = textMesh.mesh;
+            vertices = mesh.vertices;
+            colors = mesh.colors;
 
-            int index = c.vertexIndex;
+            for (int i = 0; i < textMesh.textInfo.characterCount; i++)
+            {
+                TMP_CharacterInfo c = textMesh.textInfo.characterInfo[i];
 
-            //add rainbow color gradient effect to each character in text mesh
-            colors[index] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index].x * 0.001f, 1f));
-            colors[index + 1] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index + 1].x * 0.001f, 1f));
-            colors[index + 2] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index + 2].x * 0.001f, 1f));
-            colors[index + 3] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index + 3].x * 0.001f, 1f));
+                int index = c.vertexIndex;
+
+                //add rainbow color gradient effect to each character in text mesh
+                colors[index] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index].x * 0.001f, 1f));
+                colors[index + 1] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index + 1].x * 0.001f, 1f));
+                colors[index + 2] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index + 2].x * 0.001f, 1f));
+                colors[index + 3] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index + 3].x * 0.001f, 1f));
+            }
+
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                //add wobble effect to each vertice in the text mesh
+                Vector3 offset = Wobble(Time.time + i);
+
+                vertices[i] = vertices[i] + offset;
+            }
+
+            mesh.vertices = vertices;
+            mesh.colors = colors;
+            textMesh.canvasRenderer.SetMesh(mesh);
         }
-
-        for (int i = 0; i < vertices.Length; i++)
-        {
-            //add wobble effect to each vertice in the text mesh
-            Vector3 offset = Wobble(Time.time + i);
-
-            vertices[i] = vertices[i] + offset;
-        }
-
-        mesh.vertices = vertices;
-        mesh.colors = colors;
-        textMesh.canvasRenderer.SetMesh(mesh);
-
+        
+        //set text spawn location to above player
         Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(cam, targetLocation.position);
-        textMesh.rectTransform.position = screenPos;
+        textParent.position = screenPos;
 
     }
 
