@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Services;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ public class InputControls : MonoBehaviour
 
     private void OnEnable()
     {
+        ServiceLocator.Instance.Get<EventManager>().OnClearNotes += stateReset;
         input.Enable();
         //switch case adds only the input handling for the appropriate direction.
         switch (arrowDirection)
@@ -55,6 +57,7 @@ public class InputControls : MonoBehaviour
 
     private void OnDisable()
     {
+        ServiceLocator.Instance.Get<EventManager>().OnClearNotes -= stateReset;
         input.Disable();
         switch (arrowDirection)
         {
@@ -133,28 +136,33 @@ public class InputControls : MonoBehaviour
         if (distance < gradingThreshhold) //perfect
         {
             Debug.Log("Hit - Perfect!");
+            ServiceLocator.Instance.Get<EventManager>().OnPerfect?.Invoke();
         }
         else if (distance < gradingThreshhold * 2) // excellent
         {
             awardedPointValue *= 0.9f;
             Debug.Log("Hit - Excellent!");
+            ServiceLocator.Instance.Get<EventManager>().OnExcellent?.Invoke();
         }
         else if (distance < gradingThreshhold * 3) //good
         {
             awardedPointValue *= 0.8f;
             Debug.Log("Hit - Good!");
+            ServiceLocator.Instance.Get<EventManager>().OnGood?.Invoke();
         }
         else if (distance < gradingThreshhold * 4) //fair
         {
             awardedPointValue *= 0.7f;
             Debug.Log("Hit - Fair!");
+            ServiceLocator.Instance.Get<EventManager>().OnPoor?.Invoke();
         }
         else
         {
             awardedPointValue *= 0.6f;
             Debug.Log("Hit - Poor!");
+            ServiceLocator.Instance.Get<EventManager>().OnPoor?.Invoke();
         }
-        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(awardedPointValue);
+        //ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(awardedPointValue);
     }
 
     private void DiscoInput_performed(InputAction.CallbackContext obj)
@@ -200,8 +208,16 @@ public class InputControls : MonoBehaviour
             else
             {
                 isFailingLongPress = true;
+                ServiceLocator.Instance.Get<EventManager>().OnMiss?.Invoke();
             }
         }
-
     }
+
+    private void stateReset()
+    {
+        isInLongPress = false;
+        isFailingLongPress = false;
+        noteQueue.Clear();
+    }
+
 }

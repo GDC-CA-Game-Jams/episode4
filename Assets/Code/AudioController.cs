@@ -86,7 +86,7 @@ public class Interval
         {
             _lastInterval = Mathf.FloorToInt(interval);
             _trigger.Invoke(); //Fire the event
-            Debug.Log("Beat");
+            //Debug.Log("Beat");
             //instead of debug.log do an update in the screen- change text to 0,1,2
         }
     }
