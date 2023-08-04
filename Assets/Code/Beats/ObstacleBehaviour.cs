@@ -49,6 +49,7 @@ public class ObstacleBehaviour : MonoBehaviour
         gm.beatCount = startBeat - 2;
         ac.jumpAudioToNumBeats(startBeat - 2);
         ServiceLocator.Instance.Get<EventManager>().OnClearNotes?.Invoke();
+        ServiceLocator.Instance.Get<EventManager>().OnMissObstacle?.Invoke();
         gameObject.SetActive(false);
     }
 }

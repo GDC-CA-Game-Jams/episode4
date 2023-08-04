@@ -16,6 +16,7 @@ public class EventManager : IService
     public Action OnGood;
     public Action OnPoor;
     public Action OnMiss;
+    public Action OnMissObstacle;
 
     public Action OnClearNotes;
     //private float discoMeterHitIncreaseAmount = 10;

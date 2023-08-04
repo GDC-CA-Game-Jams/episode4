@@ -51,6 +51,7 @@ public class ScoreKeeper : MonoBehaviour
     private void OnEnable()
     {
         ServiceLocator.Instance.Get<EventManager>().OnMiss += OnMiss;
+        ServiceLocator.Instance.Get<EventManager>().OnMissObstacle += OnMissObstacle;
         ServiceLocator.Instance.Get<EventManager>().OnPerfect += OnHitPerfect;
         ServiceLocator.Instance.Get<EventManager>().OnExcellent += OnHitExcellent;
         ServiceLocator.Instance.Get<EventManager>().OnGood += OnHitGood;
@@ -61,6 +62,7 @@ public class ScoreKeeper : MonoBehaviour
     private void OnDisable()
     {
         ServiceLocator.Instance.Get<EventManager>().OnMiss -= OnMiss;
+        ServiceLocator.Instance.Get<EventManager>().OnMissObstacle -= OnMissObstacle;
         ServiceLocator.Instance.Get<EventManager>().OnPerfect -= OnHitPerfect;
         ServiceLocator.Instance.Get<EventManager>().OnExcellent -= OnHitExcellent;
         ServiceLocator.Instance.Get<EventManager>().OnGood -= OnHitGood;
@@ -168,6 +170,11 @@ public class ScoreKeeper : MonoBehaviour
         
         ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(-glamIncrease);
 
+    }
+    
+    public void OnMissObstacle()
+    {
+        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(-glamIncrease * 2);
     }
     public void OnHitPerfect()
     {
