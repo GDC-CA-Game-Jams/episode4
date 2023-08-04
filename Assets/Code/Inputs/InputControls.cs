@@ -20,6 +20,7 @@ public class InputControls : MonoBehaviour
     private Queue<NoteObject> noteQueue = new Queue<NoteObject>(); //stores currently clickable notes as they pass by
     //CURRENTLY UNUSED
     private bool isInLongPress = false;
+    private bool isFailingLongPress = false;
 
     private void Awake()
     {
@@ -90,6 +91,21 @@ public class InputControls : MonoBehaviour
         {
             NoteObject objNote = noteQueue.Dequeue();
             PointScoreUpdate(objNote.getRawMissWorth());
+            if (objNote.GetFlagIsLongNote())
+            {
+                if (!isInLongPress)
+                {
+                    isInLongPress = true;
+                    isFailingLongPress = true;
+                    Debug.Log("missed the start note");
+                }
+                else
+                {
+                    isFailingLongPress = false;
+                    isInLongPress = false;
+                    Debug.Log("missed the end note");
+                }
+            }
         }
     }
 
@@ -147,6 +163,14 @@ public class InputControls : MonoBehaviour
         { 
             NoteObject objNote = noteQueue.Dequeue();
             GradeArrowPop(objNote);
+            if (objNote.GetFlagIsLongNote())
+            {
+                if (!isInLongPress && !isFailingLongPress)
+                {
+                    isInLongPress = true;
+                }
+            }
+
             Destroy(objNote.gameObject);
         }
         else
@@ -156,6 +180,28 @@ public class InputControls : MonoBehaviour
     }
     private void DiscoInput_canceled(InputAction.CallbackContext obj)
     {
-        //need to handle event for "click off" at the end of a long note
+        if (isInLongPress)
+        {
+            if (noteQueue.Count > 0)
+            {
+                NoteObject objNote = noteQueue.Peek();
+                if (objNote.GetFlagIsLongNote())
+                {
+                    if (!isFailingLongPress)
+                    {
+                        GradeArrowPop(objNote);
+                        noteQueue.Dequeue();
+                        isInLongPress = false;
+                        Destroy(objNote.gameObject);
+                        Debug.Log("STUCK THE LANDING");
+                    }
+                }
+            }
+            else
+            {
+                isFailingLongPress = true;
+            }
+        }
+
     }
 }
