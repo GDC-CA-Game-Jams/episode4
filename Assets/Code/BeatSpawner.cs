@@ -119,6 +119,7 @@ public class BeatSpawner : MonoBehaviour
 
     private void LoadObstacles()
     {
+        obstacle.GetComponent<ObstacleBehaviour>().beatTempo = beatTempo;
         LoadObstacle("os", ObstacleType.Small);
         LoadObstacle("om", ObstacleType.Medium);
         LoadObstacle("ol", ObstacleType.Large);
@@ -139,15 +140,12 @@ public class BeatSpawner : MonoBehaviour
     /// </summary>
     private void RunObstacle(int t, int end)
     {
-        Debug.Log("Running obstacle, start: " + beatCount + " end: " + end);
         if (obstacle.activeSelf)
         {
-            Debug.Log("Despawning obstacle!");
             obstacle.SetActive(false);
             return;
         }
-
-        Debug.Log("Spawning Obstacle!");
+        
         obstacle.transform.position = SpawnPoints[4].position;
         Transform sprite = obstacle.transform.GetChild(0);
         sprite.GetComponent<Image>().sprite = obstacleSprites[t];
