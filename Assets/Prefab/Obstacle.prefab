@@ -203,6 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleArt: {fileID: 386846433599909106}
   rbCover: {fileID: 6052984740043754905}
+  startBeat: 0
   beatTempo: 0
 --- !u!1 &7089844493941418928
 GameObject:
@@ -217,6 +218,7 @@ GameObject:
   - component: {fileID: 7807935472669434896}
   - component: {fileID: 6052984740043754905}
   - component: {fileID: 5493842741268820746}
+  - component: {fileID: 3325106774818030684}
   m_Layer: 5
   m_Name: Cover
   m_TagString: Untagged
@@ -338,7 +340,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -354,3 +356,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3325106774818030684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7089844493941418928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97205d05098bb304aa051b174cea3730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ob: {fileID: 6635475839422826828}

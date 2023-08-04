@@ -29,7 +29,6 @@ public class LoopingScroll : MonoBehaviour
     {
         if (transform.position.x <= loopPoint)
         {
-            Debug.Log("Looping!");
             transform.position = new Vector2(-loopPoint, transform.position.y);
         }
 

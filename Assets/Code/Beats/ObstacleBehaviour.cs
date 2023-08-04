@@ -31,8 +31,6 @@ public class ObstacleBehaviour : MonoBehaviour
     
     private void OnEnable()
     {
-        Debug.Log("Obstacle Enabling!");
-        ServiceLocator.Instance.Get<EventManager>().OnMiss += OnMiss;
         obstacleArt.transform.localPosition = artStart;
         rbCover.transform.localPosition = coverStart;
         rbCover.velocity = new Vector2(beatTempo * -1, 0f);
@@ -41,15 +39,13 @@ public class ObstacleBehaviour : MonoBehaviour
 
     private void OnDisable()
     {
-        Debug.Log("Obstacle Disabling!");
         ServiceLocator.Instance.Get<EventManager>().OnMiss -= OnMiss;
         rbCover.velocity = Vector3.zero;
         obstacleArt.velocity = Vector3.zero;
     }
 
-    private void OnMiss()
+    public void OnMiss()
     {
-        Debug.Log("Obstacle resetting!");
         gm.beatCount = startBeat - 2;
         ac.jumpAudioToNumBeats(startBeat - 2);
         ServiceLocator.Instance.Get<EventManager>().OnClearNotes?.Invoke();

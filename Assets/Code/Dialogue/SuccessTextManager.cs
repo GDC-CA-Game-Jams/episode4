@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Reflection;
 using System.Data;
+using Services;
 
 public class SuccessTextManager : MonoBehaviour
 {
@@ -23,6 +24,24 @@ public class SuccessTextManager : MonoBehaviour
 
     Gradient rainbow;
 
+    private void OnEnable()
+    {
+        EventManager em = ServiceLocator.Instance.Get<EventManager>();
+        em.OnPerfect += StartSuccessText;
+        em.OnExcellent += StartSuccessText;
+        em.OnGood += StartSuccessText;
+        em.OnPoor += StartSuccessText;
+    }
+    
+    private void OnDisable()
+    {
+        EventManager em = ServiceLocator.Instance.Get<EventManager>();
+        em.OnPerfect -= StartSuccessText;
+        em.OnExcellent -= StartSuccessText;
+        em.OnGood -= StartSuccessText;
+        em.OnPoor -= StartSuccessText;
+    }
+    
     void Start()
     {
         //textMesh = GetComponent<TMP_Text>();
@@ -33,6 +52,7 @@ public class SuccessTextManager : MonoBehaviour
     //for activating success text directly through SuccessTextManager
     public void StartSuccessText()
     {
+        Debug.Log("Text starting!");
         animator.Play("SuccessFade", -1, 0f);
         Random.InitState(System.DateTime.Now.Millisecond);
         string phrase = successText[Random.Range(0, successText.sentences.Length)];
