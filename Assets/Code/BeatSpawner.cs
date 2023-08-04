@@ -10,7 +10,7 @@ public class BeatSpawner : MonoBehaviour
 {
     [Header("Gameplay Settings")]
     [SerializeField] private GameSettingsSO m_Settings = null;
-
+    
     public Orientation orientation = Orientation.Horizontal;
     public ReadMode readMode = ReadMode.Read; //Read = playing from file, Random = Random Spawn mode as default / test mode
     public string levelFileName; //contains file name & only name, not path
@@ -20,7 +20,7 @@ public class BeatSpawner : MonoBehaviour
     public float beatFrequency; //gets auto overridden by settings beatFrequency, CONSIDER MAKING PRIVATE
 
     [Header("Scene Object References")]
-    public GameObject notePrefab; //contains a reference to the note prefab to be rotated & used in spawns
+    [SerializeField] private GameObject[] arrows;
     [Tooltip("Order for slotting is counterclockwise from down: Down-0, Right-1, Up-2, Left-3")]
     public Transform[] SpawnPoints = new Transform[4]; 
     
@@ -200,14 +200,14 @@ public class BeatSpawner : MonoBehaviour
 /// <param name="noteStyle"></param>
     private void SpawnNote(NoteStyle noteStyle)
     {
-        var noteObject = Instantiate(notePrefab);
+        var noteObject = Instantiate(arrows[(int)noteStyle]);
         var noteObjectScript = noteObject.GetComponent<NoteObject>();
 
         int noteDirection = (int)noteStyle;
 
         noteObject.transform.SetParent(gameObject.transform, false);
         noteObject.transform.position = SpawnPoints[noteDirection].position;
-        noteObject.transform.Rotate(new Vector3(0, 0, 90 * noteDirection));
+        //noteObject.transform.Rotate(new Vector3(0, 0, 90 * noteDirection));
 
         if (orientation == Orientation.Horizontal)
         {
