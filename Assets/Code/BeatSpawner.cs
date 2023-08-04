@@ -1,9 +1,10 @@
 using Services;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class BeatSpawner : MonoBehaviour
 {
@@ -27,8 +28,15 @@ public class BeatSpawner : MonoBehaviour
 
     //private variables
     private float clock = 0f;
-    private int beatCount = -1; //tracks current beat of game
-    private Dictionary<string, List<int>> levelNoteMap; //contains the 
+    private Dictionary<string, List<int>> levelNoteMap; //contains the
+    private GameManager gm;
+    
+    [Header("Obstacle Configuration")]
+    private SortedDictionary<int, int[]> obstacleBeats = new SortedDictionary<int, int[]>();
+    [SerializeField] private Sprite[] obstacleSprites;
+    [SerializeField] private GameObject obstacle;
+    [SerializeField] private float obstacleCoverScale = 1;
+    [SerializeField] private float[] obstacleSpriteScales;
 
     private void Awake()
     {
@@ -50,11 +58,15 @@ public class BeatSpawner : MonoBehaviour
             }
         }
 
+        gm = ServiceLocator.Instance.Get<GameManager>();
+        LoadObstacles();
+
     }
 
 
     private void Update()
     {
+        /*
         clock += Time.deltaTime;
         if (clock > beatFrequency)
         {
@@ -70,6 +82,7 @@ public class BeatSpawner : MonoBehaviour
                 RandomSpawn();
             }
         }
+        */
     }
 
     /// <summary>
@@ -81,26 +94,72 @@ public class BeatSpawner : MonoBehaviour
         //going to add beatspawner enum to beatreader's dict later to make this matching easy
         //for now this is just going to be a wee bit ugly and full of magic values for beat directions
 
-        if (levelNoteMap["up"].Count != 0 && levelNoteMap["up"][0] <= beatCount)
+        if (levelNoteMap["up"].Count != 0 && levelNoteMap["up"].Contains(gm.beatCount))
         {
             SpawnNote(NoteStyle.Up);
-            levelNoteMap["up"].Remove(beatCount);
         }
-        if (levelNoteMap["down"].Count != 0 && levelNoteMap["down"][0] <= beatCount)
+        if (levelNoteMap["down"].Count != 0 && levelNoteMap["down"].Contains(gm.beatCount))
         {
             SpawnNote(NoteStyle.Down);
-            levelNoteMap["down"].Remove(beatCount);
         }
-        if (levelNoteMap["left"].Count != 0 && levelNoteMap["left"][0] <= beatCount)
+        if (levelNoteMap["left"].Count != 0 && levelNoteMap["left"].Contains(gm.beatCount))
         {
             SpawnNote(NoteStyle.Left);
-            levelNoteMap["left"].Remove(beatCount);
         }
-        if (levelNoteMap["right"].Count != 0 && levelNoteMap["right"][0] <= beatCount)
+        if (levelNoteMap["right"].Count != 0 && levelNoteMap["right"].Contains(gm.beatCount))
         {
             SpawnNote(NoteStyle.Right);
-            levelNoteMap["right"].Remove(beatCount);
         }
+        if (obstacleBeats.Count != 0 && obstacleBeats.ContainsKey(gm.beatCount))
+        {
+            RunObstacle(obstacleBeats[gm.beatCount][0], obstacleBeats[gm.beatCount][1]);
+        }
+    }
+
+    public void OnBeat()
+    {
+        ++gm.beatCount;
+        ++gm.beatsElapsed;
+        ReadSpawn();
+    }
+    
+    private void LoadObstacles()
+    {
+        obstacle.GetComponent<ObstacleBehaviour>().beatTempo = beatTempo;
+        LoadObstacle("os", ObstacleType.Small);
+        LoadObstacle("om", ObstacleType.Medium);
+        LoadObstacle("ol", ObstacleType.Large);
+        LoadObstacle("ox", ObstacleType.XL);
+    }
+
+    private void LoadObstacle(string key, ObstacleType t)
+    {
+        for (int i = 0; i < levelNoteMap[key].Count - 1; i += 2)
+        {
+            obstacleBeats.TryAdd(levelNoteMap[key][i], new []{(int)t, levelNoteMap[key][i + 1]});
+            obstacleBeats.TryAdd(levelNoteMap[key][i + 1], new []{0, 0});
+        }
+    }
+    
+    /// <summary>
+    /// Spawns or despawns an obstacle
+    /// </summary>
+    private void RunObstacle(int t, int end)
+    {
+        if (obstacle.activeSelf)
+        {
+            obstacle.SetActive(false);
+            return;
+        }
+        
+        obstacle.transform.position = SpawnPoints[4].position;
+        obstacle.GetComponent<ObstacleBehaviour>().startBeat = gm.beatCount;
+        Transform sprite = obstacle.transform.GetChild(0);
+        sprite.GetComponent<Image>().sprite = obstacleSprites[t];
+        sprite.localScale = Vector3.one * obstacleSpriteScales[t];
+        Transform cover = obstacle.transform.GetChild(1);
+        cover.localScale = new Vector3((end - gm.beatCount) * obstacleCoverScale, cover.localScale.y);
+        obstacle.SetActive(true);
     }
 
     /// <summary>
@@ -182,4 +241,12 @@ public enum NoteStyle
     Right, 
     Up, 
     Left,
+}
+
+public enum ObstacleType
+{
+    Small,
+    Medium,
+    Large,
+    XL
 }

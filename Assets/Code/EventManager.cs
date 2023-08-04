@@ -7,11 +7,17 @@ using UnityEngine.Events;
 
 public class EventManager : IService
 {    
-    public UnityEvent OnHit = new();
-    public UnityEvent OnMiss = new();
+    //public UnityEvent OnHit = new();
+    //public UnityEvent OnMiss = new();
 
-    public UnityEvent OnDeath = new();
+    public Action OnDeath;
+    public Action OnPerfect;
+    public Action OnExcellent;
+    public Action OnGood;
+    public Action OnPoor;
+    public Action OnMiss;
 
+    public Action OnClearNotes;
     //private float discoMeterHitIncreaseAmount = 10;
     //private float discoMeterMissDecreaseAmount = -10;
 
@@ -34,8 +40,8 @@ public class EventManager : IService
     
     public void Init()
     {
-        OnHit.AddListener(HitListener);
-        OnMiss.AddListener(MissListener);
-        OnDeath.AddListener(DeathListener);
+        //OnHit.AddListener(HitListener);
+        //OnMiss.AddListener(MissListener);
+        //OnDeath.AddListener(DeathListener);
     }
 }
