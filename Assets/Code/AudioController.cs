@@ -29,11 +29,32 @@ public class AudioController : MonoBehaviour
 
 
     //jumps the audio back a given amount of beats
-    public void jumpAudioBack(int beats)
+    public void jumpAudioBackInBeats(int beats)
     {
-        //right now just jumps back "beats" sec in - needs fixed
-        m_MyAudioSource.time = beats;
+        //calculate secondsToRewind based on beats and bpm
+        float secondsToRewind = beats*(60/_bpm);
+
+        float currentTime = m_MyAudioSource.time;
+        float rewindTime = currentTime - secondsToRewind;
+        m_MyAudioSource.time = rewindTime;
     }
+
+    //jumps to X beats, regardless of where in the audio file the song is when this function is called
+    //ie if beats is 4, it will jump to 4 beats after the song starts
+    public void jumpAudioToNumBeats(int beats)
+    {
+        m_MyAudioSource.time = beats * (60 / _bpm);
+    }
+
+    //Probably will not be used
+    //jumps the audio back a given amount of seconds
+    public void jumpAudioBackInSeconds(float seconds)
+    {
+        float currentTime = m_MyAudioSource.time;
+        float rewindTime = currentTime - seconds;
+        m_MyAudioSource.time = rewindTime;
+    }
+
 }
 
 //Intervals are like beats, but more complex
