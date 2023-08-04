@@ -43,3 +43,42 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background00
+    uniqueID: 2460088629
+    locked: 0
+  - name: Background01
+    uniqueID: 1589963463
+    locked: 0
+  - name: Background02
+    uniqueID: 425976315
+    locked: 0
+  - name: Background03
+    uniqueID: 1952877685
+    locked: 0
+  - name: Midground
+    uniqueID: 1870230105
+    locked: 0
+  - name: Foreground
+    uniqueID: 3759307305
+    locked: 0
+  - name: Ground
+    uniqueID: 1725268671
+    locked: 0
+  - name: Grass
+    uniqueID: 497387591
+    locked: 0
+  - name: Obstacles
+    uniqueID: 3780997033
+    locked: 0
+  - name: Buzzkill
+    uniqueID: 3453603469
+    locked: 0
+  - name: Player Sprite
+    uniqueID: 513837555
+    locked: 0
+  - name: UI00
+    uniqueID: 3731805525
+    locked: 0
+  - name: UI01
+    uniqueID: 3396986375
+    locked: 0
