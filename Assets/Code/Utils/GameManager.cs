@@ -12,7 +12,7 @@ public class GameManager : IService
     
     public GameManager()
     {
-      
+        ServiceLocator.Instance.Get<EventManager>().OnDeath += OnDeath;
     }
 
     public void Init()
@@ -23,6 +23,11 @@ public class GameManager : IService
     public void Reset()
     {
         
+    }
+
+    private void OnDeath()
+    {
+        Pause("GameOver");
     }
     
     public void TogglePause(string pauseScene)
@@ -43,6 +48,17 @@ public class GameManager : IService
         
     }
 
+    public void Pause(string pauseScene)
+    {
+        if (isPaused)
+        {
+            return;
+        }
+        SceneManager.LoadScene(pauseScene, LoadSceneMode.Additive);
+        Time.timeScale = 0;
+        isPaused = true;
+    }
+    
     public void Unpause(string pauseScene)
     {
         if (!isPaused)
@@ -51,6 +67,16 @@ public class GameManager : IService
         }
 
         SceneManager.UnloadSceneAsync(pauseScene);
+        Time.timeScale = 1;
+        isPaused = false;
+    }
+
+    public void Unpause()
+    {
+        if (!isPaused)
+        {
+            return;
+        }
         Time.timeScale = 1;
         isPaused = false;
     }

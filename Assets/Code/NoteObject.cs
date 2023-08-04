@@ -34,7 +34,7 @@ public class NoteObject : MonoBehaviour
                 if (!falseStart) //provided the button wasn't held prior to "zone" entry
                 {
                     GradeArrowPop();
-                    ServiceLocator.Instance.Get<EventManager>().OnHit?.Invoke(); //might pull this if we don't add more into it
+                    //ServiceLocator.Instance.Get<EventManager>().OnHit?.Invoke(); //might pull this if we don't add more into it
                     Destroy(gameObject);
                 }
             }
@@ -57,28 +57,33 @@ public class NoteObject : MonoBehaviour
         if (distance < gradingThreshhold) //perfect
         {
             Debug.Log("Perfect!");
+            ServiceLocator.Instance.Get<EventManager>().OnPerfect?.Invoke();
         }
         else if (distance < gradingThreshhold * 2) // excellent
         {
             awardedPointValue *= 0.9f;
             Debug.Log("Excellent!");
+            ServiceLocator.Instance.Get<EventManager>().OnExcellent?.Invoke();
         }
         else if (distance < gradingThreshhold * 3) //good
         {
             awardedPointValue *= 0.8f;
             Debug.Log("Good!");
+            ServiceLocator.Instance.Get<EventManager>().OnGood?.Invoke();
         }
         else if (distance < gradingThreshhold * 4) //fair
         {
             awardedPointValue *= 0.7f;
             Debug.Log("Fair!");
+            ServiceLocator.Instance.Get<EventManager>().OnGood?.Invoke();
         }
         else
         {
             awardedPointValue *= 0.6f;
             Debug.Log("Poor!");
+            ServiceLocator.Instance.Get<EventManager>().OnPoor?.Invoke();
         }
-        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(awardedPointValue);
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
