@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2427876956944664582}
   m_Layer: 5
   m_Name: RightNote
-  m_TagString: Untagged
+  m_TagString: NoteObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,7 +89,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointValue: 10
   missValue: -10
-  rb: {fileID: 0}
 --- !u!50 &2427876956944664582
 Rigidbody2D:
   serializedVersion: 4

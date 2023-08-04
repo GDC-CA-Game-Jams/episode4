@@ -111,7 +111,7 @@ public class ScoreKeeper : MonoBehaviour
             }
             else 
             {
-                glamMeter.GetComponent<Image>().color = Color.white;
+                glamMeter.GetComponent<Image>().color = Color.green;
             }
 
         /// *** Thes are test inputs taht will be changed when button presses are available *** ///

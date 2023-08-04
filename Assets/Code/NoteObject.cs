@@ -22,6 +22,15 @@ public class NoteObject : MonoBehaviour
     private bool bLongNote = false;
     private bool bObstacleNote = false;
 
+    private void OnEnable()
+    {
+        ServiceLocator.Instance.Get<EventManager>().OnClearNotes += Remove;
+    }
+
+    private void OnDisable()
+    {
+        ServiceLocator.Instance.Get<EventManager>().OnClearNotes -= Remove;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -62,5 +71,10 @@ public class NoteObject : MonoBehaviour
     public void SetFlagIsObstacleNote(bool flag)
     {
         bObstacleNote = flag;
+    }
+
+    private void Remove()
+    {
+        Destroy(gameObject);
     }
 }
