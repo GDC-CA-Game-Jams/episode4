@@ -8,7 +8,7 @@ public class LoadSceneOnClick : MonoBehaviour
 {
     public void OnClick(string name)
     {
-        ServiceLocator.Instance.Get<GameManager>().Unpause();
+        ServiceLocator.Instance.Get<GameManager>().Reset();
         SceneManager.LoadScene(name);
     }
 }

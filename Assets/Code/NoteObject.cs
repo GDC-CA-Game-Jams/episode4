@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Services;
-
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class NoteObject : MonoBehaviour
@@ -24,6 +24,16 @@ public class NoteObject : MonoBehaviour
     private bool falseStart = false; //used to catch if the player had the button held down before the note entered "the zone"
     private InputControls targetControls = null; //used to snatch a controls reference once the note enters the "zone" of a button
     private Collider2D buttonTrigger;
+
+    private void OnEnable()
+    {
+        ServiceLocator.Instance.Get<EventManager>().OnClearNotes += Remove;
+    }
+
+    private void OnDisable()
+    {
+        ServiceLocator.Instance.Get<EventManager>().OnClearNotes -= Remove;
+    }
 
     private void Update()
     {
@@ -115,5 +125,10 @@ public class NoteObject : MonoBehaviour
         {
             canBeActivated = false;
         }
+    }
+
+    private void Remove()
+    {
+        Destroy(gameObject);
     }
 }

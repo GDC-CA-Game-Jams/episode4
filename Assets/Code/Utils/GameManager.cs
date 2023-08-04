@@ -9,6 +9,9 @@ public class GameManager : IService
 {
 
     private bool isPaused;
+
+    public int beatCount = -1;
+    public int beatsElapsed = 0;
     
     public GameManager()
     {
@@ -22,7 +25,9 @@ public class GameManager : IService
 
     public void Reset()
     {
-        
+        beatCount = -1;
+        beatsElapsed = 0;
+        Unpause();
     }
 
     private void OnDeath()

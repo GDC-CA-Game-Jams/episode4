@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Activator
   - Destroyer
+  - AudioController
   layers:
   - Default
   - TransparentFX
