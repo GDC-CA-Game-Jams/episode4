@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -13,13 +14,23 @@ public class DialogueManager : MonoBehaviour
 
     private bool hasStarted;
 
+    public static UnityEvent<Dialogue> onDialogueTrigger;
+
     //[SerializeField]
     private Queue<string> sentences;
+
+    private void Awake()
+    {
+        onDialogueTrigger = new UnityEvent<Dialogue>();
+        onDialogueTrigger.AddListener(StartDialogue);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
+
+
     }
 
     // Update is called once per frame
