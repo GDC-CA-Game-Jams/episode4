@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Services;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -35,6 +36,11 @@ public class AudioController : MonoBehaviour
     //jumps the audio back a given amount of beats
     public void jumpAudioBackInBeats(int beats)
     {
+        coroutine = playRewindStop(1.0f);
+
+        // play RewindStart
+        m_MyAudioManager.PlaySFX("RewindStart");
+        StartCoroutine(coroutine);
         //calculate secondsToRewind based on beats and bpm
         float secondsToRewind = beats*(60/_bpm);
 
@@ -47,6 +53,11 @@ public class AudioController : MonoBehaviour
     //ie if beats is 4, it will jump to 4 beats after the song starts
     public void jumpAudioToNumBeats(int beats)
     {
+        coroutine = playRewindStop(1.0f);
+
+        // play RewindStart
+        m_MyAudioManager.PlaySFX("RewindStart");
+        StartCoroutine(coroutine);
         m_MyAudioSource.time = beats * (60 / _bpm);
     }
 
@@ -89,7 +100,7 @@ public class AudioController : MonoBehaviour
     private IEnumerator playRewindStop(float waitTime)
     {
         Debug.Log("pausing time");
-
+        
         float secondsToRewind = 16*(60/_bpm);
         float currentTime = m_MyAudioSource.time;
         float rewindTime = currentTime - secondsToRewind;

@@ -5973,6 +5973,7 @@ GameObject:
   - component: {fileID: 2136966986}
   - component: {fileID: 2136966985}
   - component: {fileID: 2136966984}
+  - component: {fileID: 2136966987}
   m_Layer: 0
   m_Name: AudioController
   m_TagString: AudioController
@@ -6019,6 +6020,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   m_MyAudioSource: {fileID: 2136966985}
+  m_MyAudioManager: {fileID: 2136966987}
 --- !u!82 &2136966985
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6130,3 +6132,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2136966987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136966983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a217813d58dab14daae52466535d252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SFX:
+  - name: RewindStart
+    clip: {fileID: 8300000, guid: e24ab1feeb53b504ba8d133c3622ae1c, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: RewindStop
+    clip: {fileID: 8300000, guid: f09c7ccbf52b54a46a1fe869f6de486a, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  Music:
+  - name: 
+    clip: {fileID: 8300000, guid: ffc57efc861f6c5449cbda2c80179a46, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}

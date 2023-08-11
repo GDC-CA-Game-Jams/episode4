@@ -66,7 +66,6 @@ public class BeatSpawner : MonoBehaviour
         }
 
         gm = ServiceLocator.Instance.Get<GameManager>();
-        LoadObstacles();
 
         //Segment to set the speed at what speed notes should cross the screen
         //make this read from audiocontroller's BPM field
@@ -84,6 +83,7 @@ public class BeatSpawner : MonoBehaviour
 
         beatVelocity = SpawnPoints[0].position.x;
 
+        LoadObstacles();
     }
 
 
