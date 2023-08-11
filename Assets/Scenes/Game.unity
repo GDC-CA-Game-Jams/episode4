@@ -1415,6 +1415,18 @@ PrefabInstance:
       value: 1121
       objectReference: {fileID: 0}
     - target: {fileID: 6021296259428775915, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
+      propertyPath: AudioControlRef
+      value: 
+      objectReference: {fileID: 2136966984}
+    - target: {fileID: 6021296259428775915, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
+      propertyPath: traversalBeatTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021296259428775915, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
+      propertyPath: beatButtonPosition
+      value: 
+      objectReference: {fileID: 1425138543}
+    - target: {fileID: 6021296259428775915, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
       propertyPath: SpawnPoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -4104,6 +4116,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!224 &1425138543 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1822154864988302034, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
+  m_PrefabInstance: {fileID: 269802006}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1425302900
 GameObject:
   m_ObjectHideFlags: 0

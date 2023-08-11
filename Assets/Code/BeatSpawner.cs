@@ -17,12 +17,18 @@ public class BeatSpawner : MonoBehaviour
 
     [Header("Possibly Removable Variables")] //these don't have any need to be visible in the inspector as of now
     public float beatTempo; //gets auto overridden by settings beatTempo, CONSIDER MAKING PRIVATE
-    public float beatFrequency; //gets auto overridden by settings beatFrequency, CONSIDER MAKING PRIVATE
+    [Tooltip("Number of 4/4 measures it takes for a note to make it from spawn to 'perfect zone' of beat button")]
+    public int traversalBeatTime = 4; //default value
+    //public float beatFrequency; //gets auto overridden by settings beatFrequency, CONSIDER MAKING PRIVATE
 
     [Header("Scene Object References")]
     [SerializeField] private GameObject[] arrows;
     [Tooltip("Order for slotting is counterclockwise from down: Down-0, Right-1, Up-2, Left-3")]
-    public Transform[] SpawnPoints = new Transform[4]; 
+    public Transform[] SpawnPoints = new Transform[4];
+    [Tooltip("Used to grab x position for beat buttons; any of the 4 can be slotted in, just needs X")]
+    public Transform beatButtonPosition;
+    [Tooltip("Used to grab the AudioController for useful purposes")]
+    public AudioController AudioControlRef;
     
     //public Transform SpawnPointUp, SpawnPointDown, SpawnPointLeft, SpawnPointRight; //contains spawnpoints for arrows
 
@@ -30,6 +36,7 @@ public class BeatSpawner : MonoBehaviour
     private float clock = 0f;
     private Dictionary<string, List<int>> levelNoteMap; //contains the
     private GameManager gm;
+    private float beatVelocity = 0f;
     
     [Header("Obstacle Configuration")]
     private SortedDictionary<int, int[]> obstacleBeats = new SortedDictionary<int, int[]>();
@@ -41,7 +48,7 @@ public class BeatSpawner : MonoBehaviour
     private void Awake()
     {
         //read new value from scriptableobject for "prestige mode" speed
-        beatFrequency = m_Settings.beatFrequency;
+        //beatFrequency = m_Settings.beatFrequency;
         beatTempo = m_Settings.beatTempo;
 
         if (readMode == ReadMode.Read)
@@ -60,6 +67,22 @@ public class BeatSpawner : MonoBehaviour
 
         gm = ServiceLocator.Instance.Get<GameManager>();
         LoadObstacles();
+
+        //Segment to set the speed at what speed notes should cross the screen
+        //make this read from audiocontroller's BPM field
+        float beatVelocityAdjust = 60f / AudioControlRef.GetBPM() ; //right now this is a magic number FIXME
+
+
+        if (orientation == Orientation.Horizontal)
+        {
+            beatTempo = ((SpawnPoints[0].position.x - beatButtonPosition.position.x) / traversalBeatTime) * beatVelocityAdjust;
+        }
+        else
+        {
+            beatTempo = ((SpawnPoints[0].position.y - beatButtonPosition.position.y) / traversalBeatTime) * beatVelocityAdjust;
+        }
+
+        beatVelocity = SpawnPoints[0].position.x;
 
     }
 

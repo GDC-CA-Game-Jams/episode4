@@ -54,7 +54,10 @@ public class AudioController : MonoBehaviour
         float rewindTime = currentTime - seconds;
         m_MyAudioSource.time = rewindTime;
     }
-
+    public float GetBPM()
+    {
+        return _bpm;
+    }
 }
 
 //Intervals are like beats, but more complex
