@@ -6147,20 +6147,14 @@ MonoBehaviour:
   SFX:
   - name: RewindStart
     clip: {fileID: 8300000, guid: e24ab1feeb53b504ba8d133c3622ae1c, type: 3}
-    volume: 1
-    pitch: 0
+    volume: 0.75
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: RewindStop
     clip: {fileID: 8300000, guid: f09c7ccbf52b54a46a1fe869f6de486a, type: 3}
-    volume: 1
-    pitch: 0
+    volume: 0.75
+    pitch: 1
     loop: 0
     source: {fileID: 0}
-  Music:
-  - name: 
-    clip: {fileID: 8300000, guid: ffc57efc861f6c5449cbda2c80179a46, type: 3}
-    volume: 1
-    pitch: 0
-    loop: 0
-    source: {fileID: 0}
+  Music: []

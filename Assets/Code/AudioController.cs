@@ -18,9 +18,21 @@ public class AudioController : MonoBehaviour
 
     private IEnumerator coroutine;
 
+    private bool songPaused;
+
+    public bool SongPaused
+    {
+        get => songPaused;
+        set => songPaused = value;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (songPaused)
+        {
+            return;
+        }
         //timeElapsedinIntervals is essentially the time elapsed in beats
         //you can change the interval, so it could be time elapsed in beats, half beats, quarter beats etc.
         //for example, assuming 1 interval = 1 beat, if timeElapsedinIntervals = 5, then we are 5 beats into the song
@@ -100,7 +112,7 @@ public class AudioController : MonoBehaviour
     private IEnumerator playRewindStop(float waitTime)
     {
         Debug.Log("pausing time");
-        
+        songPaused = true;
         float secondsToRewind = 16*(60/_bpm);
         float currentTime = m_MyAudioSource.time;
         float rewindTime = currentTime - secondsToRewind;
@@ -114,6 +126,7 @@ public class AudioController : MonoBehaviour
         m_MyAudioManager.StopPlaying("RewindStart");
         Debug.Log("Stop rewind begin sfx");
         yield return new WaitForSeconds(waitTime);
+        songPaused = false;
         m_MyAudioSource.Play();
         m_MyAudioSource.time = rewindTime;
         Debug.Log("done rewinding");
