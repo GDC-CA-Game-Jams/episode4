@@ -1170,7 +1170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -301, y: -192}
+  m_AnchoredPosition: {x: -301, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &242287816
@@ -2305,7 +2305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6514891334644479886, guid: c2b5b08b5ebcb3b4a89cec299bd06b52, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -360
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6514891334644479886, guid: c2b5b08b5ebcb3b4a89cec299bd06b52, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2469,7 +2469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -75}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -700, y: 102}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &612514603
@@ -2752,7 +2752,7 @@ Terrain:
   m_GameObject: {fileID: 624700202}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: 31b1ef5d6f59e0a4a8ba2acbbc7095dd, type: 2}
+  m_TerrainData: {fileID: 0}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -3448,6 +3448,7 @@ MonoBehaviour:
   multiText: {fileID: 241391292}
   scoreboard: {fileID: 613406268}
   glamMeter: {fileID: 269802007}
+  m_MyAudioManager: {fileID: 2136966987}
   pointMultiplier: 1
   multiTracker: 0
   tempMissCount: 0
@@ -5727,7 +5728,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 245, y: -192}
+  m_AnchoredPosition: {x: 245, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2129483156
@@ -5862,7 +5863,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -30, y: -192}
+  m_AnchoredPosition: {x: -30, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2136646196
@@ -6030,7 +6031,7 @@ AudioSource:
   m_GameObject: {fileID: 2136966983}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 816672243218204432, guid: 3c28281e284c9514cba816d8266ae7ae, type: 2}
   m_audioClip: {fileID: 8300000, guid: ffc57efc861f6c5449cbda2c80179a46, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -6157,4 +6158,29 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: BeatMiss
+    clip: {fileID: 8300000, guid: 8ba9137ed5fdf4d4aa1ffd50037d2660, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BeatPoor
+    clip: {fileID: 8300000, guid: 6f13a4fa7642e2e41bbb1ed4809a3212, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BeatGood
+    clip: {fileID: 8300000, guid: 3bc50ce2b82ae024eb7cba673592a6b0, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BeatPerfect
+    clip: {fileID: 8300000, guid: 0f47234a1d75ce8448090140a8ac4ba9, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   Music: []
+  audioMixerSFX: {fileID: 1403597709028983560, guid: 3c28281e284c9514cba816d8266ae7ae, type: 2}

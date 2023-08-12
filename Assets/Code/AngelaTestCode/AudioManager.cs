@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     public Sounds[] Music;
 
     public static AudioManager instance;
+    [SerializeField] AudioMixerGroup audioMixerSFX;
 
     void Awake()
     {
@@ -32,6 +33,7 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = audioMixerSFX;
         }
 
         foreach (Sounds m in Music)

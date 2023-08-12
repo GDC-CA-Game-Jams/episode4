@@ -26,6 +26,7 @@ public class ScoreKeeper : MonoBehaviour
     public TextMeshProUGUI multiText;
     public GameObject scoreboard;
     public GameObject glamMeter;
+    [SerializeField] AudioManager m_MyAudioManager;
 
     [Header("Variables")]
     public float pointMultiplier = 1.0f;
@@ -168,6 +169,9 @@ public class ScoreKeeper : MonoBehaviour
 
         multiText.text = "Multiplier: x" + 1;
         
+        m_MyAudioManager.PlaySFX("BeatMiss");
+        Debug.Log("Playing Beat Miss");
+
         ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(-glamIncrease);
 
     }
@@ -185,6 +189,9 @@ public class ScoreKeeper : MonoBehaviour
 
         multiText.text = "Multiplier: x" + pointMultiplier;
         
+        m_MyAudioManager.PlaySFX("BeatPerfect");
+        Debug.Log("Playing Beat Perfect");
+
         ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(glamIncrease);
     }
     /// <summary>
@@ -213,6 +220,9 @@ public class ScoreKeeper : MonoBehaviour
 
         multiText.text = "Multiplier: x" + pointMultiplier;
         
+        m_MyAudioManager.PlaySFX("BeatGood");
+        Debug.Log("Playing Beat Good");
+
         ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(glamIncrease * 0.5f);
     }
 
@@ -225,6 +235,9 @@ public class ScoreKeeper : MonoBehaviour
 
         multiText.text = "Multiplier: x" + pointMultiplier;
         
+        m_MyAudioManager.PlaySFX("BeatPoor");
+        Debug.Log("Playing Beat Poor");
+
         ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(glamIncrease * 0.3f);
     }
 
