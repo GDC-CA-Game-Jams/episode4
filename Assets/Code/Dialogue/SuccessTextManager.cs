@@ -130,19 +130,17 @@ public class SuccessTextManager : MonoBehaviour
 
                 int index = c.vertexIndex;
 
+                Vector3 offset = Wobble(Time.time + i);
+                vertices[index] += offset;
+                vertices[index + 1] += offset;
+                vertices[index + 2] += offset;
+                vertices[index + 3] += offset;
+
                 //animate rainbow color gradient effect on text mesh
                 colors[index] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index].x * 0.001f, 1f));
                 colors[index + 1] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index + 1].x * 0.001f, 1f));
                 colors[index + 2] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index + 2].x * 0.001f, 1f));
                 colors[index + 3] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index + 3].x * 0.001f, 1f));
-            }
-
-            for (int i = 0; i < vertices.Length; i++)
-            {
-                //add wobble effect to each vertex in the text mesh
-                Vector3 offset = Wobble(Time.time + i);
-
-                vertices[i] = vertices[i] + offset;
             }
 
             mesh.vertices = vertices;

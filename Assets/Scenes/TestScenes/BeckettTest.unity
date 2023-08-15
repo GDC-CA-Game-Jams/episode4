@@ -355,8 +355,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a05baaf40de189d458691b75e8dd10bd, type: 2}
+  m_sharedMaterial: {fileID: -4931186348166746955, guid: a05baaf40de189d458691b75e8dd10bd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -737,22 +737,19 @@ PrefabInstance:
       propertyPath: successText.sentences.Array.data[4]
       value: Damn
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2272626621128763473, guid: bb9f8216b911dee4cb4a8a1121f93489, type: 3}
+    - {fileID: 7114436580809227488, guid: bb9f8216b911dee4cb4a8a1121f93489, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2422260745813527083, guid: bb9f8216b911dee4cb4a8a1121f93489, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1481730655}
+    - targetCorrespondingSourceObject: {fileID: 2422260745813527083, guid: bb9f8216b911dee4cb4a8a1121f93489, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1481730654}
   m_SourcePrefab: {fileID: 100100000, guid: bb9f8216b911dee4cb4a8a1121f93489, type: 3}
---- !u!114 &506299069 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7114436580809227488, guid: bb9f8216b911dee4cb4a8a1121f93489, type: 3}
-  m_PrefabInstance: {fileID: 506299067}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b18f3746b1d1f6941b180a1521dc9e2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &658444096
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,7 +764,7 @@ GameObject:
   - component: {fileID: 658444100}
   - component: {fileID: 658444101}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1034,7 +1031,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 506299069}
+      - m_Target: {fileID: 1481730654}
         m_TargetAssemblyTypeName: SuccessTextManager, Assembly-CSharp
         m_MethodName: StartSuccessText
         m_Mode: 1
@@ -1096,8 +1093,8 @@ GameObject:
   - component: {fileID: 1337260686}
   - component: {fileID: 1337260685}
   - component: {fileID: 1337260684}
-  - component: {fileID: 1337260687}
   - component: {fileID: 1337260688}
+  - component: {fileID: 1337260689}
   m_Layer: 5
   m_Name: Dialogue Test Button
   m_TagString: Untagged
@@ -1170,7 +1167,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1337260687}
+      - m_Target: {fileID: 1337260689}
         m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
         m_MethodName: TriggerDialogue
         m_Mode: 1
@@ -1220,22 +1217,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337260682}
   m_CullTransparentMesh: 1
---- !u!114 &1337260687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1337260682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e97fe8fdfdf4e614da85d619a8019c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialog:
-    sentences:
-    - Testing dialogue
-    - Next Page
 --- !u!95 &1337260688
 Animator:
   serializedVersion: 5
@@ -1257,6 +1238,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1337260689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337260682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e132cc119c95c408b8c4b88b05df34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    sentences:
+    - Testing Dialogue
+    - Testing Dialogue Again
 --- !u!1 &1459117977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,6 +1346,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1481730651 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2422260745813527083, guid: bb9f8216b911dee4cb4a8a1121f93489, type: 3}
+  m_PrefabInstance: {fileID: 506299067}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1481730654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481730651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46faa76bc4136045b25123c3836321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  successText:
+    sentences:
+    - Wow!
+    - Yeah!
+    - Groovy!
+  targetLocation: {fileID: 269252265}
+  textParent: {fileID: 1947809261}
+  animator: {fileID: 185642227}
+  textMesh: {fileID: 185642224}
+  cam: {fileID: 1459117979}
+--- !u!114 &1481730655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481730651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce30895d5cdcee4ba537fdbfaa1a334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog: {fileID: 1782585375}
+  animator: {fileID: 1782585377}
 --- !u!1 &1596668442
 GameObject:
   m_ObjectHideFlags: 0
