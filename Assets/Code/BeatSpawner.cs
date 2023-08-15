@@ -19,10 +19,13 @@ public class BeatSpawner : MonoBehaviour
     public float beatTempo; //gets auto overridden by settings beatTempo, CONSIDER MAKING PRIVATE
     [Tooltip("Number of 4/4 measures it takes for a note to make it from spawn to 'perfect zone' of beat button")]
     public int traversalBeatTime = 4; //default value
+    [Tooltip("Controls whether beat guidelines will spawn ")]
+    [SerializeField] private bool throwBeatGuidelines = true;
     //public float beatFrequency; //gets auto overridden by settings beatFrequency, CONSIDER MAKING PRIVATE
 
     [Header("Scene Object References")]
     [SerializeField] private GameObject[] arrows;
+    [SerializeField] private GameObject guideline;
     [Tooltip("Order for slotting is counterclockwise from down: Down-0, Right-1, Up-2, Left-3")]
     public Transform[] SpawnPoints = new Transform[4];
     [Tooltip("Used to grab x position for beat buttons; any of the 4 can be slotted in, just needs X")]
@@ -143,7 +146,18 @@ public class BeatSpawner : MonoBehaviour
     {
         ++gm.beatCount;
         ++gm.beatsElapsed;
-        ReadSpawn();
+        if (throwBeatGuidelines)
+        {
+            SpawnGuideLine();
+        }
+        if (readMode == ReadMode.Read)
+        {
+            ReadSpawn();
+        }
+        else
+        {
+            RandomSpawn();
+        }
     }
     
     private void LoadObstacles()
@@ -242,6 +256,29 @@ public class BeatSpawner : MonoBehaviour
             noteObjectScript.rb = noteObject.GetComponent<Rigidbody2D>();
             noteObjectScript.rb.velocity = new Vector2(0f, beatTempo * -1);
         }
+    }
+
+    /// <summary>
+    /// Temporary function to do beat measure guidelines
+    /// </summary>
+    public void SpawnGuideLine()
+    {
+        var guidelineObject = Instantiate(guideline) ;
+        guidelineObject.transform.SetParent(gameObject.transform, false);
+        guidelineObject.transform.position = SpawnPoints[1].position;
+        if (gm.beatCount % 4 == 0) //drawing quarter note lines
+        {
+            guidelineObject.GetComponentInChildren<Image>().color = Color.white;
+        }
+        else if (gm.beatCount % 2 == 0) //drawing 8th note lines
+        {
+            guidelineObject.GetComponentInChildren<Image>().color = Color.grey;
+        }
+        else //draw 16th note lines
+        {
+            guidelineObject.GetComponentInChildren<Image>().color = Color.black;
+        }
+        guidelineObject.GetComponent<Rigidbody2D>().velocity = new Vector2(beatTempo * -1, 0f);
     }
 }
 

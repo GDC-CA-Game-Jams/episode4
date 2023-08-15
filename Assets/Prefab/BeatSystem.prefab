@@ -1083,6 +1083,10 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
+      propertyPath: guideline
+      value: 
+      objectReference: {fileID: 3514293228778103551, guid: 9b42179e33a5e2a4ebb4c596304009cb, type: 3}
+    - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: m_Settings
       value: 
       objectReference: {fileID: 11400000, guid: 297a69ef31d52a446a083b533b527050, type: 2}
@@ -1122,6 +1126,10 @@ PrefabInstance:
       propertyPath: arrows.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
+      propertyPath: beatButtonPosition
+      value: 
+      objectReference: {fileID: 1822154864988302034}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: arrows.Array.data[0]
       value: 
@@ -1241,6 +1249,11 @@ PrefabInstance:
 --- !u!224 &1390495928889639003 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3265165327683993052, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
+  m_PrefabInstance: {fileID: 4475516171933629831}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1822154864988302034 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2834349717016418133, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
   m_PrefabInstance: {fileID: 4475516171933629831}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &2217162587884694938 stripped
