@@ -22,7 +22,7 @@ public class InputControls : MonoBehaviour
     //CURRENTLY UNUSED
     private bool isInLongPress = false;
     private bool isFailingLongPress = false;
-
+    
     private void Awake()
     {
         input = new CustomInput();
@@ -116,12 +116,12 @@ public class InputControls : MonoBehaviour
     {
         if(pointAmount < 0)
         {
-            Debug.Log("Miss for: " + pointAmount + " points");
+            
 
         }
         else
         {
-            Debug.Log("Hit for: " + pointAmount + " points");
+            
         }
     }
 
@@ -219,5 +219,6 @@ public class InputControls : MonoBehaviour
         isFailingLongPress = false;
         noteQueue.Clear();
     }
+    
 
 }

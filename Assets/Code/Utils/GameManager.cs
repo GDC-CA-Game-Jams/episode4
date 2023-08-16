@@ -40,16 +40,12 @@ public class GameManager : IService
 
         if (isPaused)
         {
-            SceneManager.UnloadSceneAsync(pauseScene);
-            Time.timeScale = 1;
+            Unpause(pauseScene);
         }
         else
         {
-            SceneManager.LoadScene(pauseScene, LoadSceneMode.Additive);
-            Time.timeScale = 0;
+            Pause(pauseScene);
         }
-
-        isPaused = !isPaused;
         
     }
 
@@ -62,18 +58,13 @@ public class GameManager : IService
         SceneManager.LoadScene(pauseScene, LoadSceneMode.Additive);
         Time.timeScale = 0;
         isPaused = true;
+        ServiceLocator.Instance.Get<EventManager>().OnPause?.Invoke();
     }
     
     public void Unpause(string pauseScene)
     {
-        if (!isPaused)
-        {
-            return;
-        }
-
+        Unpause();
         SceneManager.UnloadSceneAsync(pauseScene);
-        Time.timeScale = 1;
-        isPaused = false;
     }
 
     public void Unpause()
@@ -84,5 +75,6 @@ public class GameManager : IService
         }
         Time.timeScale = 1;
         isPaused = false;
+        ServiceLocator.Instance.Get<EventManager>().OnUnpause?.Invoke();
     }
 }

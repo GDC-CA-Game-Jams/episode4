@@ -19,6 +19,11 @@ public class EventManager : IService
     public Action OnMissObstacle;
 
     public Action OnClearNotes;
+
+    public Action OnRewindComplete;
+
+    public Action OnPause;
+    public Action OnUnpause;
     //private float discoMeterHitIncreaseAmount = 10;
     //private float discoMeterMissDecreaseAmount = -10;
 

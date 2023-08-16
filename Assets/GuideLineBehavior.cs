@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class GuideLineBehavior : MonoBehaviour
 {
+    
+    void Start()
+    {
+        transform.SetAsFirstSibling();
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
 
