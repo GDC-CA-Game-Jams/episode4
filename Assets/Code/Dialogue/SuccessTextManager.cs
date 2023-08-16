@@ -5,6 +5,7 @@ using TMPro;
 using System.Data;
 using System.Reflection;
 using UnityEngine.Events;
+using Services;
 
 public class SuccessTextManager : MonoBehaviour
 {
@@ -36,14 +37,34 @@ public class SuccessTextManager : MonoBehaviour
         onSuccessTextTrigger = new UnityEvent<Dialogue>();
         onSuccessTextTrigger.AddListener(StartSuccessTextExternal);
     }
+
+    private void OnEnable()
+    {
+        EventManager em = ServiceLocator.Instance.Get<EventManager>();
+        em.OnPerfect += StartSuccessText;
+        em.OnExcellent += StartSuccessText;
+        em.OnGood += StartSuccessText;
+        em.OnPoor += StartSuccessText;
+    }
+
+    private void OnDisable()
+    {
+        EventManager em = ServiceLocator.Instance.Get<EventManager>();
+        em.OnPerfect -= StartSuccessText;
+        em.OnExcellent -= StartSuccessText;
+        em.OnGood -= StartSuccessText;
+        em.OnPoor -= StartSuccessText;
+    }
+
     void Start()
     {
-        Color _orange = new Color(255, 165, 0);
-        Color _purple = new Color32(143, 0, 254, 1);
-        //textMesh = GetComponent<TMP_Text>();
         cam = Camera.main;
         rainbow = new Gradient();
         isVisible = false;
+
+        //setting gradient for rainbow effect
+        Color _orange = new Color(255, 165, 0);
+        Color _purple = new Color32(143, 0, 254, 1);
 
         var colors = new GradientColorKey[6];
         colors[0] = new GradientColorKey(Color.red, 0.3f);
@@ -109,19 +130,17 @@ public class SuccessTextManager : MonoBehaviour
 
                 int index = c.vertexIndex;
 
-                //add rainbow color gradient effect to each character in text mesh
+                Vector3 offset = Wobble(Time.time + i);
+                vertices[index] += offset;
+                vertices[index + 1] += offset;
+                vertices[index + 2] += offset;
+                vertices[index + 3] += offset;
+
+                //animate rainbow color gradient effect on text mesh
                 colors[index] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index].x * 0.001f, 1f));
                 colors[index + 1] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index + 1].x * 0.001f, 1f));
                 colors[index + 2] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index + 2].x * 0.001f, 1f));
                 colors[index + 3] = rainbow.Evaluate(Mathf.Repeat(Time.time + vertices[index + 3].x * 0.001f, 1f));
-            }
-
-            for (int i = 0; i < vertices.Length; i++)
-            {
-                //add wobble effect to each vertice in the text mesh
-                Vector3 offset = Wobble(Time.time + i);
-
-                vertices[i] = vertices[i] + offset;
             }
 
             mesh.vertices = vertices;

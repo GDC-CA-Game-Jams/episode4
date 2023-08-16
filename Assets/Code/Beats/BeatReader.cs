@@ -16,6 +16,10 @@ public class BeatReader : IService
 
         foreach (string line in lines)
         {
+            if (line.Substring(0, 1).Equals("#"))
+            {
+                continue;
+            }
             string[] split = line.Split(" ");
             string type = split[0];
             int beat = -1;

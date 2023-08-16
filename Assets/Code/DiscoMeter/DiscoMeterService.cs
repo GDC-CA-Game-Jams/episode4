@@ -84,7 +84,7 @@ public class DiscoMeterService : IService
         if (temp <= killValue)
         {
             currentValue = temp;
-            ServiceLocator.Instance.Get<EventManager>().OnDeath.Invoke();
+            ServiceLocator.Instance.Get<EventManager>().OnDeath?.Invoke();
             // Set the slider percent to a normalized percent of the max value
             UpdateSliderValue(currentValue / maxValue);
             return true;

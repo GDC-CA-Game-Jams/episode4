@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4734746834129911625}
   - component: {fileID: 2427876956944664582}
   m_Layer: 5
-  m_Name: DownNote
-  m_TagString: Untagged
+  m_Name: RightNote
+  m_TagString: NoteObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,7 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60f6d46620b11ea489b3c8efdf3f7562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  pointValue: 10
+  missValue: -10
 --- !u!50 &2427876956944664582
 Rigidbody2D:
   serializedVersion: 4
@@ -142,7 +143,7 @@ RectTransform:
   m_GameObject: {fileID: 6560639345338298750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7547375338775431615}
@@ -181,7 +182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 3279f4be1a189c64dbc3198f7ac0cb41, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

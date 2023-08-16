@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,7 @@ public class ScoreKeeper : MonoBehaviour
     public TextMeshProUGUI multiText;
     public GameObject scoreboard;
     public GameObject glamMeter;
+    [SerializeField] AudioManager m_MyAudioManager;
 
     [Header("Variables")]
     public float pointMultiplier = 1.0f;
@@ -35,6 +37,8 @@ public class ScoreKeeper : MonoBehaviour
     private string[] testNames = { "Luke", "Percy", "Vader", "Frodo", "Sam", 
                                    "Pipen", "Gandalf", "Sauron", "Harley",
                                    "Sally", "Jack", "Ivy", "Ahsoka"};
+
+    public float glamIncrease = 10;
     System.Random random = new System.Random();
     private int randomName;
     private string newName;
@@ -43,6 +47,29 @@ public class ScoreKeeper : MonoBehaviour
     
     //an array of the highest scoring players
     public string[] topScores;
+
+
+    private void OnEnable()
+    {
+        ServiceLocator.Instance.Get<EventManager>().OnMiss += OnMiss;
+        ServiceLocator.Instance.Get<EventManager>().OnMissObstacle += OnMissObstacle;
+        ServiceLocator.Instance.Get<EventManager>().OnPerfect += OnHitPerfect;
+        ServiceLocator.Instance.Get<EventManager>().OnExcellent += OnHitExcellent;
+        ServiceLocator.Instance.Get<EventManager>().OnGood += OnHitGood;
+        ServiceLocator.Instance.Get<EventManager>().OnPoor += OnHitPoor;
+        ServiceLocator.Instance.Get<EventManager>().OnDeath += OnDeath;
+    }
+    
+    private void OnDisable()
+    {
+        ServiceLocator.Instance.Get<EventManager>().OnMiss -= OnMiss;
+        ServiceLocator.Instance.Get<EventManager>().OnMissObstacle -= OnMissObstacle;
+        ServiceLocator.Instance.Get<EventManager>().OnPerfect -= OnHitPerfect;
+        ServiceLocator.Instance.Get<EventManager>().OnExcellent -= OnHitExcellent;
+        ServiceLocator.Instance.Get<EventManager>().OnGood -= OnHitGood;
+        ServiceLocator.Instance.Get<EventManager>().OnPoor -= OnHitPoor;
+        ServiceLocator.Instance.Get<EventManager>().OnDeath += OnDeath;
+    }
 
     private void Start()
     {
@@ -87,7 +114,7 @@ public class ScoreKeeper : MonoBehaviour
             }
             else 
             {
-                glamMeter.GetComponent<Image>().color = Color.white;
+                glamMeter.GetComponent<Image>().color = Color.green;
             }
 
         /// *** Thes are test inputs taht will be changed when button presses are available *** ///
@@ -102,24 +129,20 @@ public class ScoreKeeper : MonoBehaviour
             OnMiss();
 
         }
+    }
 
-        if (tempMissCount >= 3 && gameOver == false )
+    public void OnDeath()
+    {
+        if (!gameOver)
         {
-            /// *** This will be updated to have player input their name with up to 8 chars *** ///
-            ///*** This also get updated to have the player not lose on 3 misses but when the meter gets too low *** ///
-            
-
-            //if the player misses 3 beats the game ends and the scores come up including the new one
-            //I also plan to add a pause here or "rewind" when we get a chance,
-            //but I don't know how to use the current pause on the GameManager
             scoreboard.SetActive(true);
             scoreboard.GetComponent<ScoreManager>().NewEntry(curPoints, newName);
             scoreboard.GetComponent<ScoreManager>().GetHighScores();
             Debug.Log(curPoints + " --- " + newName);
-            gameOver = true;            
+            gameOver = true;
         }
     }
-
+    
     public void MultiplierIncrease()
     {
         //keeps track of the multiplier and counts up currently set to increase points by 20% per multiplier
@@ -145,7 +168,17 @@ public class ScoreKeeper : MonoBehaviour
         multiCount = 1;
 
         multiText.text = "Multiplier: x" + 1;
+        
+        m_MyAudioManager.PlaySFX("BeatMiss");
+        Debug.Log("Playing Beat Miss");
 
+        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(-glamIncrease);
+
+    }
+    
+    public void OnMissObstacle()
+    {
+        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(-glamIncrease * 2);
     }
     public void OnHitPerfect()
     {
@@ -155,6 +188,11 @@ public class ScoreKeeper : MonoBehaviour
         pointText.text = "Score: " + curPoints;
 
         multiText.text = "Multiplier: x" + pointMultiplier;
+        
+        m_MyAudioManager.PlaySFX("BeatPerfect");
+        Debug.Log("Playing Beat Perfect");
+
+        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(glamIncrease);
     }
     /// <summary>
     /// All Of the below are for use later and will probably get changed. they are functions that were meant to
@@ -169,6 +207,8 @@ public class ScoreKeeper : MonoBehaviour
         pointText.text = "Score: " + curPoints;
 
         multiText.text = "Multiplier: x" + pointMultiplier;
+        
+        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(glamIncrease * 0.8f);
     }
 
     public void OnHitGood()
@@ -179,6 +219,11 @@ public class ScoreKeeper : MonoBehaviour
         pointText.text = "Score: " + curPoints;
 
         multiText.text = "Multiplier: x" + pointMultiplier;
+        
+        m_MyAudioManager.PlaySFX("BeatGood");
+        Debug.Log("Playing Beat Good");
+
+        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(glamIncrease * 0.5f);
     }
 
     public void OnHitPoor()
@@ -189,6 +234,11 @@ public class ScoreKeeper : MonoBehaviour
         pointText.text = "Score: " + curPoints;
 
         multiText.text = "Multiplier: x" + pointMultiplier;
+        
+        m_MyAudioManager.PlaySFX("BeatPoor");
+        Debug.Log("Playing Beat Poor");
+
+        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(glamIncrease * 0.3f);
     }
 
 
