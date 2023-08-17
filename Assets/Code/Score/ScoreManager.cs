@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using Random = UnityEngine.Random;
-
+using System.IO;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -34,45 +34,57 @@ public class ScoreManager : MonoBehaviour
         template.gameObject.SetActive(false);
 
 
-        //used to test creating the highscores table
+
+
+
+
+    }
+    public void Start()
+    {
+                //used to test creating the highscores table
         //probably don't need anymore
         /*
-        highscoresList = new List<Highscores>()
+        if (highscoresList == null)
+        {
+            highscoresList = new List<Highscores>()
         {
             new Highscores{points = 400,name="Alpo"},
             new Highscores{points = 20,name="Commy"},
             new Highscores{points = 2,name="Draco"},
             new Highscores{points = 52,name="Potta"},
+            new Highscores{points = 10,name="Steven"},
             new Highscores{points = 10,name="Pipen"},
-            new Highscores{points = 10,name="Pipen"},
-            new Highscores{points = 10,name="Pipen"},
-            new Highscores{points = 10,name="Pipen"},
-            new Highscores{points = 10,name="Pipen"},
-            new Highscores{points = 10,name="Pipen"},
+            new Highscores{points = 10,name="Percy"},
+            new Highscores{points = 10,name="John"},
+            new Highscores{points = 10,name="Kale"},
+            new Highscores{points = 10,name="Katniss"},
         };
-
-        SaveScore();
+        }
+        InitialSaveScore();
         */
     }
 
     /// this is used for saving a newly created table
-    public void SaveScore()
+    public void InitialSaveScore()
     {
         //creates a Table object to save the information into json
-        HighscoresTable highscoresTable = new HighscoresTable { highscoresList = highscoresList };        
+        HighscoresTable highscoresTable = new HighscoresTable { highscoresList = highscoresList };
         string json = JsonUtility.ToJson(highscoresTable);
         PlayerPrefs.SetString("scores", json);
         PlayerPrefs.Save();
         //debugs to confirm content saved.
         Debug.Log(PlayerPrefs.GetString("scores"));
-        Debug.Log("Saved to Json");
+        Debug.Log("Initial Save to Json");
     }
 
     public void GetHighScores()
     {
+        string filePath = Application.persistentDataPath + "/JsonData.json";
+
         //gets the Json and turns it into a string.
+        string jsonData = System.IO.File.ReadAllText(filePath);
         string jsonString = PlayerPrefs.GetString("scores");
-        HighscoresTable highscoresTable = JsonUtility.FromJson<HighscoresTable>(jsonString);
+        HighscoresTable highscoresTable = JsonUtility.FromJson<HighscoresTable>(jsonData);
         Debug.Log(jsonString);
 
         //sorts the list before creating each row and displaying it.        
@@ -90,10 +102,12 @@ public class ScoreManager : MonoBehaviour
     public void NewEntry(float points, string name)
     {
         
+        string filePath = Application.persistentDataPath + "/JsonData.json";
+        string jsonReadData = System.IO.File.ReadAllText(filePath);
         Highscores highscores = new Highscores { points = points, name = name };
 
         string jsonString = PlayerPrefs.GetString("scores");
-        HighscoresTable highscoresTable = JsonUtility.FromJson<HighscoresTable>(jsonString);
+        HighscoresTable highscoresTable = JsonUtility.FromJson<HighscoresTable>(jsonReadData);
 
         //adds the entry to the list then checks list for the how many entries it has,
         //sorts them then gets rid of the lowest rank
@@ -103,12 +117,13 @@ public class ScoreManager : MonoBehaviour
             highscoresTable.highscoresList.Sort((x, y) => y.points.CompareTo(x.points));
             highscoresTable.highscoresList.RemoveRange(10, highscoresTable.highscoresList.Count - 10);
         }
-        string json = JsonUtility.ToJson(highscoresTable);
-        PlayerPrefs.SetString("scores", json);
+        string jsonData = JsonUtility.ToJson(highscoresTable);
+        PlayerPrefs.SetString("scores", jsonData);
         PlayerPrefs.Save();
         //debugs to confirm content saved.
         Debug.Log(highscoresTable.highscoresList.Count + " " + PlayerPrefs.GetString("scores") );
-        Debug.Log("Saved to Json");
+        Debug.Log(filePath);
+        System.IO.File.WriteAllText(filePath, jsonData);
 
     }
 

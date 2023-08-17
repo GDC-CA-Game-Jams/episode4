@@ -20,12 +20,18 @@ public class ScoreKeeper : MonoBehaviour
     private float pointValue = 100f;
     private static GameManager gameManager;
     private static ScoreManager scoreManager;
+    public string input;
 
     [Header("References")]
     public TextMeshProUGUI pointText;
     public TextMeshProUGUI multiText;
     public GameObject scoreboard;
     public GameObject glamMeter;
+    /***
+     * This will be used later when i have time to update it
+     * public GameObject playerNameField;
+     */
+
     [SerializeField] AudioManager m_MyAudioManager;
 
     [Header("Variables")]
@@ -34,11 +40,13 @@ public class ScoreKeeper : MonoBehaviour
     public int multiTracker;
     public int tempMissCount = 0;
     public int[] multiThresholds;
-    private string[] testNames = { "Luke", "Percy", "Vader", "Frodo", "Sam", 
-                                   "Pipen", "Gandalf", "Sauron", "Harley",
-                                   "Sally", "Jack", "Ivy", "Ahsoka"};
+    public bool tempName;
 
     public float glamIncrease = 10;
+
+    private string[] testNames = { "Luke", "Percy", "Vader", "Frodo", "Sam",
+                                   "Pipen", "Gandalf", "Sauron", "Harley",
+                                   "Sally", "Jack", "Ivy", "Ahsoka"};
     System.Random random = new System.Random();
     private int randomName;
     private string newName;
@@ -73,6 +81,7 @@ public class ScoreKeeper : MonoBehaviour
 
     private void Start()
     {
+        
         //this bool is what brings up the score board
         gameOver = false;
         // sets points and multiplier values
@@ -80,12 +89,21 @@ public class ScoreKeeper : MonoBehaviour
         multiText.text = "Multiplier: x1";
         scoreboard.SetActive(false);
 
+
         /// *** this will be changed when player input for name is implemented. *** ///
         //Uses the random functionality to choose a random name from a list
         //its just a fun extra thing i added so the names aren't all the same for the moment
         System.Random random = new System.Random();
         randomName = random.Next(testNames.Length);
         newName = testNames[randomName];
+        input = newName;
+        /***
+        tempName = true;
+        playerNameField.SetActive(false);
+        */
+        Debug.Log(input);
+        //playerNameRef = playerName.GetComponent<PlayerName>().input;
+
     }
 
     public void Update()
@@ -119,6 +137,7 @@ public class ScoreKeeper : MonoBehaviour
 
         /// *** Thes are test inputs taht will be changed when button presses are available *** ///
         //Test inputs to see how score reacts.
+        
         if (Input.GetKeyUp(KeyCode.Space))
         {
             
@@ -129,6 +148,30 @@ public class ScoreKeeper : MonoBehaviour
             OnMiss();
 
         }
+        
+    }
+    public void PlayerNameInput(string s)
+    {
+        Debug.Log("this is working --- 1");
+        if (s.Length >= 3 && s.Length <= 8)
+        {
+            if (Input.GetKeyUp(KeyCode.Return))
+            {
+                input = s;
+                //playerNameField.SetActive(false);
+                Debug.Log("this is working");
+                tempName = false;
+                //GameOver();
+            }
+        }
+        else
+        {
+            return;
+        }
+
+
+
+        Debug.Log(input);
     }
 
     public void OnDeath()
@@ -136,10 +179,17 @@ public class ScoreKeeper : MonoBehaviour
         if (!gameOver)
         {
             scoreboard.SetActive(true);
-            scoreboard.GetComponent<ScoreManager>().NewEntry(curPoints, newName);
+            scoreboard.GetComponent<ScoreManager>().NewEntry(curPoints, input);
             scoreboard.GetComponent<ScoreManager>().GetHighScores();
-            Debug.Log(curPoints + " --- " + newName);
+            Debug.Log(curPoints + " --- " + input);
             gameOver = true;
+        }
+    }
+    public void GameOver()
+    {
+        if (tempName)
+        {
+            //playerNameField.SetActive(true);
         }
     }
     
