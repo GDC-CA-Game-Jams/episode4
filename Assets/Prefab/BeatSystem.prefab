@@ -490,6 +490,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2917913440510700375}
   - {fileID: 4204339955856511880}
   - {fileID: 2217162587884694938}
   m_Father: {fileID: 0}
@@ -1217,9 +1218,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2366865486110101533, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2917913440510700375}
     - targetCorrespondingSourceObject: {fileID: 3265165327683993052, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       insertIndex: 0
       addedObject: {fileID: 7362923460595454960}
@@ -1438,7 +1436,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2217162587884694938}
+    m_TransformParent: {fileID: 8248456229583047343}
     m_Modifications:
     - target: {fileID: 3681460517874842722, guid: 2203594bf4cc8bd49a9029e9a4851898, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1546,11 +1544,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8728658468301970550, guid: 2203594bf4cc8bd49a9029e9a4851898, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 449.2008
+      value: 485.2
       objectReference: {fileID: 0}
     - target: {fileID: 8728658468301970550, guid: 2203594bf4cc8bd49a9029e9a4851898, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -284.53436
+      value: -324
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
