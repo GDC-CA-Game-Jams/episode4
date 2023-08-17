@@ -69,18 +69,18 @@ public class LoopingScroll : MonoBehaviour
     private void OnMissObstacle()
     {
         loopPoint *= -1;
-        scrollSpeed *= -2;
+        scrollSpeed *= -4;
         respawnPoint *= -1;
-        moveVec *= -2;
+        moveVec *= -4;
         isRewinding = true;
     }
 
     private void OnRewindComplete()
     {
         loopPoint *= -1;
-        scrollSpeed *= -0.5f;
+        scrollSpeed *= -0.25f;
         respawnPoint *= -1;
-        moveVec *= -0.5f;
+        moveVec *= -0.25f;
         isRewinding = false;
     }
 }
