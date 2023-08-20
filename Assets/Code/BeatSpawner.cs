@@ -37,9 +37,13 @@ public class BeatSpawner : MonoBehaviour
 
     //private variables
     private float clock = 0f;
-    private Dictionary<string, List<int>> levelNoteMap; //contains the
+    private Dictionary<string, List<int>> levelNoteMap;
     private GameManager gm;
     private float beatVelocity = 0f;
+    //stores whether each note is "in" the middle of a long/hold note
+    private bool[] isSpawningLongNote = new bool[] { false, false, false, false };
+    private bool[] justStartedLongNote = new bool[] { false, false, false, false };
+    private GameObject[] longNoteExtendoBar = new GameObject[4];
     
     [Header("Obstacle Configuration")]
     private SortedDictionary<int, int[]> obstacleBeats = new SortedDictionary<int, int[]>();
@@ -89,28 +93,6 @@ public class BeatSpawner : MonoBehaviour
         LoadObstacles();
     }
 
-
-    private void Update()
-    {
-        /*
-        clock += Time.deltaTime;
-        if (clock > beatFrequency)
-        {
-            clock = 0f;
-            beatCount++;
-
-            if (readMode == ReadMode.Read)
-            {
-                ReadSpawn();
-            }
-            else
-            {
-                RandomSpawn();
-            }
-        }
-        */
-    }
-
     /// <summary>
     /// Follows text file instructions for note generation. Currently highly syntax sensitive.
     /// ANY CHANGES TO NOTEMAP TEXT FILE SYNTAX REQUIRES THIS BE CHANGED
@@ -120,7 +102,23 @@ public class BeatSpawner : MonoBehaviour
         //going to add beatspawner enum to beatreader's dict later to make this matching easy
         //for now this is just going to be a wee bit ugly and full of magic values for beat directions
 
-        if (levelNoteMap["up"].Count != 0 && levelNoteMap["up"].Contains(gm.beatCount))
+        if (levelNoteMap["hup"].Count != 0 && levelNoteMap["hup"].Contains(gm.beatCount))
+        {
+            SpawnLongNote(NoteStyle.Up);
+        }
+        if (levelNoteMap["hdown"].Count != 0 && levelNoteMap["hdown"].Contains(gm.beatCount))
+        {
+            SpawnLongNote(NoteStyle.Down);
+        }
+        if (levelNoteMap["hleft"].Count != 0 && levelNoteMap["hleft"].Contains(gm.beatCount))
+        {
+            SpawnLongNote(NoteStyle.Left);
+        }
+        if (levelNoteMap["hright"].Count != 0 && levelNoteMap["hright"].Contains(gm.beatCount))
+        {
+            SpawnLongNote(NoteStyle.Right);
+        }
+        if ((levelNoteMap["up"].Count != 0 && levelNoteMap["up"].Contains(gm.beatCount)) && !isSpawningLongNote[0])
         {
             SpawnNote(NoteStyle.Up);
         }
@@ -140,6 +138,8 @@ public class BeatSpawner : MonoBehaviour
         {
             RunObstacle(obstacleBeats[gm.beatCount][0], obstacleBeats[gm.beatCount][1]);
         }
+
+        SpawnHoldBodies();
     }
 
     public void OnBeat()
@@ -157,6 +157,35 @@ public class BeatSpawner : MonoBehaviour
         else
         {
             RandomSpawn();
+        }
+    }
+
+    private void SpawnHoldBodies()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (isSpawningLongNote[i])
+            {
+                if (!justStartedLongNote[i])
+                {
+                    var bodyObject = Instantiate(arrows[8 + i]);
+                    bodyObject.transform.SetParent(gameObject.transform, false);
+                    bodyObject.transform.position = SpawnPoints[i].position;
+
+                    if (orientation == Orientation.Horizontal)
+                    {
+                        bodyObject.GetComponent<Rigidbody2D>().velocity = new Vector2(beatTempo * -1, 0f);
+                    }
+                    else if (orientation == Orientation.Vertical)
+                    {
+                        bodyObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, beatTempo * -1);
+                    }
+                }
+                else
+                {
+                    justStartedLongNote[i] = false;
+                }
+            }
         }
     }
     
@@ -245,6 +274,52 @@ public class BeatSpawner : MonoBehaviour
         noteObject.transform.SetParent(gameObject.transform, false);
         noteObject.transform.position = SpawnPoints[noteDirection].position;
         //noteObject.transform.Rotate(new Vector3(0, 0, 90 * noteDirection));
+
+        if (orientation == Orientation.Horizontal)
+        {
+            noteObjectScript.rb = noteObject.GetComponent<Rigidbody2D>();
+            noteObjectScript.rb.velocity = new Vector2(beatTempo * -1, 0f);
+        }
+        else if (orientation == Orientation.Vertical)
+        {
+            noteObjectScript.rb = noteObject.GetComponent<Rigidbody2D>();
+            noteObjectScript.rb.velocity = new Vector2(0f, beatTempo * -1);
+        }
+    }
+
+    private void SpawnLongNote(NoteStyle noteStyle)
+    {
+        //check to see if we're in a long note already (determines whether we're starting or ending a long note)
+        //case: starting a long notes
+            //set appropriate "isSpawningLongNote" flag bool to true (we're now in a long note)
+            //instantiate a long note & send it on its way
+        //case: ending a long note
+            //set "isSpawningLongNote" to false (we're closing it out)
+            //instantiate a long note ending
+        //Need separate function to perpetuate any active long notes bodies
+
+        int noteDirection = (int)noteStyle;
+
+        GameObject noteObject;
+        NoteObject noteObjectScript;
+
+        if (!isSpawningLongNote[noteDirection])
+        {
+            noteObject = Instantiate(arrows[noteDirection + 4]);
+            isSpawningLongNote[noteDirection] = true;
+            justStartedLongNote[noteDirection] = true;
+        }
+        else
+        {
+            noteObject = Instantiate(arrows[noteDirection]);
+            isSpawningLongNote[noteDirection] = false;
+        }
+
+        noteObjectScript = noteObject.GetComponent<NoteObject>();
+        noteObjectScript.SetFlagIsLongNote(true);
+        
+        noteObject.transform.SetParent(gameObject.transform, false);
+        noteObject.transform.position = SpawnPoints[noteDirection].position;
 
         if (orientation == Orientation.Horizontal)
         {

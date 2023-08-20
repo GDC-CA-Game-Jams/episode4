@@ -1108,7 +1108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: levelFileName
-      value: testMap
+      value: longTestMap
       objectReference: {fileID: 0}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: SpawnPointDown
@@ -1124,7 +1124,7 @@ PrefabInstance:
       objectReference: {fileID: 8485569646429338958}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: arrows.Array.size
-      value: 4
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: beatButtonPosition
@@ -1146,6 +1146,38 @@ PrefabInstance:
       propertyPath: arrows.Array.data[3]
       value: 
       objectReference: {fileID: 3514293228778103551, guid: 9e119e7f32d86bc44a3c8758a616d74f, type: 3}
+    - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
+      propertyPath: arrows.Array.data[4]
+      value: 
+      objectReference: {fileID: 3514293228778103551, guid: af471129ef7011042b8c3162453d0c33, type: 3}
+    - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
+      propertyPath: arrows.Array.data[5]
+      value: 
+      objectReference: {fileID: 3514293228778103551, guid: a9f1cda14a12b064893125b69f3f5520, type: 3}
+    - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
+      propertyPath: arrows.Array.data[6]
+      value: 
+      objectReference: {fileID: 3514293228778103551, guid: 9b043550fdca0b4418827894fe184591, type: 3}
+    - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
+      propertyPath: arrows.Array.data[7]
+      value: 
+      objectReference: {fileID: 3514293228778103551, guid: 590bad26837113048875022f0a5fbc3c, type: 3}
+    - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
+      propertyPath: arrows.Array.data[8]
+      value: 
+      objectReference: {fileID: 3514293228778103551, guid: 7390e1882229cbd4aae1a9549674d434, type: 3}
+    - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
+      propertyPath: arrows.Array.data[9]
+      value: 
+      objectReference: {fileID: 3514293228778103551, guid: 668a34c30b9a2da42a90418824575862, type: 3}
+    - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
+      propertyPath: arrows.Array.data[10]
+      value: 
+      objectReference: {fileID: 3514293228778103551, guid: fbcea53912e8cdb4988b057bde289f62, type: 3}
+    - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
+      propertyPath: arrows.Array.data[11]
+      value: 
+      objectReference: {fileID: 3514293228778103551, guid: 1c308e167d9e50144a155dc4dd775346, type: 3}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: SpawnPoints.Array.size
       value: 5
