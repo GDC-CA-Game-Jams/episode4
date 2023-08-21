@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Services;
@@ -19,13 +20,25 @@ public class AudioController : MonoBehaviour
     private IEnumerator coroutine;
 
     private bool songPaused;
-
+    
     public bool SongPaused
     {
         get => songPaused;
         set => songPaused = value;
     }
 
+    private void OnEnable()
+    {
+        ServiceLocator.Instance.Get<EventManager>().OnPause += OnPause;
+        ServiceLocator.Instance.Get<EventManager>().OnUnpause += OnUnpause;
+    }
+
+    private void OnDisable()
+    {
+        ServiceLocator.Instance.Get<EventManager>().OnPause -= OnPause;
+        ServiceLocator.Instance.Get<EventManager>().OnUnpause -= OnUnpause;
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -111,7 +124,6 @@ public class AudioController : MonoBehaviour
 
     private IEnumerator playRewindStop(float waitTime)
     {
-        Debug.Log("pausing time");
         songPaused = true;
         float secondsToRewind = 16*(60/_bpm);
         float currentTime = m_MyAudioSource.time;
@@ -119,17 +131,27 @@ public class AudioController : MonoBehaviour
         
         m_MyAudioSource.Stop();
 
-        yield return new WaitForSeconds(waitTime);
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(waitTime * 2);
         m_MyAudioManager.PlaySFX("RewindStop");
         yield return new WaitForSeconds(waitTime);
         m_MyAudioManager.StopPlaying("RewindStart");
-        Debug.Log("Stop rewind begin sfx");
         yield return new WaitForSeconds(waitTime);
         songPaused = false;
         m_MyAudioSource.Play();
         m_MyAudioSource.time = rewindTime;
-        Debug.Log("done rewinding");
+        ServiceLocator.Instance.Get<EventManager>().OnRewindComplete?.Invoke();
+    }
+    
+    private void OnPause()
+    {
+        songPaused = true;
+        m_MyAudioSource.Pause();
+    }
+
+    private void OnUnpause()
+    {
+        songPaused = false;
+        m_MyAudioSource.Play();
     }
 
 }

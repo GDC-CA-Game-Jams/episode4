@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class InputControls : MonoBehaviour
 {
@@ -23,10 +24,16 @@ public class InputControls : MonoBehaviour
     private bool isInLongPress = false;
     private bool isFailingLongPress = false;
 
+    private Image img;
+    
+    private int colorIndex;
+    [SerializeField] private Color[] hitColorCycle;
+    
     private void Awake()
     {
         input = new CustomInput();
         Physics2D.callbacksOnDisable = false; //bad place for this, but fixes a bug where popping a note double triggers dequeueing
+        img = gameObject.GetComponentInChildren<Image>();
     }
 
     private void OnEnable()
@@ -116,12 +123,12 @@ public class InputControls : MonoBehaviour
     {
         if(pointAmount < 0)
         {
-            Debug.Log("Miss for: " + pointAmount + " points");
+            
 
         }
         else
         {
-            Debug.Log("Hit for: " + pointAmount + " points");
+            
         }
     }
 
@@ -135,7 +142,6 @@ public class InputControls : MonoBehaviour
         //figures out what threshhold for quality the arrow pop is in
         if (distance < gradingThreshhold) //perfect
         {
-            Debug.Log("Hit - Perfect!");
             ServiceLocator.Instance.Get<EventManager>().OnPerfect?.Invoke();
         }
         else if (distance < gradingThreshhold * 2) // excellent
@@ -185,6 +191,8 @@ public class InputControls : MonoBehaviour
         {
             Debug.Log("THE BEAT THAT YOUR PRESS SKIPPED SOUNDED LIKE THIS!");
         }
+        img.color = hitColorCycle[colorIndex];
+        colorIndex = (colorIndex + 1) % hitColorCycle.Length;
     }
     private void DiscoInput_canceled(InputAction.CallbackContext obj)
     {
@@ -211,6 +219,8 @@ public class InputControls : MonoBehaviour
                 ServiceLocator.Instance.Get<EventManager>().OnMiss?.Invoke();
             }
         }
+
+        ResetColor();
     }
 
     private void stateReset()
@@ -218,6 +228,11 @@ public class InputControls : MonoBehaviour
         isInLongPress = false;
         isFailingLongPress = false;
         noteQueue.Clear();
+    }
+
+    private void ResetColor()
+    {
+        img.color = Color.white;
     }
 
 }
