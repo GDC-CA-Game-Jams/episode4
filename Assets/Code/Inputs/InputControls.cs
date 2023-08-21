@@ -93,6 +93,10 @@ public class InputControls : MonoBehaviour
         {
             noteQueue.Enqueue(collision.GetComponent<NoteObject>());
         }
+        else if (collision.CompareTag("LongBody"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -175,17 +179,20 @@ public class InputControls : MonoBehaviour
     {
         if (noteQueue.Count > 0) 
         { 
-            NoteObject objNote = noteQueue.Dequeue();
-            GradeArrowPop(objNote);
-            if (objNote.GetFlagIsLongNote())
+            if (!isFailingLongPress)
             {
-                if (!isInLongPress && !isFailingLongPress)
+                NoteObject objNote = noteQueue.Dequeue();
+                GradeArrowPop(objNote);
+                if (objNote.GetFlagIsLongNote())
                 {
-                    isInLongPress = true;
+                    if (!isInLongPress && !isFailingLongPress)
+                    {
+                        isInLongPress = true;
+                    }
                 }
-            }
 
-            Destroy(objNote.gameObject);
+                Destroy(objNote.gameObject);
+            }
         }
         else
         {

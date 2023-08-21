@@ -7,8 +7,13 @@ public class AudioManager : MonoBehaviour
     public Sounds[] SFX;
     public Sounds[] Music;
 
+    [SerializeField] AudioSource m_GuitarMusicLayer;
+
     public static AudioManager instance;
     [SerializeField] AudioMixerGroup audioMixerSFX;
+    [SerializeField] AudioMixerGroup audioMixerMUS;
+
+    [SerializeField] AudioFilterControl audioFilterController;
 
     void Awake()
     {
@@ -36,15 +41,22 @@ public class AudioManager : MonoBehaviour
             s.source.outputAudioMixerGroup = audioMixerSFX;
         }
 
-        foreach (Sounds m in Music)
-        {
-            m.source = gameObject.AddComponent<AudioSource>();
-            m.source.clip = m.clip;
+        // foreach (Sounds m in Music)
+        // {
+        //     //Debug.Log("playing audio clip " + m.name);
+        //     m.source = gameObject.AddComponent<AudioSource>();
+        //     m.source.clip = m.clip;
 
-            m.source.volume = m.volume;
-            m.source.pitch = m.pitch;
-            m.source.loop = m.loop;
-        }
+        //     m.source.volume = m.volume;
+        //     m.source.pitch = m.pitch;
+        //     m.source.loop = m.loop;
+        //     m.source.outputAudioMixerGroup = audioMixerMUS;
+        // }
+
+        // PlayMUS("MusicBaseLayer");
+        // PlayMUS("MusicPianoLayer");
+        // PlayMUS("MusicSynthLayer");
+        //PlayMUS("MusicGuitarLayer");
     }
 
     public void PlaySFX(string name)
@@ -59,20 +71,19 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
-    public void PlayMUS(string name)
-    {
-        // search through Array of SFX, play the one that matches name
-        Sounds m = Array.Find(Music, sound => sound.name == name);
-        if(m == null)
-        {
-            Debug.LogWarning("Sound: " + name + " not found");
-            return;
-        }
+    // public void PlayMUS(string name)
+    // {
+    //     // search through Array of Music, play the one that matches name
+    //     Sounds m = Array.Find(Music, sound => sound.name == name);
+    //     if(m == null)
+    //     {
+    //         Debug.LogWarning("Sound: " + name + " not found");
+    //         return;
+    //     }
+    //     m.source.Play();
+    //}
 
-        m.source.Play();
-    }
-
-    public void StopPlaying (string name)
+    public void StopPlaying(string name)
     {
         Sounds s = Array.Find(SFX, sound => sound.name == name);
         if(s == null)
@@ -83,4 +94,17 @@ public class AudioManager : MonoBehaviour
 
         s.source.Stop();      
     }
+
+    public void MusicGuitarFadeIn()
+    {
+        //Debug.Log("fading in guitar layer");
+        StartCoroutine(FadeAudioSource.StartFade(m_GuitarMusicLayer, 3f, .75f));
+    }
+
+    public void MusicGuitarFadeOut()
+    {
+        //Debug.Log("fading out guitar layer");
+        StartCoroutine(FadeAudioSource.StartFade(m_GuitarMusicLayer, 1f, 0f));
+    }
+
 }

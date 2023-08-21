@@ -20,6 +20,8 @@ public class DiscoMeterService : IService
     private MonoBehaviour mono;
     
     private float currentValue;
+
+    private AudioFilterControl audioFilterController;
     
     /// <summary>
     /// Init the service with the proper variables
@@ -28,7 +30,7 @@ public class DiscoMeterService : IService
     /// <param name="initialValue">Starting value of the bar</param>
     /// <param name="maxValue">Maximum value for the bar</param>
     /// <param name="killValue">What value constitutes a kill/player death</param>
-    public void Init(MonoBehaviour mono, Slider slider, Slider deathSlider, float initialValue, float maxValue, float killValue)
+    public void Init(MonoBehaviour mono, Slider slider, Slider deathSlider, float initialValue, float maxValue, float killValue, AudioFilterControl audioFilterController)
     {
         this.initialValue = initialValue;
         this.maxValue = maxValue;
@@ -42,6 +44,9 @@ public class DiscoMeterService : IService
         currentValue = initialValue;
         this.slider.value = currentValue / maxValue;
         this.deathSlider.value = 1 - this.slider.value;
+
+        this.audioFilterController = audioFilterController;
+
     }
 
     /// <summary>
@@ -70,6 +75,10 @@ public class DiscoMeterService : IService
             currentValue = maxValue;
             // Set the slider percent to a normalized percent of the max value
             UpdateSliderValue(currentValue / maxValue);
+            audioFilterController.BlendSnapshots(currentValue);
+            audioFilterController.PlayerMaxHealth(true);
+            
+            // send 'yes' to Guitar Track
             return true;
         }
 
@@ -78,6 +87,10 @@ public class DiscoMeterService : IService
             currentValue = temp;
             // Set the slider percent to a normalized percent of the max value
             UpdateSliderValue(currentValue / maxValue);
+            audioFilterController.BlendSnapshots(currentValue);
+            audioFilterController.PlayerMaxHealth(false);
+
+            // send 'no' to guitar track
             return true;
         }
         
@@ -87,6 +100,7 @@ public class DiscoMeterService : IService
             ServiceLocator.Instance.Get<EventManager>().OnDeath?.Invoke();
             // Set the slider percent to a normalized percent of the max value
             UpdateSliderValue(currentValue / maxValue);
+            audioFilterController.BlendSnapshots(currentValue);
             return true;
         }
 

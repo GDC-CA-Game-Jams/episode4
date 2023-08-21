@@ -10,6 +10,14 @@ public class BeatReader : IService
 
     public void Init(string file)
     {
+        //preloading handled note keywords; required as beatreader isn't doing nullkey checking now
+        //"h+direction" connotes a hold note, comes in pairs
+        string[] possKeys = { "hup", "hdown", "hleft", "hright", "up", "down", "left", "right" };
+        foreach (string key in possKeys)
+        {
+            notes.Add(key, new List<int>());
+        }
+
         TextAsset rawText = Resources.Load<TextAsset>(file);
         string text = rawText.text.Trim();
         string[] lines = text.Split("\n");
