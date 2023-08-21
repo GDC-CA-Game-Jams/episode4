@@ -13,13 +13,14 @@ public class DiscoMeterBehaviour : MonoBehaviour
     [SerializeField] private float initialValue;
     [SerializeField] private float maxValue;
     [SerializeField] private float killValue;
+    [SerializeField] private AudioFilterControl audioFilterController;
     
     // Start is called before the first frame update
     void Start()
     {
         // Init the disco meter service. Setting as a service so other scripts can access more easily
         ServiceLocator.Instance.Register(new DiscoMeterService());
-        ServiceLocator.Instance.Get<DiscoMeterService>().Init(this, slider, deathSlider, initialValue, maxValue, killValue);
+        ServiceLocator.Instance.Get<DiscoMeterService>().Init(this, slider, deathSlider, initialValue, maxValue, killValue, audioFilterController);
     }
 
     // Update is called once per frame
