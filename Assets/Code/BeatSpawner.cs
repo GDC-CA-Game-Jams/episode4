@@ -169,6 +169,12 @@ public class BeatSpawner : MonoBehaviour
                 if (!justStartedLongNote[i])
                 {
                     var bodyObject = Instantiate(arrows[8 + i]);
+
+                    //scaling of hold bodies relative to screen velocity
+                    //note that 120 is actually the proper scaling, but 119f gives a tiny bite of overlap
+                    //the overlap is used to cover any gaps from tiny bits of screen lag (which would sometimes appear)
+                    bodyObject.GetComponent<RectTransform>().localScale = new Vector3(1f * beatTempo / 119f, 1f, 1f);
+                    
                     bodyObject.transform.SetParent(gameObject.transform, false);
                     bodyObject.transform.position = SpawnPoints[i].position;
 
@@ -302,16 +308,16 @@ public class BeatSpawner : MonoBehaviour
 
         GameObject noteObject;
         NoteObject noteObjectScript;
+        noteObject = Instantiate(arrows[noteDirection + 4]);
 
         if (!isSpawningLongNote[noteDirection])
         {
-            noteObject = Instantiate(arrows[noteDirection + 4]);
             isSpawningLongNote[noteDirection] = true;
             justStartedLongNote[noteDirection] = true;
         }
         else
         {
-            noteObject = Instantiate(arrows[noteDirection]);
+            noteObject.GetComponent<RectTransform>().localScale = new Vector3(-1f, 1f, 1f);
             isSpawningLongNote[noteDirection] = false;
         }
 
