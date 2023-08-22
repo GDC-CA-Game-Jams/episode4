@@ -111,19 +111,17 @@ public class AudioController : MonoBehaviour
         // play RewindStart
         m_MyAudioManager.PlaySFX("RewindStart");
         StartCoroutine(coroutine);
-        Debug.Log("done");
+        //Debug.Log("done");
     }
 
     private IEnumerator playRewindStop(float waitTime)
     {
-        //Debug.Log("pausing time");
         songPaused = true;
         float secondsToRewind = 16*(60/_bpm);
         float currentTime = m_MyAudioSource.time;
         float rewindTime = currentTime - secondsToRewind;
         // ^-- it will always rewind 4 measures
         
-        //m_MyAudioSource.Stop();
         foreach(AudioSource m in m_MyMusicSources)
         {
             m.Stop();
@@ -137,20 +135,13 @@ public class AudioController : MonoBehaviour
         m_MyAudioManager.StopPlaying("RewindStart");
         yield return new WaitForSeconds(waitTime);
         songPaused = false;
-        m_MyAudioSource.Play();
-        m_MyAudioSource.time = rewindTime;
         ServiceLocator.Instance.Get<EventManager>().OnRewindComplete?.Invoke();
-        //Debug.Log("Stop rewind begin sfx");
-        yield return new WaitForSeconds((waitTime/2));
-        yield return new WaitForSeconds(waitTime);
-        songPaused = false;
-        //m_MyAudioSource.Play();
+
         foreach(AudioSource m in m_MyMusicSources)
         {
             m.Play();
             m.time = rewindTime;
         }        
-        //m_MyAudioSource.time = rewindTime;
         //Debug.Log("done rewinding");
     }
     

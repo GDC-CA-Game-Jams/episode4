@@ -78,7 +78,6 @@ public class DiscoMeterService : IService
             audioFilterController.BlendSnapshots(currentValue);
             audioFilterController.PlayerMaxHealth(true);
             
-            // send 'yes' to Guitar Track
             return true;
         }
 
@@ -90,7 +89,6 @@ public class DiscoMeterService : IService
             audioFilterController.BlendSnapshots(currentValue);
             audioFilterController.PlayerMaxHealth(false);
 
-            // send 'no' to guitar track
             return true;
         }
         

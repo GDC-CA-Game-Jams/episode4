@@ -314,7 +314,11 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   m_MyAudioSource: {fileID: 308671961337252810}
-  m_MyMusicSources: []
+  m_MyMusicSources:
+  - {fileID: 5389325531317262861}
+  - {fileID: 3687306497925216763}
+  - {fileID: 6975041300411858235}
+  - {fileID: 9204095312651245968}
   m_MyAudioManager: {fileID: 997315548351449995}
 --- !u!114 &997315548351449995
 MonoBehaviour:

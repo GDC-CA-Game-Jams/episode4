@@ -18,7 +18,6 @@ public class AudioFilterControl : MonoBehaviour
         // TransitionToSnapshots(AudioMixerSnapshot[] snapshots, float[] weights, float timeToReach)
         // -- (set of snapshots to be mixed, mix weights for snapshots specified, time after which mix should be reached from any current state)
         filterMixer.TransitionToSnapshots(filterSnapshots, weights, .1f);
-        Debug.Log("blending snapshot " + playerHealth);
     }
 
     public void PlayerMaxHealth(bool maxHealth)
