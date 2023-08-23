@@ -88,9 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointValue: 10
-  missValue: -10
-  gradingThreshhold: 10
-  rb: {fileID: 0}
+  missValue: -20
 --- !u!50 &2427876956944664582
 Rigidbody2D:
   serializedVersion: 4
