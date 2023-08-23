@@ -2235,6 +2235,14 @@ PrefabInstance:
       value: 1121
       objectReference: {fileID: 0}
     - target: {fileID: 6021296259428775915, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
+      propertyPath: delayOffset
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021296259428775915, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
+      propertyPath: levelFileName
+      value: draftMapRichard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021296259428775915, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
       propertyPath: AudioControlRef
       value: 
       objectReference: {fileID: 2136966984}

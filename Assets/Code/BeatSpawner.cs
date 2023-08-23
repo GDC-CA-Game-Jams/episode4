@@ -51,6 +51,7 @@ public class BeatSpawner : MonoBehaviour
     [SerializeField] private GameObject obstacle;
     [SerializeField] private float obstacleCoverScale = 1;
     [SerializeField] private float[] obstacleSpriteScales;
+    [SerializeField] private int delayOffset = 15;
 
     private void Awake()
     {
@@ -146,6 +147,7 @@ public class BeatSpawner : MonoBehaviour
     {
         ++gm.beatCount;
         ++gm.beatsElapsed;
+        Debug.Log("On Beat " + gm.beatCount);
         if (throwBeatGuidelines)
         {
             SpawnGuideLine();
@@ -220,7 +222,7 @@ public class BeatSpawner : MonoBehaviour
     {
         if (obstacle.activeSelf)
         {
-            obstacle.SetActive(false);
+            StartCoroutine(DelayedDespawn());
             return;
         }
         
@@ -234,6 +236,13 @@ public class BeatSpawner : MonoBehaviour
         obstacle.SetActive(true);
     }
 
+    private IEnumerator DelayedDespawn()
+    {
+        int startBeat = gm.beatCount;
+        yield return new WaitUntil(() => gm.beatCount >= startBeat + delayOffset);
+        obstacle.SetActive(false);
+    }
+    
     /// <summary>
     /// spawns random arrows in all directions.
     /// </summary>
