@@ -24,6 +24,8 @@ public class EventManager : IService
 
     public Action OnPause;
     public Action OnUnpause;
+
+    public Action OnSongComplete;
     //private float discoMeterHitIncreaseAmount = 10;
     //private float discoMeterMissDecreaseAmount = -10;
 

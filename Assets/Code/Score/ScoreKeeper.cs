@@ -66,6 +66,7 @@ public class ScoreKeeper : MonoBehaviour
         ServiceLocator.Instance.Get<EventManager>().OnGood += OnHitGood;
         ServiceLocator.Instance.Get<EventManager>().OnPoor += OnHitPoor;
         ServiceLocator.Instance.Get<EventManager>().OnDeath += OnDeath;
+        ServiceLocator.Instance.Get<EventManager>().OnSongComplete += OnDeath;
     }
     
     private void OnDisable()
@@ -76,7 +77,8 @@ public class ScoreKeeper : MonoBehaviour
         ServiceLocator.Instance.Get<EventManager>().OnExcellent -= OnHitExcellent;
         ServiceLocator.Instance.Get<EventManager>().OnGood -= OnHitGood;
         ServiceLocator.Instance.Get<EventManager>().OnPoor -= OnHitPoor;
-        ServiceLocator.Instance.Get<EventManager>().OnDeath += OnDeath;
+        ServiceLocator.Instance.Get<EventManager>().OnDeath -= OnDeath;
+        ServiceLocator.Instance.Get<EventManager>().OnSongComplete -= OnDeath;
     }
 
     private void Start()

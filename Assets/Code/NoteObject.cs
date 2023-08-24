@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Timers;
 using Services;
 
 using UnityEngine;
@@ -31,7 +31,7 @@ public class NoteObject : MonoBehaviour
     {
         ServiceLocator.Instance.Get<EventManager>().OnClearNotes -= Remove;
     }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
 

@@ -47,6 +47,12 @@ public class AudioController : MonoBehaviour
         {
             return;
         }
+
+        if (m_MyAudioSource.time >= m_MyAudioSource.clip.length)
+        {
+            songPaused = true;
+            ServiceLocator.Instance.Get<EventManager>().OnSongComplete?.Invoke();
+        }
         //timeElapsedinIntervals is essentially the time elapsed in beats
         //you can change the interval, so it could be time elapsed in beats, half beats, quarter beats etc.
         //for example, assuming 1 interval = 1 beat, if timeElapsedinIntervals = 5, then we are 5 beats into the song
@@ -83,12 +89,19 @@ public class AudioController : MonoBehaviour
     //ie if beats is 4, it will jump to 4 beats after the song starts
     public void jumpAudioToNumBeats(int beats)
     {
-        coroutine = playRewindStop(1.0f);
-
         // play RewindStart
         m_MyAudioManager.PlaySFX("RewindStart");
-        StartCoroutine(coroutine);
-        m_MyAudioSource.time = beats * (60 / _bpm);
+        StartCoroutine(playRewindStop(1.0f));
+        float locToJump = (beats * (60/_bpm)) + 1.5f;
+        Debug.Log("Music time at jump: " + m_MyAudioSource.time);
+        Debug.Log("Jump target: " + locToJump);
+        foreach(AudioSource m in m_MyMusicSources)
+        {
+            m.Pause();
+            m.time = locToJump;
+        }
+        m_MyAudioSource.Pause();
+        m_MyAudioSource.time = locToJump;
     }
 
     //Probably will not be used
@@ -117,15 +130,6 @@ public class AudioController : MonoBehaviour
     private IEnumerator playRewindStop(float waitTime)
     {
         songPaused = true;
-        float secondsToRewind = 16*(60/_bpm);
-        float currentTime = m_MyAudioSource.time;
-        float rewindTime = currentTime - secondsToRewind;
-        // ^-- it will always rewind 4 measures
-        
-        foreach(AudioSource m in m_MyMusicSources)
-        {
-            m.Stop();
-        }
 
         yield return new WaitForSeconds(waitTime);
         yield return new WaitForSeconds(waitTime);
@@ -140,8 +144,9 @@ public class AudioController : MonoBehaviour
         foreach(AudioSource m in m_MyMusicSources)
         {
             m.Play();
-            m.time = rewindTime;
         }        
+        m_MyAudioSource.Play();
+        Debug.Log("Actual jump:" + m_MyAudioSource.time);
         //Debug.Log("done rewinding");
     }
     
@@ -149,13 +154,20 @@ public class AudioController : MonoBehaviour
     {
         songPaused = true;
         m_MyAudioSource.Pause();
+        foreach(AudioSource m in m_MyMusicSources)
+        {
+            m.Pause();
+        }  
     }
 
     private void OnUnpause()
     {
         songPaused = false;
         m_MyAudioSource.Play();
-        
+        foreach(AudioSource m in m_MyMusicSources)
+        {
+            m.Play();
+        }  
     }
 
 }

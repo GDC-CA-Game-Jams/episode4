@@ -16,6 +16,7 @@ public class GameManager : IService
     public GameManager()
     {
         ServiceLocator.Instance.Get<EventManager>().OnDeath += OnDeath;
+        ServiceLocator.Instance.Get<EventManager>().OnSongComplete += OnSongComplete;
     }
 
     public void Init()
@@ -33,6 +34,11 @@ public class GameManager : IService
     private void OnDeath()
     {
         Pause("GameOver");
+    }
+    
+    private void OnSongComplete()
+    {
+        Pause("SongComplete");
     }
     
     public void TogglePause(string pauseScene)

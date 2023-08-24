@@ -31,6 +31,7 @@ public class PlayerBehaviour : MonoBehaviour
         em.OnMissObstacle += OnMissObstacle;
         em.OnRewindComplete += OnRewindComplete;
         em.OnDeath += OnDeath;
+        em.OnSongComplete += OnSongComplete;
         input.Enable();
         input.Player.Pause.performed += OnPressPause;
     }
@@ -38,8 +39,9 @@ public class PlayerBehaviour : MonoBehaviour
     private void OnDisable()
     {
         EventManager em = ServiceLocator.Instance.Get<EventManager>();
-        em.OnMissObstacle += OnMissObstacle;
-        em.OnDeath += OnDeath;
+        em.OnMissObstacle -= OnMissObstacle;
+        em.OnDeath -= OnDeath;
+        em.OnSongComplete -= OnSongComplete;
         input.Player.Pause.performed -= OnPressPause;
     }
 
@@ -54,6 +56,11 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     private void OnDeath()
+    {
+        anim.SetTrigger("Death");
+    }
+    
+    private void OnSongComplete()
     {
         anim.SetTrigger("Death");
     }

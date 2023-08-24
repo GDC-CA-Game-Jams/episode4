@@ -147,7 +147,6 @@ public class BeatSpawner : MonoBehaviour
     {
         ++gm.beatCount;
         ++gm.beatsElapsed;
-        Debug.Log("On Beat " + gm.beatCount);
         if (throwBeatGuidelines)
         {
             SpawnGuideLine();
