@@ -15,6 +15,7 @@ public class GameManager : IService
     
     public GameManager()
     {
+        Debug.Log("GameManager Constructor!");
         ServiceLocator.Instance.Get<EventManager>().OnDeath += OnDeath;
         ServiceLocator.Instance.Get<EventManager>().OnSongComplete += OnSongComplete;
     }
@@ -26,6 +27,7 @@ public class GameManager : IService
 
     public void Reset()
     {
+        Debug.Log("GameManager Resetting!");
         beatCount = -1;
         beatsElapsed = 0;
         Unpause();
