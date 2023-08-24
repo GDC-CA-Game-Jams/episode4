@@ -5953,11 +5953,11 @@ PrefabInstance:
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: obstacleSprites.Array.data[1]
       value: 
-      objectReference: {fileID: 21300000, guid: 344ffedcf5626494a828336bcf076963, type: 3}
+      objectReference: {fileID: 21300000, guid: 15aafd6c558b4a446927ce7934eb0dbf, type: 3}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: obstacleSprites.Array.data[2]
       value: 
-      objectReference: {fileID: 21300000, guid: 6350cdc46f0c6fa4ea1e952caaa4a906, type: 3}
+      objectReference: {fileID: 21300000, guid: f4b2d3c9052cd3e40b6ace287e91fb90, type: 3}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: obstacleSprites.Array.data[3]
       value: 
@@ -5976,11 +5976,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: obstacleSpriteScales.Array.data[1]
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: obstacleSpriteScales.Array.data[2]
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: obstacleSpriteScales.Array.data[3]
@@ -6000,7 +6000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: obtacleSpritePoints.Array.data[1].y
-      value: 1.5
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: obtacleSpritePoints.Array.data[2].x
@@ -6008,7 +6008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: obtacleSpritePoints.Array.data[2].y
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: obtacleSpritePoints.Array.data[3].x
