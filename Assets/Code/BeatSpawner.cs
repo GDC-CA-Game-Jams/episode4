@@ -207,6 +207,10 @@ public class BeatSpawner : MonoBehaviour
 
     private void LoadObstacle(string key, ObstacleType t)
     {
+        if (!levelNoteMap.ContainsKey(key))
+        {
+            return;
+        }
         for (int i = 0; i < levelNoteMap[key].Count - 1; i += 2)
         {
             obstacleBeats.TryAdd(levelNoteMap[key][i], new []{(int)t, levelNoteMap[key][i + 1]});
