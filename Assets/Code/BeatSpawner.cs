@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using Image = UnityEngine.UI.Image;
 
 public class BeatSpawner : MonoBehaviour
 {
@@ -52,6 +51,7 @@ public class BeatSpawner : MonoBehaviour
     [SerializeField] private float obstacleCoverScale = 1;
     [SerializeField] private float[] obstacleSpriteScales;
     [SerializeField] private int delayOffset = 15;
+    [SerializeField] private Vector2[] obtacleSpritePoints;
 
     private void Awake()
     {
@@ -207,6 +207,10 @@ public class BeatSpawner : MonoBehaviour
 
     private void LoadObstacle(string key, ObstacleType t)
     {
+        if (!levelNoteMap.ContainsKey(key))
+        {
+            return;
+        }
         for (int i = 0; i < levelNoteMap[key].Count - 1; i += 2)
         {
             obstacleBeats.TryAdd(levelNoteMap[key][i], new []{(int)t, levelNoteMap[key][i + 1]});
@@ -225,13 +229,15 @@ public class BeatSpawner : MonoBehaviour
             return;
         }
         
-        obstacle.transform.position = SpawnPoints[4].position;
         obstacle.GetComponent<ObstacleBehaviour>().startBeat = gm.beatCount;
         Transform sprite = obstacle.transform.GetChild(0);
-        sprite.GetComponent<Image>().sprite = obstacleSprites[t];
+        sprite.GetComponent<SpriteRenderer>().sprite = obstacleSprites[t];
         sprite.localScale = Vector3.one * obstacleSpriteScales[t];
+        sprite.localPosition = obtacleSpritePoints[t];
         Transform cover = obstacle.transform.GetChild(1);
         cover.localScale = new Vector3((end - gm.beatCount) * obstacleCoverScale, cover.localScale.y);
+        obstacle.transform.position = new Vector2(SpawnPoints[4].position.x + (cover.localScale.x / 2f),
+            SpawnPoints[4].position.y);
         obstacle.SetActive(true);
     }
 
@@ -357,15 +363,15 @@ public class BeatSpawner : MonoBehaviour
         guidelineObject.transform.position = SpawnPoints[1].position;
         if (gm.beatCount % 4 == 0) //drawing quarter note lines
         {
-            guidelineObject.GetComponentInChildren<Image>().color = Color.white;
+            guidelineObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
         }
         else if (gm.beatCount % 2 == 0) //drawing 8th note lines
         {
-            guidelineObject.GetComponentInChildren<Image>().color = Color.grey;
+            guidelineObject.GetComponentInChildren<SpriteRenderer>().color = Color.grey;
         }
         else //draw 16th note lines
         {
-            guidelineObject.GetComponentInChildren<Image>().color = Color.black;
+            guidelineObject.GetComponentInChildren<SpriteRenderer>().color = Color.black;
         }
         guidelineObject.GetComponent<Rigidbody2D>().velocity = new Vector2(beatTempo * -1, 0f);
     }

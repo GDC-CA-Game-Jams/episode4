@@ -259,6 +259,7 @@ public class ScoreKeeper : MonoBehaviour
         pointText.text = "Score: " + curPoints;
 
         multiText.text = "Multiplier: x" + pointMultiplier;
+        m_MyAudioManager.PlaySFX("BeatGood");
         
         ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(glamIncrease * 0.8f);
     }

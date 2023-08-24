@@ -24,7 +24,7 @@ public class InputControls : MonoBehaviour
     private bool isInLongPress = false;
     private bool isFailingLongPress = false;
 
-    private Image img;
+    private SpriteRenderer img;
     
     private int colorIndex;
     [SerializeField] private Color[] hitColorCycle;
@@ -33,7 +33,7 @@ public class InputControls : MonoBehaviour
     {
         input = new CustomInput();
         Physics2D.callbacksOnDisable = false; //bad place for this, but fixes a bug where popping a note double triggers dequeueing
-        img = gameObject.GetComponentInChildren<Image>();
+        img = gameObject.GetComponentInChildren<SpriteRenderer>();
     }
 
     private void OnEnable()

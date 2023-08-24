@@ -92,7 +92,7 @@ public class AudioController : MonoBehaviour
         // play RewindStart
         m_MyAudioManager.PlaySFX("RewindStart");
         StartCoroutine(playRewindStop(1.0f));
-        float locToJump = (beats * (60/_bpm)) + 1.5f;
+        float locToJump = (beats * (60 / _bpm)) + 1.5f;
         Debug.Log("Music time at jump: " + m_MyAudioSource.time);
         Debug.Log("Jump target: " + locToJump);
         foreach(AudioSource m in m_MyMusicSources)
