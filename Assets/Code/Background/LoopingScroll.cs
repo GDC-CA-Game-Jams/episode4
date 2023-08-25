@@ -12,6 +12,8 @@ public class LoopingScroll : MonoBehaviour
 
     [SerializeField] private float respawnPoint;
 
+    [SerializeField] private bool isUnscaled;
+
     private float startScrollSpeed;
 
     private bool isRewinding;
@@ -63,7 +65,14 @@ public class LoopingScroll : MonoBehaviour
             }
         }
 
-        transform.position += moveVec * Time.deltaTime;
+        if (isUnscaled)
+        {
+            transform.position += moveVec * Time.unscaledDeltaTime;
+        }
+        else
+        {
+            transform.position += moveVec * Time.deltaTime;
+        }
     }
 
     private void OnMissObstacle()

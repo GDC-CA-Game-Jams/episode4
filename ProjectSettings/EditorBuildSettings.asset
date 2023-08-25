@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Pause.unity
     guid: cf6e5ff53b3af8048a6d366c1b13a864
+  - enabled: 1
+    path: Assets/Scenes/SongComplete.unity
+    guid: 195e0f54f03eb1440a4a810eaa008c8a
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: cfde40016dade014393bfedb552ff9d9, type: 2}

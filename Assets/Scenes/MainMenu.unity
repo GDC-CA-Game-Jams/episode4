@@ -156,6 +156,7 @@ MonoBehaviour:
   scrollSpeed: 1
   loopPoint: 18
   respawnPoint: 18
+  isUnscaled: 1
 --- !u!212 &449246184
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -720,6 +721,7 @@ MonoBehaviour:
   scrollSpeed: 1
   loopPoint: 18
   respawnPoint: 18
+  isUnscaled: 1
 --- !u!212 &1295494171
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1217,6 +1219,7 @@ MonoBehaviour:
   scrollSpeed: 1
   loopPoint: 18
   respawnPoint: 18
+  isUnscaled: 1
 --- !u!212 &1544276672
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1679,6 +1682,7 @@ MonoBehaviour:
   scrollSpeed: 1
   loopPoint: 18
   respawnPoint: 18
+  isUnscaled: 1
 --- !u!212 &1874656386
 SpriteRenderer:
   m_ObjectHideFlags: 0
