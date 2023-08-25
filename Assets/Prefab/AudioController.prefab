@@ -353,7 +353,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: BeatPoor
     clip: {fileID: 8300000, guid: 6f13a4fa7642e2e41bbb1ed4809a3212, type: 3}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}
