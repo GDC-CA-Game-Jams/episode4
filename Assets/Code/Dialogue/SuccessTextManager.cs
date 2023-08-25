@@ -156,6 +156,7 @@ public class SuccessTextManager : MonoBehaviour
 
     Vector2 Wobble(float time)
     {
-        return new Vector2(Mathf.Sin(time * 3.3f), Mathf.Cos(time * 1.8f));
+        //Sin 3.3f  Cos 1.8f
+        return new Vector2(Mathf.Sin(time * 4f), Mathf.Cos(time * 4f));
     }
 }
