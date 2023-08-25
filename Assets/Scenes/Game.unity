@@ -2711,6 +2711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 431631282}
   - component: {fileID: 431631283}
+  - component: {fileID: 431631284}
   m_Layer: 5
   m_Name: Success Text Parent
   m_TagString: Untagged
@@ -2747,6 +2748,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431631281}
   m_CullTransparentMesh: 1
+--- !u!114 &431631284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431631281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25bdd6574c50f14419cb2d779901913c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &476289800
 GameObject:
   m_ObjectHideFlags: 0

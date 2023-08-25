@@ -28,6 +28,8 @@ public class InputControls : MonoBehaviour
     
     private int colorIndex;
     [SerializeField] private Color[] hitColorCycle;
+
+    [SerializeField] private ParticleSystem[] perfectParticles;
     
     private void Awake()
     {
@@ -147,6 +149,7 @@ public class InputControls : MonoBehaviour
         if (distance < gradingThreshhold) //perfect
         {
             ServiceLocator.Instance.Get<EventManager>().OnPerfect?.Invoke();
+            perfectParticles[Random.Range(0, 3)].Play();
         }
         else if (distance < gradingThreshhold * 2) // excellent
         {
@@ -196,7 +199,7 @@ public class InputControls : MonoBehaviour
         }
         else
         {
-            Debug.Log("THE BEAT THAT YOUR PRESS SKIPPED SOUNDED LIKE THIS!");
+            ServiceLocator.Instance.Get<EventManager>().OnMiss?.Invoke();
         }
         img.color = hitColorCycle[colorIndex];
         colorIndex = (colorIndex + 1) % hitColorCycle.Length;
