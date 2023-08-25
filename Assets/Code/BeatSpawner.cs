@@ -180,7 +180,7 @@ public class BeatSpawner : MonoBehaviour
                     //scaling of hold bodies relative to screen velocity
                     //note that 120 is actually the proper scaling, but 119f gives a tiny bite of overlap
                     //the overlap is used to cover any gaps from tiny bits of screen lag (which would sometimes appear)
-                    bodyObject.GetComponent<RectTransform>().localScale = new Vector3(1f * beatTempo / 119f, 1f, 1f);
+                    bodyObject.GetComponent<Transform>().localScale = new Vector3((80 * beatTempo) / 119f, 1f, 1f);
                     
                     bodyObject.transform.SetParent(gameObject.transform, false);
                     bodyObject.transform.position = SpawnPoints[i].position;
@@ -337,7 +337,7 @@ public class BeatSpawner : MonoBehaviour
         }
         else
         {
-            noteObject.GetComponent<RectTransform>().localScale = new Vector3(-1f, 1f, 1f);
+            noteObject.GetComponent<Transform>().localScale = new Vector3(-1f, 1f, 1f);
             isSpawningLongNote[noteDirection] = false;
         }
 
