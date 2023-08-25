@@ -61,12 +61,13 @@ public class BeatSpawner : MonoBehaviour
 
         if (readMode == ReadMode.Read)
         {
-            if (System.IO.File.Exists("Assets/Resources/" + levelFileName + ".txt")) //checking if file is valid
+            //if (System.IO.File.Exists("Assets/Resources/" + levelFileName + ".txt")) //checking if file is valid
+            try
             {
                 ServiceLocator.Instance.Get<BeatReader>().Init(levelFileName);
                 levelNoteMap = ServiceLocator.Instance.Get<BeatReader>().GetNotes();
             }
-            else //if file either not selected in inspector or not valid, swaps to random mode
+            catch //if file either not selected in inspector or not valid, swaps to random mode
             {
                 readMode = ReadMode.Random;
                 Debug.Log("Random Mode Engaged - Invalid File Location");

@@ -22,7 +22,7 @@ public class BeatReader : IService
             }
         }
 
-        TextAsset rawText = Resources.Load<TextAsset>(file);
+        TextAsset rawText = Resources.Load<TextAsset>(file); //load the BeatMap
         string text = rawText.text.Trim();
         string[] lines = text.Split("\n");
 
