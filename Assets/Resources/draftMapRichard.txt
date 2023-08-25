@@ -108,3 +108,4 @@ up 110
 left 111
 om 111
 right 113
+win 130

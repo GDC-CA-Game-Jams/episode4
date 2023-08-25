@@ -223,6 +223,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 19
   respawnPoint: 19
+  isUnscaled: 0
 --- !u!1 &10835981
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +324,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 19
   respawnPoint: 19
+  isUnscaled: 0
 --- !u!1 &94609660
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +491,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 20
   respawnPoint: 20
+  isUnscaled: 0
 --- !u!212 &132181183
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -861,6 +864,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 20
   respawnPoint: 20
+  isUnscaled: 0
 --- !u!212 &223365942
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -961,6 +965,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 20
   respawnPoint: 20
+  isUnscaled: 0
 --- !u!212 &223728428
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2542,6 +2547,7 @@ MonoBehaviour:
   scrollSpeed: 1
   loopPoint: 21.5
   respawnPoint: 21.5
+  isUnscaled: 0
 --- !u!212 &363940990
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2642,6 +2648,7 @@ MonoBehaviour:
   scrollSpeed: 1.5
   loopPoint: 20
   respawnPoint: 20
+  isUnscaled: 0
 --- !u!212 &377950995
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2974,6 +2981,7 @@ MonoBehaviour:
   scrollSpeed: 1
   loopPoint: 21
   respawnPoint: 21
+  isUnscaled: 0
 --- !u!212 &511441425
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3867,6 +3875,7 @@ MonoBehaviour:
   scrollSpeed: 1.5
   loopPoint: 21
   respawnPoint: 21
+  isUnscaled: 0
 --- !u!212 &616781394
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4059,6 +4068,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 20
   respawnPoint: 20
+  isUnscaled: 0
 --- !u!212 &642254289
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4211,6 +4221,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 19
   respawnPoint: 19
+  isUnscaled: 0
 --- !u!1 &748748675
 GameObject:
   m_ObjectHideFlags: 0
@@ -4813,6 +4824,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 20
   respawnPoint: 20
+  isUnscaled: 0
 --- !u!212 &853385193
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5288,6 +5300,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 20.5
   respawnPoint: 20.5
+  isUnscaled: 0
 --- !u!212 &917061425
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6559,6 +6572,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 21
   respawnPoint: 21
+  isUnscaled: 0
 --- !u!212 &1390958276
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6711,6 +6725,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 19
   respawnPoint: 19
+  isUnscaled: 0
 --- !u!1 &1403606037
 GameObject:
   m_ObjectHideFlags: 0
@@ -6759,6 +6774,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 20
   respawnPoint: 20
+  isUnscaled: 0
 --- !u!212 &1403606040
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6859,6 +6875,7 @@ MonoBehaviour:
   scrollSpeed: 1
   loopPoint: 20
   respawnPoint: 20
+  isUnscaled: 0
 --- !u!212 &1425302903
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6969,6 +6986,7 @@ GameObject:
   - component: {fileID: 1522118851}
   - component: {fileID: 1522118853}
   - component: {fileID: 1522118852}
+  - component: {fileID: 1522118854}
   m_Layer: 5
   m_Name: Player
   m_TagString: Untagged
@@ -6994,7 +7012,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -671, y: 110}
+  m_AnchoredPosition: {x: -466, y: 223}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1522118852
@@ -7035,6 +7053,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522118850}
   m_CullTransparentMesh: 1
+--- !u!114 &1522118854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522118850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25bdd6574c50f14419cb2d779901913c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1532177133
 GameObject:
   m_ObjectHideFlags: 0
@@ -7218,6 +7248,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 20
   respawnPoint: 20
+  isUnscaled: 0
 --- !u!212 &1553616979
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7531,6 +7562,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 19
   respawnPoint: 19
+  isUnscaled: 0
 --- !u!1 &1627643863
 GameObject:
   m_ObjectHideFlags: 0
@@ -7664,6 +7696,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 19
   respawnPoint: 19
+  isUnscaled: 0
 --- !u!1 &1667683801
 GameObject:
   m_ObjectHideFlags: 0
@@ -7753,6 +7786,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 21.5
   respawnPoint: 21.5
+  isUnscaled: 0
 --- !u!212 &1700340083
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7853,6 +7887,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 20
   respawnPoint: 20
+  isUnscaled: 0
 --- !u!212 &1746024952
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8805,6 +8840,7 @@ MonoBehaviour:
   scrollSpeed: 1
   loopPoint: 20.5
   respawnPoint: 20.5
+  isUnscaled: 0
 --- !u!1 &1983756506
 GameObject:
   m_ObjectHideFlags: 0
@@ -8853,6 +8889,7 @@ MonoBehaviour:
   scrollSpeed: 1.5
   loopPoint: 21.5
   respawnPoint: 21.5
+  isUnscaled: 0
 --- !u!212 &1983756509
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9124,6 +9161,7 @@ MonoBehaviour:
   scrollSpeed: 1.5
   loopPoint: 20.5
   respawnPoint: 20.5
+  isUnscaled: 0
 --- !u!212 &2103761850
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9259,6 +9297,7 @@ MonoBehaviour:
   scrollSpeed: 0.8
   loopPoint: 20
   respawnPoint: 20
+  isUnscaled: 0
 --- !u!212 &2128657057
 SpriteRenderer:
   m_ObjectHideFlags: 0

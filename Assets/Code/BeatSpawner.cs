@@ -140,6 +140,12 @@ public class BeatSpawner : MonoBehaviour
             RunObstacle(obstacleBeats[gm.beatCount][0], obstacleBeats[gm.beatCount][1]);
         }
 
+        if (levelNoteMap["win"].Count != 0 && levelNoteMap["win"].Contains(gm.beatCount))
+        {
+            ServiceLocator.Instance.Get<EventManager>().OnClearNotes?.Invoke();
+            ServiceLocator.Instance.Get<EventManager>().OnSongComplete?.Invoke();
+        }
+
         SpawnHoldBodies();
     }
 

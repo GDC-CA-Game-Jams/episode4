@@ -13,7 +13,7 @@ public class BeatReader : IService
         notes = new();
         //preloading handled note keywords; required as beatreader isn't doing nullkey checking now
         //"h+direction" connotes a hold note, comes in pairs
-        string[] possKeys = { "hup", "hdown", "hleft", "hright", "up", "down", "left", "right" };
+        string[] possKeys = { "hup", "hdown", "hleft", "hright", "up", "down", "left", "right", "win" };
         foreach (string key in possKeys)
         {
             if (!notes.ContainsKey(key))
