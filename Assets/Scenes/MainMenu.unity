@@ -1850,7 +1850,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1909615130}
         m_TargetAssemblyTypeName: LoadSceneOnClick, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickDelay
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
