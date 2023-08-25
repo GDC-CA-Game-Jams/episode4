@@ -222,7 +222,6 @@ public class ScoreKeeper : MonoBehaviour
         multiText.text = "Multiplier: x" + 1;
         
         m_MyAudioManager.PlaySFX("BeatMiss");
-        Debug.Log("Playing Beat Miss");
 
         ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(-glamIncrease);
 
@@ -242,7 +241,6 @@ public class ScoreKeeper : MonoBehaviour
         multiText.text = "Multiplier: x" + pointMultiplier;
         
         m_MyAudioManager.PlaySFX("BeatPerfect");
-        Debug.Log("Playing Beat Perfect");
 
         ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(glamIncrease);
     }
@@ -259,6 +257,7 @@ public class ScoreKeeper : MonoBehaviour
         pointText.text = "Score: " + curPoints;
 
         multiText.text = "Multiplier: x" + pointMultiplier;
+
         m_MyAudioManager.PlaySFX("BeatGood");
         
         ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(glamIncrease * 0.8f);
@@ -273,8 +272,7 @@ public class ScoreKeeper : MonoBehaviour
 
         multiText.text = "Multiplier: x" + pointMultiplier;
         
-        m_MyAudioManager.PlaySFX("BeatGood");
-        Debug.Log("Playing Beat Good");
+        m_MyAudioManager.PlaySFX("BeatPoor");
 
         ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(glamIncrease * 0.5f);
     }
@@ -289,7 +287,6 @@ public class ScoreKeeper : MonoBehaviour
         multiText.text = "Multiplier: x" + pointMultiplier;
         
         m_MyAudioManager.PlaySFX("BeatPoor");
-        Debug.Log("Playing Beat Poor");
 
         ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(glamIncrease * 0.3f);
     }

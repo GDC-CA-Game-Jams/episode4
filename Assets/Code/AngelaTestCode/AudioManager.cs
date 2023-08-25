@@ -40,23 +40,6 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
             s.source.outputAudioMixerGroup = audioMixerSFX;
         }
-
-        // foreach (Sounds m in Music)
-        // {
-        //     //Debug.Log("playing audio clip " + m.name);
-        //     m.source = gameObject.AddComponent<AudioSource>();
-        //     m.source.clip = m.clip;
-
-        //     m.source.volume = m.volume;
-        //     m.source.pitch = m.pitch;
-        //     m.source.loop = m.loop;
-        //     m.source.outputAudioMixerGroup = audioMixerMUS;
-        // }
-
-        // PlayMUS("MusicBaseLayer");
-        // PlayMUS("MusicPianoLayer");
-        // PlayMUS("MusicSynthLayer");
-        //PlayMUS("MusicGuitarLayer");
     }
 
     public void PlaySFX(string name)
@@ -70,18 +53,6 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Play();
     }
-
-    // public void PlayMUS(string name)
-    // {
-    //     // search through Array of Music, play the one that matches name
-    //     Sounds m = Array.Find(Music, sound => sound.name == name);
-    //     if(m == null)
-    //     {
-    //         Debug.LogWarning("Sound: " + name + " not found");
-    //         return;
-    //     }
-    //     m.source.Play();
-    //}
 
     public void StopPlaying(string name)
     {
