@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : IService
 {
-
+    
     private bool isPaused;
 
     public int beatCount = -1;
@@ -37,6 +37,7 @@ public class GameManager : IService
 
     private void OnDeath()
     {
+
         Pause("GameOver");
     }
     

@@ -29,6 +29,7 @@ public class ScoreKeeper : MonoBehaviour
     public TextMeshProUGUI multiText;
     public GameObject scoreboard;
     public GameObject glamMeter;
+    public GameObject Submit;
 
     [SerializeField]
      private List<TextMeshProUGUI> playerNames;
@@ -116,14 +117,21 @@ public class ScoreKeeper : MonoBehaviour
     {
         LeaderboardCreator.UploadNewEntry(publicLeaderboardKey, newName, (int)curPoints, (msg) =>
         {
-            name.Substring(0, 8);
+            LeaderboardCreator.ResetPlayer(() =>
+            {
+                
+                GetLeaderboard();
+            });
 
-            GetLeaderboard();
+            
         });
     }
         public void SubmitScore()
     {
-        submitScoreEvent.Invoke(newName, (int)curPoints);
+        int curScore = (int)curPoints;
+        Debug.Log(curScore);
+        submitScoreEvent.Invoke(newName, curScore);
+        Submit.SetActive(false);
         
     }
 
@@ -212,7 +220,7 @@ public class ScoreKeeper : MonoBehaviour
         
         if (!gameOver)
         {
-            SubmitScore();
+            //SubmitScore();
             pointsDisplay.text = curPoints.ToString();
             curName.text = newName;            
             scoreboard.SetActive(true);
