@@ -223,13 +223,13 @@ public class ScoreKeeper : MonoBehaviour
         
         m_MyAudioManager.PlaySFX("BeatMiss");
 
-        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(-glamIncrease * 1.5f);
+        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(-glamIncrease * 1.8f);
 
     }
     
     public void OnMissObstacle()
     {
-        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(-glamIncrease * 2.5f);
+        ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(-glamIncrease * 4f);
     }
     public void OnHitPerfect()
     {
