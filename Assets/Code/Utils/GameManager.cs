@@ -12,6 +12,8 @@ public class GameManager : IService
 
     public int beatCount = -1;
     public int beatsElapsed = 0;
+
+    public string playerNameInput;
     
     public GameManager()
     {
@@ -55,6 +57,10 @@ public class GameManager : IService
             Pause(pauseScene);
         }
         
+    }
+    public void PlayerNameChange(string s)
+    {
+        playerNameInput = s;
     }
 
     public void Pause(string pauseScene)

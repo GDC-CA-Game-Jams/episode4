@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using Random = UnityEngine.Random;
-using System.IO;
+using Dan.Main;
+using UnityEngine.Events;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class ScoreManager : MonoBehaviour
      * The HighscoresTable obj is an object to save a list of the Highscores objects as data to json
      * using the functions GetHighScores() or NewEntry() it is possible to display or add new info to the table
      */
-    
+    private string publicLeaderboardKey = "9dcab203467529a028c995351789458c9e9aeea545f860b239e8daf1ddbf9277";
     private Transform container;
     private Transform template;
 
@@ -23,6 +24,7 @@ public class ScoreManager : MonoBehaviour
     private List<Transform> highscoreTransformList;
 
     private static ScoreKeeper scoreKeeper;
+
 
 
     private void Awake()
@@ -36,7 +38,7 @@ public class ScoreManager : MonoBehaviour
 
 
 
-
+        
 
     }
     public void Start()
@@ -99,10 +101,16 @@ public class ScoreManager : MonoBehaviour
         
     }
 
-    public void NewEntry(float points, string name)
+    public void NewEntry(string name, int points)
     {
-        
-        string filePath = Application.persistentDataPath + "/JsonData.json";
+        LeaderboardCreator.UploadNewEntry(publicLeaderboardKey, name, points, (msg) =>
+        {
+            name.Substring(0,4);
+
+            //scoreKeeper.GetLeaderboard();
+        });
+
+        /*string filePath = Application.persistentDataPath + "/JsonData.json";
         string jsonReadData = System.IO.File.ReadAllText(filePath);
         Highscores highscores = new Highscores { points = points, name = name };
 
@@ -124,6 +132,7 @@ public class ScoreManager : MonoBehaviour
         Debug.Log(highscoresTable.highscoresList.Count + " " + PlayerPrefs.GetString("scores") );
         Debug.Log(filePath);
         System.IO.File.WriteAllText(filePath, jsonData);
+        */
 
     }
 
