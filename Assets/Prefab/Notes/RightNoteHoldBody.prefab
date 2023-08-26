@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7547375338775431615}
   - component: {fileID: 2427876956944664582}
-  - component: {fileID: 4562979736516097991}
-  - component: {fileID: 3605513927860232587}
+  - component: {fileID: 472055229912384427}
+  - component: {fileID: 8496345249404646640}
   m_Layer: 5
-  m_Name: HoldNoteBodyDown
+  m_Name: RightNoteHoldBody
   m_TagString: LongBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &4562979736516097991
+--- !u!61 &472055229912384427
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,7 +107,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3605513927860232587
+--- !u!114 &8496345249404646640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5923413221221238359}
   - component: {fileID: 3359862870602618113}
-  - component: {fileID: 4379577835149388751}
+  - component: {fileID: 7048762109551592114}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -160,7 +160,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6560639345338298750}
   m_CullTransparentMesh: 1
---- !u!212 &4379577835149388751
+--- !u!212 &7048762109551592114
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,7 +201,7 @@ SpriteRenderer:
   m_SortingLayerID: -897980921
   m_SortingLayer: 13
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 597469ff342bfe844a423df85938691c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e6dd71ad7b179b349bec6d42aa9ebdd0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

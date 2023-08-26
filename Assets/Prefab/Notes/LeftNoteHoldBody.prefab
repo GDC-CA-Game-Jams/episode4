@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7070213701856866742}
   - component: {fileID: 3290453469057211288}
   m_Layer: 5
-  m_Name: HoldNoteBodyLeft
+  m_Name: LeftNoteHoldBody
   m_TagString: LongBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +201,7 @@ SpriteRenderer:
   m_SortingLayerID: -897980921
   m_SortingLayer: 13
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d339c028eac3e23418bf344714a3e209, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d8bd0a6452577d47ac7287e733111bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
