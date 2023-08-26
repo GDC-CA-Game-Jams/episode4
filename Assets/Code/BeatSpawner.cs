@@ -252,6 +252,8 @@ public class BeatSpawner : MonoBehaviour
     {
         int startBeat = gm.beatCount;
         yield return new WaitUntil(() => gm.beatCount >= startBeat + delayOffset);
+        obstacle.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Explode");
+        yield return new WaitForSeconds(0.3f);
         obstacle.SetActive(false);
     }
     

@@ -40,6 +40,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         EventManager em = ServiceLocator.Instance.Get<EventManager>();
         em.OnMissObstacle -= OnMissObstacle;
+        em.OnRewindComplete -= OnRewindComplete;
         em.OnDeath -= OnDeath;
         em.OnSongComplete -= OnSongComplete;
         input.Player.Pause.performed -= OnPressPause;
