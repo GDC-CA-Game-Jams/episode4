@@ -25,13 +25,13 @@ public class ObstacleBehaviour : MonoBehaviour
     {
         gm = ServiceLocator.Instance.Get<GameManager>();
         ac = GameObject.FindWithTag("AudioController").GetComponent<AudioController>();
-        artStart = obstacleArt.transform.localPosition;
+        //artStart = obstacleArt.transform.localPosition;
         coverStart = rbCover.transform.localPosition;
     }
     
     private void OnEnable()
     {
-        obstacleArt.transform.localPosition = artStart;
+        //obstacleArt.transform.localPosition = artStart;
         rbCover.transform.localPosition = coverStart;
         rbCover.velocity = new Vector2(beatTempo * -1, 0f);
         obstacleArt.velocity = new Vector2(beatTempo * -1, 0f);

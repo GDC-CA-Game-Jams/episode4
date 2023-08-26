@@ -95,6 +95,16 @@ public class BeatSpawner : MonoBehaviour
         LoadObstacles();
     }
 
+    private void OnEnable()
+    {
+        ServiceLocator.Instance.Get<EventManager>().OnClearNotes += OnClearNotes;
+    }
+
+    private void OnDisable()
+    {
+        ServiceLocator.Instance.Get<EventManager>().OnClearNotes -= OnClearNotes;
+    }
+    
     /// <summary>
     /// Follows text file instructions for note generation. Currently highly syntax sensitive.
     /// ANY CHANGES TO NOTEMAP TEXT FILE SYNTAX REQUIRES THIS BE CHANGED
@@ -253,7 +263,7 @@ public class BeatSpawner : MonoBehaviour
         int startBeat = gm.beatCount;
         yield return new WaitUntil(() => gm.beatCount >= startBeat + delayOffset);
         obstacle.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Explode");
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.4f);
         obstacle.SetActive(false);
     }
     
@@ -383,6 +393,15 @@ public class BeatSpawner : MonoBehaviour
             guidelineObject.GetComponentInChildren<SpriteRenderer>().color = Color.black;
         }
         guidelineObject.GetComponent<Rigidbody2D>().velocity = new Vector2(beatTempo * -1, 0f);
+    }
+
+    private void OnClearNotes()
+    {
+        for (int i = 0; i < isSpawningLongNote.Length; ++i)
+        {
+            isSpawningLongNote[i] = false;
+            justStartedLongNote[i] = false;
+        }
     }
 }
 
