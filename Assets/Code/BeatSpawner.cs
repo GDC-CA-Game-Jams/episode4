@@ -157,7 +157,7 @@ public class BeatSpawner : MonoBehaviour
             ServiceLocator.Instance.Get<EventManager>().OnSongComplete?.Invoke();
         }
 
-        SpawnHoldBodies();
+        //SpawnHoldBodies();
     }
 
     public void OnBeat()
@@ -178,7 +178,7 @@ public class BeatSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnHoldBodies()
+    public void SpawnHoldBodies()
     {
         for (int i = 0; i < 4; i++)
         {
@@ -191,7 +191,7 @@ public class BeatSpawner : MonoBehaviour
                     //scaling of hold bodies relative to screen velocity
                     //note that 120 is actually the proper scaling, but 119f gives a tiny bite of overlap
                     //the overlap is used to cover any gaps from tiny bits of screen lag (which would sometimes appear)
-                    bodyObject.GetComponent<Transform>().localScale = new Vector3((80 * beatTempo) / 119f, 1f, 1f);
+                    bodyObject.GetComponent<Transform>().localScale = new Vector3((80 * beatTempo) / 119f / 3f, 1f, 1f);
                     
                     bodyObject.transform.SetParent(gameObject.transform, false);
                     bodyObject.transform.position = SpawnPoints[i].position;
@@ -341,16 +341,17 @@ public class BeatSpawner : MonoBehaviour
 
         GameObject noteObject;
         NoteObject noteObjectScript;
-        noteObject = Instantiate(arrows[noteDirection + 4]);
+       
 
         if (!isSpawningLongNote[noteDirection])
         {
+            noteObject = Instantiate(arrows[noteDirection + 4]);
             isSpawningLongNote[noteDirection] = true;
             justStartedLongNote[noteDirection] = true;
         }
         else
         {
-            noteObject.GetComponent<Transform>().localScale = new Vector3(-1f, 1f, 1f);
+            noteObject = Instantiate(arrows[noteDirection + 12]);
             isSpawningLongNote[noteDirection] = false;
         }
 
