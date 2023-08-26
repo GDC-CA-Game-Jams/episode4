@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using Dan.Main;
 using Services;
+using UnityEngine.Events;
 
 
 public class ScoreKeeper : MonoBehaviour
@@ -20,6 +21,7 @@ public class ScoreKeeper : MonoBehaviour
     private float pointValue = 100f;
     private static GameManager gameManager;
     private static ScoreManager scoreManager;
+    private string publicLeaderboardKey = "9dcab203467529a028c995351789458c9e9aeea545f860b239e8daf1ddbf9277";
     public string input;
 
     [Header("References")]
@@ -27,10 +29,16 @@ public class ScoreKeeper : MonoBehaviour
     public TextMeshProUGUI multiText;
     public GameObject scoreboard;
     public GameObject glamMeter;
-    /***
-     * This will be used later when i have time to update it
-     * public GameObject playerNameField;
-     */
+
+    [SerializeField]
+     private List<TextMeshProUGUI> playerNames;
+    [SerializeField]
+    private List<TextMeshProUGUI> playerScores;
+    [SerializeField]
+    private TMP_InputField inputName;
+
+    public TextMeshProUGUI curName;
+    public TextMeshProUGUI pointsDisplay;
 
     [SerializeField] AudioManager m_MyAudioManager;
 
@@ -50,12 +58,9 @@ public class ScoreKeeper : MonoBehaviour
     System.Random random = new System.Random();
     private int randomName;
     private string newName;
+    public UnityEvent<string, int> submitScoreEvent;
 
     private bool gameOver = false;
-    
-    //an array of the highest scoring players
-    public string[] topScores;
-
 
     private void OnEnable()
     {
@@ -105,9 +110,35 @@ public class ScoreKeeper : MonoBehaviour
         */
         Debug.Log(input);
         //playerNameRef = playerName.GetComponent<PlayerName>().input;
+        GetLeaderboard();
+    }
+    public void NewEntry(string name, int points)
+    {
+        LeaderboardCreator.UploadNewEntry(publicLeaderboardKey, newName, (int)curPoints, (msg) =>
+        {
+            name.Substring(0, 8);
 
+            GetLeaderboard();
+        });
+    }
+        public void SubmitScore()
+    {
+        submitScoreEvent.Invoke(newName, (int)curPoints);
+        
     }
 
+    public void GetLeaderboard()
+    {
+        LeaderboardCreator.GetLeaderboard(publicLeaderboardKey, ((msg) =>
+        {
+            int loopLength = (msg.Length < playerNames.Count) ? msg.Length : playerNames.Count;
+            for (int i = 0; i < loopLength; i++)
+            {
+                playerNames[i].text = msg[i].Username;
+                playerScores[i].text = msg[i].Score.ToString();
+            }
+        }));
+    }
     public void Update()
     {
         //takes the multiplier count and changes the glam bar based on current multiplier
@@ -139,7 +170,7 @@ public class ScoreKeeper : MonoBehaviour
 
         /// *** Thes are test inputs taht will be changed when button presses are available *** ///
         //Test inputs to see how score reacts.
-        
+        /**
         if (Input.GetKeyUp(KeyCode.Space))
         {
             
@@ -150,7 +181,7 @@ public class ScoreKeeper : MonoBehaviour
             OnMiss();
 
         }
-        
+        */
     }
     public void PlayerNameInput(string s)
     {
@@ -178,11 +209,15 @@ public class ScoreKeeper : MonoBehaviour
 
     public void OnDeath()
     {
+        
         if (!gameOver)
         {
+            SubmitScore();
+            pointsDisplay.text = curPoints.ToString();
+            curName.text = newName;            
             scoreboard.SetActive(true);
-            scoreboard.GetComponent<ScoreManager>().NewEntry(curPoints, input);
-            scoreboard.GetComponent<ScoreManager>().GetHighScores();
+            scoreboard.GetComponent<ScoreManager>().NewEntry(input, (int)curPoints);
+            //scoreboard.GetComponent<ScoreManager>().GetHighScores();
             Debug.Log(curPoints + " --- " + input);
             gameOver = true;
         }
