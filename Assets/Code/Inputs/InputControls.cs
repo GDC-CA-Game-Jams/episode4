@@ -30,12 +30,14 @@ public class InputControls : MonoBehaviour
     [SerializeField] private Color[] hitColorCycle;
 
     [SerializeField] private ParticleSystem[] perfectParticles;
+    private Animator hitAnim;
     
     private void Awake()
     {
         input = new CustomInput();
         Physics2D.callbacksOnDisable = false; //bad place for this, but fixes a bug where popping a note double triggers dequeueing
         img = gameObject.GetComponentInChildren<SpriteRenderer>();
+        hitAnim = gameObject.GetComponentInChildren<Animator>();
     }
 
     private void OnEnable()
@@ -150,30 +152,35 @@ public class InputControls : MonoBehaviour
         {
             ServiceLocator.Instance.Get<EventManager>().OnPerfect?.Invoke();
             perfectParticles[Random.Range(0, 3)].Play();
+            hitAnim.SetTrigger("OnPerfect");
         }
         else if (distance < gradingThreshhold * 2) // excellent
         {
             awardedPointValue *= 0.9f;
             Debug.Log("Hit - Excellent!");
             ServiceLocator.Instance.Get<EventManager>().OnExcellent?.Invoke();
+            hitAnim.SetTrigger("OnGood");
         }
         else if (distance < gradingThreshhold * 3) //good
         {
             awardedPointValue *= 0.8f;
             Debug.Log("Hit - Good!");
             ServiceLocator.Instance.Get<EventManager>().OnGood?.Invoke();
+            hitAnim.SetTrigger("OnGood");
         }
         else if (distance < gradingThreshhold * 4) //fair
         {
             awardedPointValue *= 0.7f;
             Debug.Log("Hit - Fair!");
             ServiceLocator.Instance.Get<EventManager>().OnPoor?.Invoke();
+            hitAnim.SetTrigger("OnPoor");
         }
         else
         {
             awardedPointValue *= 0.6f;
             Debug.Log("Hit - Poor!");
             ServiceLocator.Instance.Get<EventManager>().OnPoor?.Invoke();
+            hitAnim.SetTrigger("OnPoor");
         }
         //ServiceLocator.Instance.Get<DiscoMeterService>().ChangeValue(awardedPointValue);
     }
