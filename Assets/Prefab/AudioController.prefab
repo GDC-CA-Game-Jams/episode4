@@ -305,11 +305,23 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - _steps: 2
+  - _steps: 4
     _trigger:
       m_PersistentCalls:
-        m_Calls: []
-  - _steps: 4
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: BeatSpawner, Assembly-CSharp
+          m_MethodName: SpawnHoldBodies
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
+  - _steps: 2
     _trigger:
       m_PersistentCalls:
         m_Calls: []
@@ -373,6 +385,7 @@ MonoBehaviour:
   m_GuitarMusicLayer: {fileID: 9204095312651245968}
   audioMixerSFX: {fileID: 1403597709028983560, guid: 3c28281e284c9514cba816d8266ae7ae, type: 2}
   audioMixerMUS: {fileID: 816672243218204432, guid: 3c28281e284c9514cba816d8266ae7ae, type: 2}
+  masterMixer: {fileID: 24100000, guid: 3c28281e284c9514cba816d8266ae7ae, type: 2}
   audioFilterController: {fileID: 5176001377358221712}
 --- !u!114 &5176001377358221712
 MonoBehaviour:
@@ -394,7 +407,7 @@ MonoBehaviour:
   weights:
   - 100
   - 0
-  atMaxHealth: 0
+  maxHealth: 0
   audioManager: {fileID: 997315548351449995}
 --- !u!1 &6470316485982503184
 GameObject:
@@ -568,7 +581,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 816672243218204432, guid: 3c28281e284c9514cba816d8266ae7ae, type: 2}
   m_audioClip: {fileID: 8300000, guid: 3ad3d75f0a5a3a94d9faad4042595c80, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.75
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0

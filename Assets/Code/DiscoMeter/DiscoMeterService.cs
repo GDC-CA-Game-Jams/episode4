@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Services;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class DiscoMeterService : IService
 {
@@ -22,6 +23,7 @@ public class DiscoMeterService : IService
     private float currentValue;
 
     private AudioFilterControl audioFilterController;
+    private AudioManager audioManager;
     
     /// <summary>
     /// Init the service with the proper variables
@@ -30,7 +32,7 @@ public class DiscoMeterService : IService
     /// <param name="initialValue">Starting value of the bar</param>
     /// <param name="maxValue">Maximum value for the bar</param>
     /// <param name="killValue">What value constitutes a kill/player death</param>
-    public void Init(MonoBehaviour mono, Slider slider, Slider deathSlider, float initialValue, float maxValue, float killValue, AudioFilterControl audioFilterController)
+    public void Init(MonoBehaviour mono, Slider slider, Slider deathSlider, float initialValue, float maxValue, float killValue, AudioFilterControl audioFilterController, AudioManager audioManager)
     {
         this.initialValue = initialValue;
         this.maxValue = maxValue;
@@ -46,6 +48,7 @@ public class DiscoMeterService : IService
         this.deathSlider.value = 1 - this.slider.value;
 
         this.audioFilterController = audioFilterController;
+        this.audioManager = audioManager;
 
     }
 
@@ -95,6 +98,7 @@ public class DiscoMeterService : IService
         if (temp <= killValue)
         {
             currentValue = temp;
+            audioManager.MuteAllOnPlayerDeath();
             ServiceLocator.Instance.Get<EventManager>().OnDeath?.Invoke();
             // Set the slider percent to a normalized percent of the max value
             UpdateSliderValue(currentValue / maxValue);

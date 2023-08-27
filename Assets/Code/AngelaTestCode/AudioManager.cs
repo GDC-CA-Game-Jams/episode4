@@ -12,8 +12,11 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     [SerializeField] AudioMixerGroup audioMixerSFX;
     [SerializeField] AudioMixerGroup audioMixerMUS;
+    public AudioMixer masterMixer;
 
     [SerializeField] AudioFilterControl audioFilterController;
+
+    public AudioMixerSnapshot defaultSnapshot;
 
     void Awake()
     {
@@ -76,6 +79,23 @@ public class AudioManager : MonoBehaviour
     {
         //Debug.Log("fading out guitar layer");
         StartCoroutine(FadeAudioSource.StartFade(m_GuitarMusicLayer, 1f, 0f));
+    }
+
+    public void SetSFXLevel(float sfxLvl)
+    {
+        masterMixer.SetFloat("sfxVol", sfxLvl);
+    }
+
+    public void SetMUSLevel(float musLvl)
+    {
+        masterMixer.SetFloat("musicVol", musLvl);
+    }
+
+    public void MuteAllOnPlayerDeath()
+    {
+        float muteLevel = -80f;
+        SetMUSLevel(muteLevel);
+        SetSFXLevel(muteLevel);
     }
 
 }
