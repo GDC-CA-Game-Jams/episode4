@@ -101,7 +101,7 @@ public class DiscoMeterService : IService
             audioManager.MuteAllOnPlayerDeath();
             ServiceLocator.Instance.Get<EventManager>().OnDeath?.Invoke();
             // Set the slider percent to a normalized percent of the max value
-            UpdateSliderValue(currentValue / maxValue);
+            SetSliderValue(currentValue / maxValue);
             return true;
         }
 
@@ -112,6 +112,12 @@ public class DiscoMeterService : IService
     {
         mono.StartCoroutine(SmoothMoveSlider(slider, value));
         mono.StartCoroutine(SmoothMoveSlider(deathSlider, 1 - value));
+    }
+
+    private void SetSliderValue(float value)
+    {
+        slider.value = value;
+        deathSlider.value = 1 - value;
     }
 
     private IEnumerator SmoothMoveSlider(Slider currSlider, float value)
