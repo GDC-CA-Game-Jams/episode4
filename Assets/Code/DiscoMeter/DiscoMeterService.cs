@@ -102,7 +102,6 @@ public class DiscoMeterService : IService
             ServiceLocator.Instance.Get<EventManager>().OnDeath?.Invoke();
             // Set the slider percent to a normalized percent of the max value
             UpdateSliderValue(currentValue / maxValue);
-            audioFilterController.BlendSnapshots(currentValue);
             return true;
         }
 
