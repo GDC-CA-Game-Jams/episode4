@@ -97,6 +97,7 @@ public class AudioManager : MonoBehaviour
 
     public void MuteAllOnPlayerDeath()
     {
+        StopPlaying("RewindStart");
         float muteLevel = -80f;
         SetMUSLevel(muteLevel);
         SetSFXLevel(muteLevel);

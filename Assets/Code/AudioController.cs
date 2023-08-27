@@ -89,8 +89,8 @@ public class AudioController : MonoBehaviour
     {
         // play RewindStart
         m_MyAudioManager.PlaySFX("RewindStart");
-        StartCoroutine(playRewindStop(1.0f));
-        float locToJump = (beats * (60 / _bpm)) + 1.5f;
+        StartCoroutine(playRewindStop(0.5f));
+        float locToJump = (beats * (60 / _bpm)) + .75f;
         Debug.Log("Music time at jump: " + m_MyAudioSource.time);
         Debug.Log("Jump target: " + locToJump);
         foreach(AudioSource m in m_MyMusicSources)
@@ -128,9 +128,10 @@ public class AudioController : MonoBehaviour
         songPaused = true;
 
         yield return new WaitForSeconds(waitTime);
-        yield return new WaitForSeconds(waitTime);
-        yield return new WaitForSeconds(waitTime);
+
         m_MyAudioManager.PlaySFX("RewindStop");
+        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(waitTime);
         yield return new WaitForSeconds((waitTime/2));
         m_MyAudioManager.StopPlaying("RewindStart");
         yield return new WaitForSeconds(waitTime);

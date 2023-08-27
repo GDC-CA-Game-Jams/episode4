@@ -9,12 +9,12 @@ public class AudioGameOver : MonoBehaviour
     [SerializeField] AudioMixerGroup audioMixerMUS;
     public AudioMixer masterMixer;
     public AudioMixerSnapshot audioResetSnapshot;
-    //private AudioManager audioManager;
+    private AudioManager audioManager;
 
     void Start()
     {
-        //audioManager = FindObjectOfType<AudioManager>();
-        //audioManager.StopGuitarFadeOut();
+        audioManager = FindObjectOfType<AudioManager>();
+        audioManager.StopPlaying("RewindStart");
         ResetAudioMixerLevels();
         ResetAudioFilterLevels();
     }
@@ -38,7 +38,6 @@ public class AudioGameOver : MonoBehaviour
     public void SetSFXLevel(float sfxLvl)
     {
         masterMixer.SetFloat("sfxVol", sfxLvl);
-        Debug.Log("resetting audio mixer levels on game over");
     }
 
     public void SetMUSLevel(float musLvl)
