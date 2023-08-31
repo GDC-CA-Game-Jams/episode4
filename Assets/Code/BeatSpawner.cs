@@ -31,6 +31,8 @@ public class BeatSpawner : MonoBehaviour
     public Transform beatButtonPosition;
     [Tooltip("Used to grab the AudioController for useful purposes")]
     public AudioController AudioControlRef;
+    //[Tooltip("Used to grab the AudioManager to play correct obstacle sfx")]
+    //public AudioManager audioManager;
     
     //public Transform SpawnPointUp, SpawnPointDown, SpawnPointLeft, SpawnPointRight; //contains spawnpoints for arrows
 
@@ -47,6 +49,7 @@ public class BeatSpawner : MonoBehaviour
     [Header("Obstacle Configuration")]
     private SortedDictionary<int, int[]> obstacleBeats = new SortedDictionary<int, int[]>();
     [SerializeField] private Sprite[] obstacleSprites;
+    [SerializeField] private AudioSource[] obstacleSFX;
     [SerializeField] private GameObject obstacle;
     [SerializeField] private float obstacleCoverScale = 1;
     [SerializeField] private float[] obstacleSpriteScales;
@@ -242,7 +245,7 @@ public class BeatSpawner : MonoBehaviour
     {
         if (obstacle.activeSelf)
         {
-            StartCoroutine(DelayedDespawn());
+            StartCoroutine(DelayedDespawn(t));
             return;
         }
         
@@ -258,11 +261,15 @@ public class BeatSpawner : MonoBehaviour
         obstacle.SetActive(true);
     }
 
-    private IEnumerator DelayedDespawn()
+    private IEnumerator DelayedDespawn(int s)
     {
         int startBeat = gm.beatCount;
         yield return new WaitUntil(() => gm.beatCount >= startBeat + delayOffset);
         obstacle.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Explode");
+        // explode sfx
+        obstacleSFX[s].Play();
+        Debug.Log("playing sfx #:" + s);
+
         yield return new WaitForSeconds(0.4f);
         obstacle.SetActive(false);
     }

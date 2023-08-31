@@ -1,6 +1,7 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
@@ -12,8 +13,13 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     [SerializeField] AudioMixerGroup audioMixerSFX;
     [SerializeField] AudioMixerGroup audioMixerMUS;
+    public AudioMixer masterMixer;
 
     [SerializeField] AudioFilterControl audioFilterController;
+
+    public AudioMixerSnapshot defaultSnapshot;
+
+    private Coroutine coroutine;
 
     void Awake()
     {
@@ -70,12 +76,37 @@ public class AudioManager : MonoBehaviour
     {
         //Debug.Log("fading in guitar layer");
         StartCoroutine(FadeAudioSource.StartFade(m_GuitarMusicLayer, 3f, .75f));
+
     }
 
     public void MusicGuitarFadeOut()
     {
         //Debug.Log("fading out guitar layer");
-        StartCoroutine(FadeAudioSource.StartFade(m_GuitarMusicLayer, 1f, 0f));
+        coroutine = StartCoroutine(FadeAudioSource.StartFade(m_GuitarMusicLayer, 1f, 0f));
+    }
+
+    public void SetSFXLevel(float sfxLvl)
+    {
+        masterMixer.SetFloat("sfxVol", sfxLvl);
+    }
+
+    public void SetMUSLevel(float musLvl)
+    {
+        masterMixer.SetFloat("musicVol", musLvl);
+    }
+
+    public void MuteAllOnPlayerDeath()
+    {
+        StopPlaying("RewindStart");
+        float muteLevel = -80f;
+        SetMUSLevel(muteLevel);
+        SetSFXLevel(muteLevel);
+    }
+
+    public void StopGuitarFadeOut()
+    {
+        // backup to stop coroutine while loading game over screen
+        StopCoroutine(coroutine);
     }
 
 }

@@ -66,24 +66,22 @@ public class AudioController : MonoBehaviour
 
 
     //jumps the audio back a given amount of beats
-    public void jumpAudioBackInBeats(int beats)
-    {
-        coroutine = playRewindStop(1.0f);
+    // public void jumpAudioBackInBeats(int beats)
+    // {
+    //     coroutine = playRewindStop(1.0f);
 
-        // play RewindStart
-        m_MyAudioManager.PlaySFX("RewindStart");
-        StartCoroutine(coroutine);
-        //calculate secondsToRewind based on beats and bpm
-        float secondsToRewind = beats*(60/_bpm);
-
-
-        // for each audio source (track)
+    //     // play RewindStart
+    //     m_MyAudioManager.PlaySFX("RewindStart");
+    //     StartCoroutine(coroutine);
+    //     //calculate secondsToRewind based on beats and bpm
+    //     float secondsToRewind = beats*(60/_bpm);
 
 
-        float currentTime = m_MyAudioSource.time;
-        float rewindTime = currentTime - secondsToRewind;
-        m_MyAudioSource.time = rewindTime;
-    }
+    //     // for each audio source (track)
+    //     float currentTime = m_MyAudioSource.time;
+    //     float rewindTime = currentTime - secondsToRewind;
+    //     m_MyAudioSource.time = rewindTime;
+    // }
 
     //jumps to X beats, regardless of where in the audio file the song is when this function is called
     //ie if beats is 4, it will jump to 4 beats after the song starts
@@ -91,8 +89,8 @@ public class AudioController : MonoBehaviour
     {
         // play RewindStart
         m_MyAudioManager.PlaySFX("RewindStart");
-        StartCoroutine(playRewindStop(1.0f));
-        float locToJump = (beats * (60 / _bpm)) + 1.5f;
+        StartCoroutine(playRewindStop(0.5f));
+        float locToJump = (beats * (60 / _bpm)) + .75f;
         Debug.Log("Music time at jump: " + m_MyAudioSource.time);
         Debug.Log("Jump target: " + locToJump);
         foreach(AudioSource m in m_MyMusicSources)
@@ -121,10 +119,8 @@ public class AudioController : MonoBehaviour
     {
         coroutine = playRewindStop(1.0f);
 
-        // play RewindStart
         m_MyAudioManager.PlaySFX("RewindStart");
         StartCoroutine(coroutine);
-        //Debug.Log("done");
     }
 
     private IEnumerator playRewindStop(float waitTime)
@@ -132,9 +128,10 @@ public class AudioController : MonoBehaviour
         songPaused = true;
 
         yield return new WaitForSeconds(waitTime);
-        yield return new WaitForSeconds(waitTime);
-        yield return new WaitForSeconds(waitTime);
+
         m_MyAudioManager.PlaySFX("RewindStop");
+        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(waitTime);
         yield return new WaitForSeconds((waitTime/2));
         m_MyAudioManager.StopPlaying("RewindStart");
         yield return new WaitForSeconds(waitTime);
@@ -144,10 +141,13 @@ public class AudioController : MonoBehaviour
         foreach(AudioSource m in m_MyMusicSources)
         {
             m.Play();
-        }        
+        }
+
+        m_MyAudioManager.MusicGuitarFadeOut();
+        //just tryna make sure the guitar isn't playing...
+
         m_MyAudioSource.Play();
         Debug.Log("Actual jump:" + m_MyAudioSource.time);
-        //Debug.Log("done rewinding");
     }
     
     private void OnPause()

@@ -9,8 +9,8 @@ public class LoadSceneOnClick : MonoBehaviour
 
     public void OnClick(string name)
     {
-        ServiceLocator.Instance.Get<GameManager>().Reset();
         SceneManager.LoadScene(name);
+        ServiceLocator.Instance.Get<GameManager>().Reset();
     }
     
     public void OnClickDelay(string name)
@@ -20,9 +20,9 @@ public class LoadSceneOnClick : MonoBehaviour
 
     private IEnumerator delayStartGame(string name)
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSecondsRealtime(1.5f);
 
-        ServiceLocator.Instance.Get<GameManager>().Reset();
         SceneManager.LoadScene(name);
+        ServiceLocator.Instance.Get<GameManager>().Reset();
     }
 }

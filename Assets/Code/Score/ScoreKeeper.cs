@@ -257,6 +257,11 @@ public class ScoreKeeper : MonoBehaviour
 
     public void OnMiss()
     {
+        if (gameOver)
+        {
+            return;
+        }
+
         multiTracker = 0;
         pointMultiplier = 1.0f;
         tempMissCount++;
