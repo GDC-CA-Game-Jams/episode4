@@ -33,13 +33,21 @@ public class AudioFilterControl : MonoBehaviour
         // if false, do not play
         atMaxHealth = maxHealth;
 
-        if (atMaxHealth)
+        try
         {
-            audioManager.MusicGuitarFadeIn();
+            if (atMaxHealth)
+            {
+                audioManager.MusicGuitarFadeIn();
+            }
+            else
+            {
+                audioManager.MusicGuitarFadeOut();
+            }
         }
-        else
+        catch (System.Exception)
         {
-            audioManager.MusicGuitarFadeOut();
+
+            Debug.Log("No guitar track bud!");
         }
     }
 }
