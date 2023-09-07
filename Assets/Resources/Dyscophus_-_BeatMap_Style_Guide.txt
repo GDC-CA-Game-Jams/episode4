@@ -1,0 +1,78 @@
+Style Guide for Dyscophus beat maps
+
+Basic syntax of a note is "<direction/style> <beat number>"
+<direction/style (string)> - refers to the type of note to be spawned at the bottom or right of the screen
+<beat number (integer)> - refers to the 16th beat where the beat will spawn.
+
+beat number: beat numbers are in 16th notes. (the below is assuming 4/4 time, I'm not great at music theory)
+	-Every 16 beats is 4 beats / tempo clicks (whole note)
+	-Every 8 beats is 2 beats / tempo clicks (half note)
+	-Every 4 beats is 1 beat / tempo click (quarter note)
+	-Every 2 beats is halfway between two beats/clicks (8th note)
+	-Every 1 beat is a quarter of the way between two beats/clicks (16th note)
+So at 104bpm, a measure (or 16 beats / 4 tempo clicks) is something like 6.93 seconds
+
+
+Rules:
+	1-each line must contain a single "<direction/style> <beat number>
+	2-notes should be in order (0,1,2, etc)
+		-order only matters within each order style
+		-doesn't matter whether you put left, right, up, down etc first
+	3-long notes & obstacles need to be written in pairs
+		-first call notes the start of a hold / obstacle segment
+		-the second call note the end of a hold / obstacle segment
+	4-Don't nest single notes inside a long note
+		-it won't break it, it'll just be ignored, so why waste the space?
+
+Allowable direction / styles are:
+	Basic Notes:
+		left  - "single beat left note"
+		right - "single beat right note"
+		up    - "single beat up note"
+		down  - "single beat right note"
+	Hold/Long Notes (must come in pairs)
+		hleft  - "multi beat left note start/stop"
+		hright - "multi beat right note start/stop"
+		hup    - "multi beat up note start/stop"
+		hdown  - "multi beat right note start/stop"
+	Other Signals: (must come in pairs)
+		os - "small obstacle start/stop"
+		om - "medium obstacle start/stop"
+		ol - "large obstacle start/stop"
+		ox - "XL obstacles start/stop"
+
+Examples:
+	a measure of quarter notes
+		left 4
+		left 8
+		left 12
+		left 16
+	a measure of a whole note long hold on left w/ 8th notes on right & 16th hammering up (starting at click 1)
+		hleft 4
+		right 4
+		up 4
+		up 5
+		right 6
+		up 6
+		up 7
+		right 8
+		up 8
+		up 9
+		right 10
+		up 10
+		up 11
+		right 12
+		up 12
+		up 13
+		right 14
+		up 14
+		up 15
+		right 16
+		up 16
+		up 17
+		right 18
+		up 18
+		up 19
+		right 20
+		up 20
+		hleft 20
