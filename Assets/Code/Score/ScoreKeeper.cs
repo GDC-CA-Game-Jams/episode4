@@ -53,9 +53,9 @@ public class ScoreKeeper : MonoBehaviour
 
     public float glamIncrease = 10;
 
-    private string[] testNames = { "Luke", "Percy", "Vader", "Frodo", "Sam",
+    private string[] testNames = { "Luke", "Percy", "Vader", "Frodo", "Samwise",
                                    "Pipen", "Gandalf", "Sauron", "Harley",
-                                   "Sally", "Jack", "Ivy", "Ahsoka"};
+                                   "Sally", "Jack", "Ivey", "Ahsoka"};
     System.Random random = new System.Random();
     private int randomName;
     private string newName;
