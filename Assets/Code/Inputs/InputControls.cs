@@ -8,34 +8,34 @@ using UnityEngine.UI;
 
 public class InputControls : MonoBehaviour
 {
-    //enum used to hold cardinal direction of inputButton this is attached to.
+    // --- Enum Declarations --- //
     enum Direction { Up, Down, Left, Right };
-    [SerializeField] Direction arrowDirection;
     enum PopQuality { Perfect, Excellent, Good, Poor, Miss } //to be used for FX triggering
 
-    //Exposed variables
+    // --- Serialized Variable Declarations --- //
+    [Header("Defining Variables")]
+    [Tooltip("Sets the direction this arrow is \"Pointing\"")]
+    [SerializeField] Direction arrowDirection;
     [Tooltip("specifies grading threshhold in meters from center of button to center of note")]
     [SerializeField] private float gradingThreshhold = 10f; //grading threshhold between perfect, excellent, good, poor
-
-    //Private Variables
-    private CustomInput input = null; //stores an input reference for handling purposes
-    private Queue<NoteObject> noteQueue = new Queue<NoteObject>(); //stores currently clickable notes as they pass by
-    //CURRENTLY UNUSED
-    private bool isInLongPress = false;
-    private bool isFailingLongPress = false;
-
-    private SpriteRenderer img;
-    
-    private int colorIndex;
     [SerializeField] private Color[] hitColorCycle;
-
     [SerializeField] private ParticleSystem[] perfectParticles;
+
+    // --- Private Variable Declarations --- //
+    private CustomInput input = null;                               // Input reference for handling purposes
+    private Queue<NoteObject> noteQueue = new Queue<NoteObject>();  // Stores notes currently "in range" of clicking
+    private SpriteRenderer img;                                     
     private Animator hitAnim;
+
+    // Play-State Variables
+    private bool isInLongPress = false;         // Flags whether note track is currently in a long-press region
+    private bool isFailingLongPress = false;    // Flags whether note track is currently in a long-press fail-state
+    private int colorIndex;                     // Controls color cycling for hitColorCycling CHECK FOR VALIDITY
     
     private void Awake()
     {
         input = new CustomInput();
-        Physics2D.callbacksOnDisable = false; //bad place for this, but fixes a bug where popping a note double triggers dequeueing
+        Physics2D.callbacksOnDisable = false; // Bad place for this, but fixes a bug where popping a note double triggers dequeueing
         img = gameObject.GetComponentInChildren<SpriteRenderer>();
         hitAnim = gameObject.GetComponentInChildren<Animator>();
     }
@@ -44,7 +44,7 @@ public class InputControls : MonoBehaviour
     {
         ServiceLocator.Instance.Get<EventManager>().OnClearNotes += stateReset;
         input.Enable();
-        //switch case adds only the input handling for the appropriate direction.
+        // Switch case adds only the input handling for the appropriate direction.
         switch (arrowDirection)
         {
             case Direction.Up:
@@ -70,6 +70,7 @@ public class InputControls : MonoBehaviour
     {
         ServiceLocator.Instance.Get<EventManager>().OnClearNotes -= stateReset;
         input.Disable();
+        // Switch case removes the previously subscribed input
         switch (arrowDirection)
         {
             case Direction.Up:

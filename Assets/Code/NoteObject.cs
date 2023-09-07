@@ -8,19 +8,19 @@ using UnityEngine;
 
 public class NoteObject : MonoBehaviour
 {
-    //public (serialized) variables
+    // --- Serialized Variable Declarations ---//
     [Header("Difficulty Variables")]
     [Tooltip("Point worth of note on a hit (modified by grade on hit)")]
     public float pointValue = 10f;
     [Tooltip("specifies how much a miss costs the player in terms of glamour")]
     public float missValue = -10f;
 
-    //public (non-serialized) variables
+    // --- Non-Serialized Public Variable Declarations --- //
     [NonSerialized] public Rigidbody2D rb;
 
-    //private variables
-    private bool bLongNote = false;
-    private bool bObstacleNote = false;
+    // --- Private Variable Declarations --- //
+    private bool bLongNote = false;                 // Flag set by Beatspawner & used by InputControls
+    private bool bObstacleNote = false;             // Flag for beat recoloring in obstacles --NOT IMPLEMENTED--
 
     private void OnEnable()
     {
@@ -37,7 +37,7 @@ public class NoteObject : MonoBehaviour
 
         if (other.CompareTag("Destroyer"))
         {
-            ServiceLocator.Instance.Get<EventManager>().OnMiss?.Invoke(); //might pull this if we don't add things into it
+            ServiceLocator.Instance.Get<EventManager>().OnMiss?.Invoke(); // Might pull this if we don't add things into it
             Destroy(gameObject);
         }
     }
