@@ -14,7 +14,9 @@ public class ObstacleBehaviour : MonoBehaviour
     public int startBeat;
     
     public float beatTempo;
-
+    
+    public AudioClip sfx;
+    
     private Vector3 artStart;
     private Vector3 coverStart;
 
