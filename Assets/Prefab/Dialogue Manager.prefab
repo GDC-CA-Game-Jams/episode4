@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6368580544392655296}
-  - component: {fileID: 2272626621128763473}
-  - component: {fileID: 7114436580809227488}
+  - component: {fileID: 1378862947527935652}
+  - component: {fileID: 3983706481988941944}
   m_Layer: 0
   m_Name: Dialogue Manager
   m_TagString: Untagged
@@ -31,9 +31,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2272626621128763473
+--- !u!114 &1378862947527935652
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,12 +42,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2422260745813527083}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b1c5ddffa5324141839340bcb6d1c40, type: 3}
+  m_Script: {fileID: 11500000, guid: cce30895d5cdcee4ba537fdbfaa1a334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialog: {fileID: 0}
   animator: {fileID: 0}
---- !u!114 &7114436580809227488
+--- !u!114 &3983706481988941944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,11 +56,51 @@ MonoBehaviour:
   m_GameObject: {fileID: 2422260745813527083}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b18f3746b1d1f6941b180a1521dc9e2c, type: 3}
+  m_Script: {fileID: 11500000, guid: a46faa76bc4136045b25123c3836321e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  successtext:
+  successText:
     sentences:
-    - Wow!!
-    - You did it!
+    - Groovy, baby, you're on fire!
+    - Far out, keep dancin'!
+    - Boogie down, god of rhythm!
+    - Far out, keep dancin'!
+    - Disco inferno, shake it!
+    - Dig that funky beat!
+    - Get down with your godly self!
+    - Solid moves, divine disco dude!
+    - You're the hustle master!
+    - Keep the dance floor shakin'!
+    - Spin that mythological record, baby!
+    - Greek god groovin' all night!
+    - Slay those disco moves!
+    - Show 'em your mythic swag!
+    - Stayin' alive, god of disco!
+    - You're a dancing deity, man!
+    - Rockin' the Olympus dance floor!
+    - Shake it like a Greek god!
+    - Dancin' through eternity, baby!
+    - Funkadelic moves!
+    - Dig that funky beat!
+    - Boogie oogie oogie, divine deity!
+    - Shake your groove thing!
+    - Disco fever, Greek god style!
+    - Get down with Olympus, baby!
+    - Get down with Olympus, baby!
+    - Keep on truckin', godly dancer!
+    - You're a funky legend!
+    - Dance your immortal heart out!
+    - Slayin' the dance floor!
+    - Show 'em your mythic swagger!
+    - Stayin' alive, disco deity!
+    - You're a boogie wonder, man!
+    - Olympus disco domination, baby!
+    - Shake it like Zeus intended!
+    - Gettin' down with divine rhythm!
+    - Gettin' down with divine rhythm!
+    - "Forever groovin\u2019!"
+  targetLocation: {fileID: 0}
+  textParent: {fileID: 0}
+  animator: {fileID: 0}
   textMesh: {fileID: 0}
+  cam: {fileID: 0}
