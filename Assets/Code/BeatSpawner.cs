@@ -67,6 +67,11 @@ public class BeatSpawner : MonoBehaviour
     {     
         gm = ServiceLocator.Instance.Get<GameManager>();
 
+        readMode = m_Settings.gameMode;
+        mapGenerationDifficulty = m_Settings.difficulty;
+        Debug.Log("ReadMode: " + (readMode));
+        Debug.Log("Difficulty: " + (mapGenerationDifficulty));
+
         // Set gameplay mode
         if (readMode == ReadMode.Read)
         {

@@ -4021,6 +4021,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1824736340}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
+      propertyPath: readMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: beatTempo
       value: 40
       objectReference: {fileID: 0}
@@ -4159,6 +4163,10 @@ PrefabInstance:
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: obstacleSFX.Array.size
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
+      propertyPath: mapGenerationDifficulty
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7895878001416292972, guid: 299de401c2251ee4790e0772ce47bfd6, type: 3}
       propertyPath: SpawnPoints.Array.data[0]
