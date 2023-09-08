@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Services;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BeatReader : IService
 {
     // --- Private Variable Declarations 
     private Dictionary<string, List<int>> notes = new();
+    // PLEASE DO NOT CHANGE THIS STRING, IT'S USED AS A REFERENCE FOR A BUNCH OF FUNCTIONS RELATING TO BEATS
     private readonly string[] allowableKeys = { "up", "down", "left", "right", 
                                 "hup", "hdown", "hleft", "hright", "win",
                                 "os", "om", "ol", "ox"};
@@ -59,18 +63,35 @@ public class BeatReader : IService
     /// <summary>
     /// Function creates and fills in a randomly generated notes dictionary / level map
     /// </summary>
-    public void InitRandomMap()
+    public void InitRandomMap(int difficulty)
     {
         // Preset variables for qualities of the beatmap generation
-        int levelLengthInBeats = 250;   // How many beats in the level
-        float beatFrequency = .8f;      // Percentage of beats a note will spawn
-        float beatCountOne = .7f;       // Probability 1 note will spawn
-        float beatCountTwo = .9f;       // Probability 2 notes will spawn
-        float beatCountThree = .97f;    // Probability 3 notes will spawn (remainder below 1f -> 4 note blast frequency)
-        float longNoteChance = 0.13f;   // Probability that any given note will be a long note
+        int levelLengthInBeats = 240;           // How many beats in the level must be a minimum of 12x obstacle length
+        int obsLength = 14;                     // Length of Obstacles, defaulted to 14 like in game
+        int obsIndexOffset = 9;                 // Used to store offest to get to obstacle codes in allowableKeys
+
+        // Difficulty variables
+        // It's set up as a slidable index of probability demands
+        float[] beatFrequency  = { 0.60f, 0.70f, 0.80f, 0.90f, 1.00f };       // Percentage of beats a note will spawn
+        float[] beatCountOne   = { 0.90f, 0.80f, 0.70f, 0.60f, 0.50f };       // Probability 1 note will spawn
+        float[] beatCountTwo   = { 0.96f, 0.92f, 0.90f, 0.85f, 0.80f };       // Probability 2 notes will spawn
+        float[] beatCountThree = { 0.99f, 0.98f, 0.97f, 0.96f, 0.95f };       // Probability 3 notes will spawn (rem < 1f -> 4 note blast)
+        float[] longNoteChance = { 0.03f, 0.08f, 0.13f, 0.18f, 0.23f };       // Probability that any given note will be a long note
 
         // Storage variable for whether a note track is in a long note spawning state
         bool[] inLongNote = { false, false, false, false };
+        int[] longNoteCount = { 0, 0, 0, 0 };                               // THE MOST BRILLIANT FIX IN HISTORY - BRETTS!
+        int difficultyAdjust = difficulty - 1;                              // Have an easier start
+
+        // Storage & precomputes for obstacle insertion logic
+        // SERIOUSLY, PLEASE MAKE SURE THE LEVELLENGTHINBEATS IS WELL ABOVE 9x obstaclelength - PREFERABLY ~250
+        // I'M DOING THIS QUICK & DIRTY AND AM NOT DOING ANY VALIDATION LOGIC -BRETT
+        int[] beatThreshholds = { 0, 0, 0, 0, -obsLength };                 // Stores threshholds for obstacle starts
+        beatThreshholds[0] = levelLengthInBeats / 4;                        // Small Obstacle start beat
+        beatThreshholds[1] = beatThreshholds[0] * 2;                        // Medium Obstacle start beat
+        beatThreshholds[2] = beatThreshholds[0] * 3;                        // Large Obstacle start beat
+        beatThreshholds[3] = levelLengthInBeats - obsLength - 1;            // Final (Large) Obstacle start beat
+        int currentObstacleLoading = 0;                                     // Which obstacle are we trying to load?
 
         // Set up notes dictionary for storing notes
         LoadMapKeys();
@@ -80,8 +101,8 @@ public class BeatReader : IService
         // But given that this whole function will only run once in the lifetime of the level, it's alright
         for (int currentBeat = 0; currentBeat < levelLengthInBeats; currentBeat++)
         {
-            // Decides whether to spawn a note at all
-            if (UnityEngine.Random.Range(0f, 1f) < beatFrequency)
+            // Decides whether and which notes to spawn in current beat
+            if (UnityEngine.Random.Range(0f, 1f) < beatFrequency[difficultyAdjust])
             {
                 // Determine how many notes to spawn
                 float beatCountProbability = UnityEngine.Random.Range(0f, 1f);  
@@ -91,9 +112,9 @@ public class BeatReader : IService
                 bool[] bArrowSpawn = new bool[] { false, false, false, false };
                 List<int> availableIndices = new List<int> { 0, 1, 2, 3 };
 
-                if (beatCountProbability < beatCountOne) { numOfArrowSpawns = 1; }
-                else if (beatCountProbability < beatCountTwo) { numOfArrowSpawns = 2; }
-                else if (beatCountProbability < beatCountThree) { numOfArrowSpawns = 3; }
+                if (beatCountProbability < beatCountOne[difficultyAdjust]) { numOfArrowSpawns = 1; }
+                else if (beatCountProbability < beatCountTwo[difficultyAdjust]) { numOfArrowSpawns = 2; }
+                else if (beatCountProbability < beatCountThree[difficultyAdjust]) { numOfArrowSpawns = 3; }
                 else { numOfArrowSpawns = 4; }
 
                 // Determine which directions / tracks to spawn notes in
@@ -116,19 +137,62 @@ public class BeatReader : IService
                     }
                 }
             }
+
+            // Logic to insert Obstacles into the sequence
+            if (currentBeat == beatThreshholds[currentObstacleLoading])
+            {
+                notes[allowableKeys[obsIndexOffset + currentObstacleLoading]].Add(currentBeat);
+                // Adjust difficulty based off spot in level
+                if (currentObstacleLoading == 3) // Make final obstacle harder
+                {
+                    difficultyAdjust = difficulty + 1;
+                }
+            }
+            else if (currentBeat == beatThreshholds[currentObstacleLoading] + obsLength)
+            {
+                notes[allowableKeys[obsIndexOffset + currentObstacleLoading]].Add(currentBeat);
+                currentObstacleLoading++;
+                difficultyAdjust = difficulty;      // Reset difficulty after first obstacle
+            }
+
+            // Required to sanitize the edges of an obstacle from long note debris.
+            if (currentBeat == beatThreshholds[currentObstacleLoading] + 2 || currentBeat == beatThreshholds[currentObstacleLoading] + obsLength)
+            {
+                KillLongNotes(currentBeat);
+            }
+
+
         }
 
         // Close out any active long notes & add win call
-        for (int i = 0; i < 4; i++)
+        KillLongNotes(levelLengthInBeats);
+        notes[allowableKeys[8]].Add(levelLengthInBeats+12);
+
+        // Local func - nukes long notes & sets one far back iff apppropriate
+        void KillLongNotes(int currBeat) 
         {
-            if (inLongNote[i])
+            for (int i = 0; i < 4; i++)
             {
-                notes[allowableKeys[4 + i]].Add(levelLengthInBeats);
+                for (int j = 0; j <= 4; j++)
+                {
+                    if (notes[allowableKeys[4 + i]].Contains(currBeat - j))
+                    {
+                        notes[allowableKeys[4 + i]].Remove(currBeat - j);
+                        longNoteCount[i]--;
+                    }
+                }
+                if (longNoteCount[i] < 0)
+                {
+                    longNoteCount[i] = 0;
+                }
+                else if (longNoteCount[i] % 2 != 0) 
+                {
+                    notes[allowableKeys[4 + i]].Add(currBeat - 4);
+                    longNoteCount[i]++;
+                }
                 inLongNote[i] = false;
             }
         }
-        notes[allowableKeys[8]].Add(levelLengthInBeats+12);
-
 
         // Local function to add a short / long note into the notes dict / beatmap
         void AddSelectedRandomNote(int currSelect, int currBeat)
@@ -137,10 +201,11 @@ public class BeatReader : IService
             if (!inLongNote[currSelect])
             {
                 // Decide whether to add a long or short note
-                if (UnityEngine.Random.Range(0,1f) < longNoteChance) 
+                if (UnityEngine.Random.Range(0,1f) < longNoteChance[difficultyAdjust]) 
                 {
                     notes[allowableKeys[4 + currSelect]].Add(currBeat);
                     inLongNote[currSelect] = true;
+                    longNoteCount[currSelect]++;
                 }
                 else
                 {
@@ -152,6 +217,7 @@ public class BeatReader : IService
             {
                 notes[allowableKeys[4 + currSelect]].Add(currBeat);
                 inLongNote[currSelect] = false;
+                longNoteCount[currSelect]++;
             }
         }
     }
