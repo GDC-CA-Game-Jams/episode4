@@ -46,7 +46,7 @@ public class BeatSpawner : MonoBehaviour
     [SerializeField] private float[] obstacleSpriteScales;
     [SerializeField] private int delayOffset = 15;
     [SerializeField] private Vector2[] obtacleSpritePoints;
-    [SerializeField] private AudioClip obstacleSfx;
+    [SerializeField] private AudioClip[] obstacleSfx;
 
     // --- Private Variable Declarations - to be used internally --- //
     private Dictionary<string, List<int>> levelNoteMap; // Level map provided by beat reader
