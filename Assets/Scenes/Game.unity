@@ -576,6 +576,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &154548945 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6975041300411858235, guid: 993fd3586b4344e4999e181752a29074, type: 3}
+  m_PrefabInstance: {fileID: 7033749337563397797}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &223365939
 GameObject:
   m_ObjectHideFlags: 0
@@ -3546,6 +3551,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924052461}
   m_CullTransparentMesh: 1
+--- !u!82 &924618441 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9204095312651245968, guid: 993fd3586b4344e4999e181752a29074, type: 3}
+  m_PrefabInstance: {fileID: 7033749337563397797}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1027907283 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3743942415954452556, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
@@ -6452,6 +6462,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1925721527 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5389325531317262861, guid: 993fd3586b4344e4999e181752a29074, type: 3}
+  m_PrefabInstance: {fileID: 7033749337563397797}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1973535906 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9096539571495389991, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
@@ -6863,6 +6878,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6428713777174798770, guid: dfbae084a4c103648be66ebaf6325d32, type: 3}
   m_PrefabInstance: {fileID: 269802006}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &2097591354 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3687306497925216763, guid: 993fd3586b4344e4999e181752a29074, type: 3}
+  m_PrefabInstance: {fileID: 7033749337563397797}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2103761847
 GameObject:
   m_ObjectHideFlags: 0
@@ -7176,6 +7196,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4967270005480784933, guid: 993fd3586b4344e4999e181752a29074, type: 3}
   m_PrefabInstance: {fileID: 7033749337563397797}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2136966993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798615500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1d13144bfdc5043b297f0fcaca2a64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicTracks:
+  - {fileID: 1925721527}
+  - {fileID: 2097591354}
+  - {fileID: 154548945}
+  - {fileID: 924618441}
 --- !u!1001 &7033749337563397797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7292,6 +7329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioController
       objectReference: {fileID: 0}
+    - target: {fileID: 3687306497925216763, guid: 993fd3586b4344e4999e181752a29074, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4967270005480784933, guid: 993fd3586b4344e4999e181752a29074, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -7336,8 +7377,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5389325531317262861, guid: 993fd3586b4344e4999e181752a29074, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975041300411858235, guid: 993fd3586b4344e4999e181752a29074, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9204095312651245968, guid: 993fd3586b4344e4999e181752a29074, type: 3}
       propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9204095312651245968, guid: 993fd3586b4344e4999e181752a29074, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7356,4 +7409,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3032734932809836096, guid: 993fd3586b4344e4999e181752a29074, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2136966991}
+    - targetCorrespondingSourceObject: {fileID: 3032734932809836096, guid: 993fd3586b4344e4999e181752a29074, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2136966993}
   m_SourcePrefab: {fileID: 100100000, guid: 993fd3586b4344e4999e181752a29074, type: 3}
