@@ -8,4 +8,7 @@ public class GameSettingsSO : ScriptableObject
     public float beatTempo;
     public float beatFrequency;
     public float beatMultiplier;
+
+    public ReadMode gameMode;
+    public Difficulty difficulty;
 }

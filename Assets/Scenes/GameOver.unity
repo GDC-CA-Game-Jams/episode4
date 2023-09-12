@@ -1961,3 +1961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193625d7cd89d014690f89b58db14456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Settings: {fileID: 11400000, guid: 297a69ef31d52a446a083b533b527050, type: 2}
+  mainMenuButton: 0
+  readmode: 1
+  difficulty: 2

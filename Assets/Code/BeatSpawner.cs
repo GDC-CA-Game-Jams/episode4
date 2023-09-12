@@ -16,6 +16,8 @@ public class BeatSpawner : MonoBehaviour
     [SerializeField] private ReadMode readMode = ReadMode.Read;
     [Tooltip("File name (and only file name) - no path or extension")]
     [SerializeField] private string levelFileName;
+    [Tooltip("Difficulty of Random Generation Mode")]
+    [SerializeField] private Difficulty mapGenerationDifficulty = Difficulty.Medium;
 
     [Header("Gameplay Settings")]
     [Tooltip("Number of 4/4 measures it takes for a note to make it from spawn to 'perfect zone' of beat button")]
@@ -65,6 +67,11 @@ public class BeatSpawner : MonoBehaviour
     {     
         gm = ServiceLocator.Instance.Get<GameManager>();
 
+        readMode = m_Settings.gameMode;
+        mapGenerationDifficulty = m_Settings.difficulty;
+        Debug.Log("ReadMode: " + (readMode));
+        Debug.Log("Difficulty: " + (mapGenerationDifficulty));
+
         // Set gameplay mode
         if (readMode == ReadMode.Read)
         {
@@ -83,7 +90,7 @@ public class BeatSpawner : MonoBehaviour
         {
             try
             {
-                ServiceLocator.Instance.Get<BeatReader>().InitRandomMap();
+                ServiceLocator.Instance.Get<BeatReader>().InitRandomMap((int)mapGenerationDifficulty);
                 levelNoteMap = ServiceLocator.Instance.Get<BeatReader>().GetNotes();
                 readMode = ReadMode.Read;
             }
@@ -242,7 +249,7 @@ public class BeatSpawner : MonoBehaviour
         
         ObstacleBehaviour ob = obstacle.GetComponent<ObstacleBehaviour>();
         ob.startBeat = gm.beatCount;
-        ob.sfx = obstacleSfx[t];
+        //ob.sfx = obstacleSfx[t];
         Transform sprite = obstacle.transform.GetChild(0);
         sprite.GetComponent<SpriteRenderer>().sprite = obstacleSprites[t];
         sprite.localScale = Vector3.one * obstacleSpriteScales[t];
@@ -443,4 +450,10 @@ public enum ObstacleType
     Medium,
     Large,
     XL
+}
+public enum Difficulty
+{
+    Easy = 1,
+    Medium = 2,
+    Hard = 3,
 }

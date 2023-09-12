@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneOnClick : MonoBehaviour
 {
+    // Serialized Variables
+    [Header("Game Mode Settings")]
+    [SerializeField] private GameSettingsSO m_Settings = null;
+    [SerializeField] bool mainMenuButton = false;
+    [SerializeField] private ReadMode readmode = ReadMode.Read;
+    [SerializeField] private Difficulty difficulty = Difficulty.Medium;
 
     public void OnClick(string name)
     {
@@ -20,6 +26,12 @@ public class LoadSceneOnClick : MonoBehaviour
 
     private IEnumerator delayStartGame(string name)
     {
+        if (mainMenuButton)
+        {
+            m_Settings.gameMode = readmode;
+            m_Settings.difficulty = difficulty;
+        }
+
         yield return new WaitForSecondsRealtime(1.5f);
 
         SceneManager.LoadScene(name);
