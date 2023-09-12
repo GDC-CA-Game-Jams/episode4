@@ -17,6 +17,7 @@ public class EventManager : IService
     public Action OnPoor;
     public Action OnMiss;
     public Action OnMissObstacle;
+    public Action OnBackCycle;
 
     public Action OnClearNotes;
 
