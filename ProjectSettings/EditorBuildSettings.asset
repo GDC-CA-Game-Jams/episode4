@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SongComplete.unity
     guid: 195e0f54f03eb1440a4a810eaa008c8a
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: b860e0c789c0be04091c6510d6791e7f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: cfde40016dade014393bfedb552ff9d9, type: 2}
