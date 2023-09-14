@@ -182,8 +182,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Angela Geiss - Audio Design & Implementation\r\nRoshelle Patterson - Narrative
-    & Design\r\nBob Glahn - Production & Audio\r\nSteven Fisher - Programming\r\nShane
-    Bergeron - Programming \r\r\nBrett Hansen - Programming\nSJ Singh - Art & Production\r\nRichard
+    & Design\r\nBob Glahn - Production\nSteven Fisher - Programming\r\nShane Bergeron
+    - Programming \r\r\nBrett Hansen - Programming\nSJ Singh - Art & Production\r\nRichard
     S. Hetley - Production & Level Design \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
