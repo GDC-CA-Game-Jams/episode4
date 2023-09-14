@@ -27,6 +27,7 @@ public class LoopingScroll : MonoBehaviour
         EventManager em = ServiceLocator.Instance.Get<EventManager>();
         em.OnMissObstacle += OnMissObstacle;
         em.OnRewindComplete += OnRewindComplete;
+        em.OnBackCycle += OnBackCycle;
     }
 
     private void OnDisable()
@@ -34,6 +35,7 @@ public class LoopingScroll : MonoBehaviour
         EventManager em = ServiceLocator.Instance.Get<EventManager>();
         em.OnMissObstacle -= OnMissObstacle;
         em.OnRewindComplete -= OnRewindComplete;
+        em.OnBackCycle -= OnBackCycle;
     }
 
     // Start is called before the first frame update
@@ -76,6 +78,18 @@ public class LoopingScroll : MonoBehaviour
     }
 
     private void OnMissObstacle()
+    {
+        loopPoint *= -1;
+        scrollSpeed *= -4;
+        respawnPoint *= -1;
+        moveVec *= -4;
+        isRewinding = true;
+    }
+
+    /// <summary>
+    /// Quick & dirty fix for audio/screen sync issue
+    /// </summary>
+    private void OnBackCycle()
     {
         loopPoint *= -1;
         scrollSpeed *= -4;

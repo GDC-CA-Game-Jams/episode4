@@ -64,6 +64,16 @@ public class AudioController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// A quick fix for audio de-sync issues on the start of level
+    /// Needed to use the jumpAudio's resync behavior to sync audio to beats
+    /// </summary>
+    private void Start()
+    {
+        ServiceLocator.Instance.Get<EventManager>().OnBackCycle?.Invoke();
+        jumpAudioToNumBeats(0);
+    }
+
 
     //jumps the audio back a given amount of beats
     // public void jumpAudioBackInBeats(int beats)
